@@ -3,9 +3,9 @@ package handler
 import (
 	"context"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/service"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/utils"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pb/cart"
+	"go-grpc-ecommerce-beDryluigi/go-grpc-ecommerce-be/internal/service"
+	"go-grpc-ecommerce-beDryluigi/go-grpc-ecommerce-be/internal/utils"
+	"go-grpc-ecommerce-beDryluigi/go-grpc-ecommerce-be/pb/cart"
 )
 
 type cartHandler struct {

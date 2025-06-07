@@ -3,9 +3,9 @@ package handler
 import (
 	"context"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/service"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/utils"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pb/order"
+	"go-grpc-ecommerce-be/internal/service"
+	"go-grpc-ecommerce-be/internal/utils"
+	"go-grpc-ecommerce-be/pb/order"
 )
 
 type orderHandler struct {

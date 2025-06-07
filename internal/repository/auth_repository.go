@@ -6,7 +6,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/entity"
+	"go-grpc-ecommerce-be/internal/entity"
 )
 
 type IAuthRepository interface {

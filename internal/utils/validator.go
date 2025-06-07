@@ -3,8 +3,8 @@ package utils
 import (
 	"errors"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pb/common"
-	"github.com/bufbuild/protovalidate-go"
+	"buf.build/go/protovalidate"
+	"go-grpc-ecommerce-be/pb/common"
 	"google.golang.org/protobuf/proto"
 )
 

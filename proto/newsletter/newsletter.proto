@@ -3,7 +3,7 @@ syntax = "proto3";
 import "common/base_response.proto";
 import "buf/validate/validate.proto";
 
-option go_package = "github.com/Dryluigi/go-grpc-ecommerce-be/pb/newsletter";
+option go_package = "go-grpc-ecommerce-be/pb/newsletter";
 
 package newsletter;
 

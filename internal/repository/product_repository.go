@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/entity"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pb/common"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pkg/database"
+	"go-grpc-ecommerce-be/internal/entity"
+	"go-grpc-ecommerce-be/pb/common"
+	"go-grpc-ecommerce-be/pkg/database"
 )
 
 type IProductRepository interface {

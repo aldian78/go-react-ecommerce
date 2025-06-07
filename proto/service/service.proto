@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package service;
 
-option go_package = "github.com/Dryluigi/go-grpc-ecommerce-be/pb/service";
+option go_package = "go-grpc-ecommerce-be/pb/service";
 
 import "common/base_response.proto";
 import "buf/validate/validate.proto";

@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/entity"
+	"go-grpc-ecommerce-be/internal/entity"
 )
 
 type INewsletterRepository interface {

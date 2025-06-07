@@ -8,13 +8,13 @@ import (
 	"os"
 	"path"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/handler"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/repository"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/service"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pkg/database"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
+	"go-grpc-ecommerce-be/internal/handler"
+	"go-grpc-ecommerce-be/internal/repository"
+	"go-grpc-ecommerce-be/internal/service"
+	"go-grpc-ecommerce-be/pkg/database"
 )
 
 func handleGetFileName(c *fiber.Ctx) error {

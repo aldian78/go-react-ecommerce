@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/Dryluigi/go-grpc-ecommerce-be/pb/product";
+option go_package = "go-grpc-ecommerce-be/pb/product";
 
 import "common/base_response.proto";
 import "common/pagination.proto";

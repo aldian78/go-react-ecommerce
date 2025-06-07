@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pb/common"
+	"go-grpc-ecommerce-be/pb/common"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
