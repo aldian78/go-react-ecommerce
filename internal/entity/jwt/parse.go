@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/utils"
+	"go-grpc-ecommerce-be/internal/utils"
 	"google.golang.org/grpc/metadata"
 )
 

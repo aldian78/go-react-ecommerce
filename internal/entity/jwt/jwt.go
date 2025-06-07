@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/utils"
 	"github.com/golang-jwt/jwt/v5"
+	"go-grpc-ecommerce-be/internal/utils"
 )
 
 type JwtEntityContextKey string

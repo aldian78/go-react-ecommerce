@@ -4,11 +4,11 @@ import (
 	"context"
 	"time"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/entity"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/repository"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/utils"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pb/newsletter"
 	"github.com/google/uuid"
+	"go-grpc-ecommerce-be/internal/entity"
+	"go-grpc-ecommerce-be/internal/repository"
+	"go-grpc-ecommerce-be/internal/utils"
+	"go-grpc-ecommerce-be/pb/newsletter"
 )
 
 type INewsletterService interface {

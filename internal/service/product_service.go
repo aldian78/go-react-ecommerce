@@ -7,12 +7,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/entity"
-	jwtentity "github.com/Dryluigi/go-grpc-ecommerce-be/internal/entity/jwt"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/repository"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/utils"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/pb/product"
 	"github.com/google/uuid"
+	"go-grpc-ecommerce-be/internal/entity"
+	jwtentity "go-grpc-ecommerce-be/internal/entity/jwt"
+	"go-grpc-ecommerce-be/internal/repository"
+	"go-grpc-ecommerce-be/internal/utils"
+	"go-grpc-ecommerce-be/pb/product"
 )
 
 type IProductService interface {

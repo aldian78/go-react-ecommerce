@@ -5,9 +5,9 @@ import (
 	"errors"
 	"time"
 
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/dto"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/entity"
-	"github.com/Dryluigi/go-grpc-ecommerce-be/internal/repository"
+	"go-grpc-ecommerce-be/internal/dto"
+	"go-grpc-ecommerce-be/internal/entity"
+	"go-grpc-ecommerce-be/internal/repository"
 )
 
 type IWebhookService interface {
