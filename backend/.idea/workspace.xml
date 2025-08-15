@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1eed1a5e-a7dc-4647-979a-42a3119929c2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/build.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/backend/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose/Dockerfile-2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose/docker-postgres-gocommerce.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose/docker-postgres-production.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/constants/constant.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/entity/rest/api.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/entity/rest/response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/grpcmiddleware/client.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/grpcmiddleware/recovery.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/handler/authentication.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/model/model.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/repository/authentication_repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/service/authentication_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/utils/responseRest.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/utils/utils.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pb/api/api.pb.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pb/api/api.pb.micro.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/api/api.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/proto/authentication/auth.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/go-grpc-ecommerce-be.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/grpc/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/grpc/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/rest/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/rest/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/jwt/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/entity/jwt/jwt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/jwt/parse.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/entity/jwt/parse.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/handler/auth.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/utils/validator.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/utils/validator.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/auth/auth.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/pb/auth/auth.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/auth/auth_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/pb/auth/auth_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/cart/cart_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/pb/cart/cart_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/google/protobuf/descriptor.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/pb/google/protobuf/descriptor.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/newsletter/newsletter_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/pb/newsletter/newsletter_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/order/order_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/pb/order/order_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/product/product_grpc.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/pb/product/product_grpc.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/service/service.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/service/service_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/auth/auth.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/auth/auth.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/service/service.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/service/service.proto" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/go/bin/bin/pkg/mod/golang.org/toolchain@v0.0.1-go1.24.0.windows-amd64" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;aldian78&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/aldian78/go-react-ecommerce.git&quot;,
+    &quot;accountId&quot;: &quot;30a23ee6-d004-4b78-b484-749bd53663d7&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="318cO22wBYaOVU7r88K2XV23Vqq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginOnboarding&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/Go-react-ecommerce/go-grpc-ecommerce-be/proto&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;go.sdk&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\proto" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\pb" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\internal\repository" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\services\internal\entity" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\services\internal\handler" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\cmd\backend" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\proto" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-3b128438d3f6-4b567d62c776-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-251.26094.127" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-GO-251.26094.127" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1eed1a5e-a7dc-4647-979a-42a3119929c2" name="Changes" comment="" />
+      <created>1754909104394</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754909104394</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>

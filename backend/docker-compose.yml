@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    container_name: postgres-gocommerce
+    image: postgres:16.9
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  rest:
+    container_name: rest-gocommerce
+    build:
+      context: .
+      dockerfile: docker-compose/Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    env_file:
+      - ../.env
+    networks:
+      - app-network
+
+  grpc:
+    container_name: grpc-gocommerce
+    build:
+      context: .
+      dockerfile: docker-compose/Dockerfile-2
+    depends_on:
+      - postgres
+    ports:
+      - "50051:50051"
+    env_file:
+      - ../.env
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgresql:
+  postgresql_data:

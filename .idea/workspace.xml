@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/gateway/go.mod" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/constants/constant.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/grpcmiddleware/auth_middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/grpcmiddleware/client.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/grpcmiddleware/error_middleware.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/grpcmiddleware/recovery.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/utils/response.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/utils/responseRest.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/internal/utils/validator.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/pkg/database/connection.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/pkg/database/database_query.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/proto/common/base_response.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gateway/proto/common/pagination.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/grpc/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/rest/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/dto/webhook_receive_invoice.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/cart.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/jwt/jwt.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/jwt/parse.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/newsletter.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/numbering.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/order.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/product.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/entity/user.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/grpcmiddleware/auth_middleware.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/grpcmiddleware/error_middleware.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/auth.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/cart.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/newsletter.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/order.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/product.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/product_upload_image.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/handler/webhook_handler.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/auth_repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/cart_repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/newsletter_repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/order_repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/repository/product_repository.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/auth_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/cart_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/newsletter_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/order_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/product_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/service/webhook_service.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/utils/response.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/utils/validator.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/auth/auth.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/auth/auth_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/buf/validate/validate.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/cart/cart.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/cart/cart_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/common/base_response.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/common/pagination.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/google/protobuf/descriptor.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/google/protobuf/duration.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/google/protobuf/timestamp.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/newsletter/newsletter.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/newsletter/newsletter_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/order/order.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/order/order_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/product/product.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/product/product_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/service/service.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pb/service/service_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/database/connection.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pkg/database/database_query.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/auth/auth.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/buf/validate/validate.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/cart/cart.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/common/base_response.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/common/pagination.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/protobuf/descriptor.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/protobuf/duration.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/google/protobuf/timestamp.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/newsletter/newsletter.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/order/order.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/product/product.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/service/service.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1741845244785075200.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1741845311798439800.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1742316300803347800.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1742320848947079500.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1743136911693338300.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1744123851327510800.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1744123878056865900.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1744123915136993000.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1744123951502860800.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/product/product_1744123976388680000.png" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file://$USER_HOME$/go/bin/bin/go1.24.6" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="31KgwOILqvyYTUhId8TFdoAlbw8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboarding": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "C:/laragon/www/Go-react-ecommerce/go-grpc-ecommerce-be",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-gosdk-3b128438d3f6-4b567d62c776-org.jetbrains.plugins.go.sharedIndexes.bundled-GO-251.26094.127" />
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-GO-251.26094.127" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="" />
+      <created>1755278416796</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1755278416796</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+</project>
