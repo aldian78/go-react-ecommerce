@@ -1,4 +1,4 @@
-module go-grpc-ecommerce-be
+module github.com/aldian78/go-react-ecommerce/backend
 
 go 1.24
 
