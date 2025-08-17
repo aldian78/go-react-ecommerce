@@ -2,8 +2,8 @@ package utils
 
 import (
 	"fmt"
+	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	gtc "github.com/shengyanli1982/go-trycatch"
-	protoApi "go-grpc-ecommerce-be/pb/api"
 	"go-micro.dev/v4/logger"
 	"runtime/debug"
 )

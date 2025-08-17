@@ -5,23 +5,23 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	entity2 "github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 	"strings"
 
-	"go-grpc-ecommerce-be/internal/entity"
-	"go-grpc-ecommerce-be/pb/common"
-	"go-grpc-ecommerce-be/pkg/database"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/database"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 )
 
 type IOrderRepository interface {
 	WithTransaction(tx *sql.Tx) IOrderRepository
-	GetNumbering(ctx context.Context, module string) (*entity.Numbering, error)
-	CreateOrder(ctx context.Context, order *entity.Order) error
-	UpdateNumbering(ctx context.Context, numbering *entity.Numbering) error
-	CreateOrderItem(ctx context.Context, orderItem *entity.OrderItem) error
-	GetOrderById(ctx context.Context, orderId string) (*entity.Order, error)
-	UpdateOrder(ctx context.Context, order *entity.Order) error
-	GetListOrderAdminPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Order, *common.PaginationResponse, error)
-	GetListOrderPagination(ctx context.Context, pagination *common.PaginationRequest, userId string) ([]*entity.Order, *common.PaginationResponse, error)
+	GetNumbering(ctx context.Context, module string) (*entity2.Numbering, error)
+	CreateOrder(ctx context.Context, order *entity2.Order) error
+	UpdateNumbering(ctx context.Context, numbering *entity2.Numbering) error
+	CreateOrderItem(ctx context.Context, orderItem *entity2.OrderItem) error
+	GetOrderById(ctx context.Context, orderId string) (*entity2.Order, error)
+	UpdateOrder(ctx context.Context, order *entity2.Order) error
+	GetListOrderAdminPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity2.Order, *common.PaginationResponse, error)
+	GetListOrderPagination(ctx context.Context, pagination *common.PaginationRequest, userId string) ([]*entity2.Order, *common.PaginationResponse, error)
 }
 
 type orderRepository struct {
@@ -34,7 +34,7 @@ func (os *orderRepository) WithTransaction(tx *sql.Tx) IOrderRepository {
 	}
 }
 
-func (os *orderRepository) GetNumbering(ctx context.Context, module string) (*entity.Numbering, error) {
+func (os *orderRepository) GetNumbering(ctx context.Context, module string) (*entity2.Numbering, error) {
 	row := os.db.QueryRowContext(
 		ctx,
 		"SELECT module, number FROM numbering WHERE module = $1 FOR UPDATE",
@@ -44,7 +44,7 @@ func (os *orderRepository) GetNumbering(ctx context.Context, module string) (*en
 		return nil, row.Err()
 	}
 
-	var numbering entity.Numbering
+	var numbering entity2.Numbering
 	err := row.Scan(
 		&numbering.Module,
 		&numbering.Number,
@@ -60,7 +60,7 @@ func (os *orderRepository) GetNumbering(ctx context.Context, module string) (*en
 	return &numbering, nil
 }
 
-func (or *orderRepository) CreateOrder(ctx context.Context, order *entity.Order) error {
+func (or *orderRepository) CreateOrder(ctx context.Context, order *entity2.Order) error {
 	_, err := or.db.ExecContext(
 		ctx,
 		"INSERT INTO \"order\" (id, number, user_id, order_status_code, user_full_name, address, phone_number, notes, total, expired_at, created_at, created_by, updated_at, updated_by, deleted_at, deleted_by, is_deleted, xendit_invoice_id, xendit_invoice_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)",
@@ -91,7 +91,7 @@ func (or *orderRepository) CreateOrder(ctx context.Context, order *entity.Order)
 	return nil
 }
 
-func (or *orderRepository) UpdateNumbering(ctx context.Context, numbering *entity.Numbering) error {
+func (or *orderRepository) UpdateNumbering(ctx context.Context, numbering *entity2.Numbering) error {
 	_, err := or.db.ExecContext(
 		ctx,
 		"UPDATE numbering SET number = $1 WHERE module = $2",
@@ -105,7 +105,7 @@ func (or *orderRepository) UpdateNumbering(ctx context.Context, numbering *entit
 	return nil
 }
 
-func (or *orderRepository) CreateOrderItem(ctx context.Context, orderItem *entity.OrderItem) error {
+func (or *orderRepository) CreateOrderItem(ctx context.Context, orderItem *entity2.OrderItem) error {
 	_, err := or.db.ExecContext(
 		ctx,
 		"INSERT INTO order_item (id, product_id, product_name, product_image_file_name, product_price, quantity, order_id, created_at, created_by, updated_at, updated_by, deleted_at, deleted_by, is_deleted) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)",
@@ -131,7 +131,7 @@ func (or *orderRepository) CreateOrderItem(ctx context.Context, orderItem *entit
 	return nil
 }
 
-func (or *orderRepository) GetOrderById(ctx context.Context, orderId string) (*entity.Order, error) {
+func (or *orderRepository) GetOrderById(ctx context.Context, orderId string) (*entity2.Order, error) {
 	row := or.db.QueryRowContext(
 		ctx,
 		"SELECT id, number, user_full_name, address, phone_number, notes, order_status_code, total, created_at, xendit_invoice_url, user_id, expired_at, xendit_paid_at, xendit_payment_channel, xendit_payment_method FROM \"order\" WHERE id = $1 AND is_deleted = false",
@@ -141,7 +141,7 @@ func (or *orderRepository) GetOrderById(ctx context.Context, orderId string) (*e
 		return nil, row.Err()
 	}
 
-	var order entity.Order
+	var order entity2.Order
 	err := row.Scan(
 		&order.Id,
 		&order.Number,
@@ -176,9 +176,9 @@ func (or *orderRepository) GetOrderById(ctx context.Context, orderId string) (*e
 		return nil, err
 	}
 
-	items := make([]*entity.OrderItem, 0)
+	items := make([]*entity2.OrderItem, 0)
 	for rows.Next() {
-		var item entity.OrderItem
+		var item entity2.OrderItem
 
 		err = rows.Scan(
 			&item.ProductId,
@@ -198,7 +198,7 @@ func (or *orderRepository) GetOrderById(ctx context.Context, orderId string) (*e
 	return &order, nil
 }
 
-func (or *orderRepository) UpdateOrder(ctx context.Context, order *entity.Order) error {
+func (or *orderRepository) UpdateOrder(ctx context.Context, order *entity2.Order) error {
 	_, err := or.db.ExecContext(
 		ctx,
 		"UPDATE \"order\" SET updated_at = $1, updated_by = $2, xendit_paid_at = $3, xendit_payment_channel = $4, xendit_payment_method = $5, order_status_code = $6 WHERE id = $7",
@@ -217,7 +217,7 @@ func (or *orderRepository) UpdateOrder(ctx context.Context, order *entity.Order)
 	return nil
 }
 
-func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Order, *common.PaginationResponse, error) {
+func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity2.Order, *common.PaginationResponse, error) {
 	row := or.db.QueryRowContext(
 		ctx,
 		"SELECT COUNT(*) FROM \"order\" WHERE is_deleted = false",
@@ -265,11 +265,11 @@ func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagi
 		return nil, nil, err
 	}
 
-	orders := make([]*entity.Order, 0)
+	orders := make([]*entity2.Order, 0)
 	ids := make([]string, 0)
-	orderItemsMap := make(map[string][]*entity.OrderItem)
+	orderItemsMap := make(map[string][]*entity2.OrderItem)
 	for rows.Next() {
-		var orderEntity entity.Order
+		var orderEntity entity2.Order
 		err = rows.Scan(
 			&orderEntity.Id,
 			&orderEntity.Number,
@@ -285,7 +285,7 @@ func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagi
 
 		orders = append(orders, &orderEntity)
 		ids = append(ids, fmt.Sprintf("'%s'", orderEntity.Id))
-		orderItemsMap[orderEntity.Id] = make([]*entity.OrderItem, 0)
+		orderItemsMap[orderEntity.Id] = make([]*entity2.OrderItem, 0)
 	}
 
 	if len(orders) > 0 {
@@ -300,7 +300,7 @@ func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagi
 		}
 
 		for rows.Next() {
-			var item entity.OrderItem
+			var item entity2.OrderItem
 			err = rows.Scan(
 				&item.ProductId,
 				&item.ProductName,
@@ -329,7 +329,7 @@ func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagi
 	return orders, &metadata, nil
 }
 
-func (or *orderRepository) GetListOrderPagination(ctx context.Context, pagination *common.PaginationRequest, userId string) ([]*entity.Order, *common.PaginationResponse, error) {
+func (or *orderRepository) GetListOrderPagination(ctx context.Context, pagination *common.PaginationRequest, userId string) ([]*entity2.Order, *common.PaginationResponse, error) {
 	row := or.db.QueryRowContext(
 		ctx,
 		"SELECT COUNT(*) FROM \"order\" WHERE is_deleted = false AND user_id = $1",
@@ -379,11 +379,11 @@ func (or *orderRepository) GetListOrderPagination(ctx context.Context, paginatio
 		return nil, nil, err
 	}
 
-	orders := make([]*entity.Order, 0)
+	orders := make([]*entity2.Order, 0)
 	ids := make([]string, 0)
-	orderItemsMap := make(map[string][]*entity.OrderItem)
+	orderItemsMap := make(map[string][]*entity2.OrderItem)
 	for rows.Next() {
-		var orderEntity entity.Order
+		var orderEntity entity2.Order
 		err = rows.Scan(
 			&orderEntity.Id,
 			&orderEntity.Number,
@@ -400,7 +400,7 @@ func (or *orderRepository) GetListOrderPagination(ctx context.Context, paginatio
 
 		orders = append(orders, &orderEntity)
 		ids = append(ids, fmt.Sprintf("'%s'", orderEntity.Id))
-		orderItemsMap[orderEntity.Id] = make([]*entity.OrderItem, 0)
+		orderItemsMap[orderEntity.Id] = make([]*entity2.OrderItem, 0)
 	}
 
 	if len(orders) > 0 {
@@ -415,7 +415,7 @@ func (or *orderRepository) GetListOrderPagination(ctx context.Context, paginatio
 		}
 
 		for rows.Next() {
-			var item entity.OrderItem
+			var item entity2.OrderItem
 			err = rows.Scan(
 				&item.ProductId,
 				&item.ProductName,

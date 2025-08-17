@@ -5,12 +5,12 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 	"strings"
 	"time"
 
-	"go-grpc-ecommerce-be/internal/entity"
-	"go-grpc-ecommerce-be/pb/common"
-	"go-grpc-ecommerce-be/pkg/database"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/database"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 )
 
 type IProductRepository interface {

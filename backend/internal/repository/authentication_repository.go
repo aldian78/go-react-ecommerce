@@ -3,8 +3,8 @@ package repository
 import (
 	"context"
 	"database/sql"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 	"github.com/pkg/errors"
-	"go-grpc-ecommerce-be/internal/entity"
 	"time"
 )
 

@@ -2,16 +2,16 @@ package service
 
 import (
 	"context"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	jwt2 "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
+	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	gocache "github.com/patrickmn/go-cache"
 	"github.com/pkg/errors"
-	"go-grpc-ecommerce-be/internal/entity"
-	jwtentity "go-grpc-ecommerce-be/internal/entity/jwt"
-	"go-grpc-ecommerce-be/internal/repository"
-	"go-grpc-ecommerce-be/internal/utils"
-	protoApi "go-grpc-ecommerce-be/pb/api"
-	"go-grpc-ecommerce-be/pb/authentication"
 	"go-micro.dev/v4/logger"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"
@@ -108,7 +108,7 @@ func (as *authenticationService) LoginService(ctx context.Context, request *auth
 
 	// generate jwt
 	now := time.Now()
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwtentity.JwtClaims{
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt2.JwtClaims{
 		RegisteredClaims: jwt.RegisteredClaims{
 			Subject:   user.Id,
 			ExpiresAt: jwt.NewNumericDate(now.Add(time.Hour * 24)),
@@ -148,14 +148,14 @@ func (as *authenticationService) LogoutService(ctx context.Context, request *pro
 
 	logger.Info("check tokenStr : ", tokenStr)
 	// Parse token
-	jwtToken, err := jwtentity.ParseToken(tokenStr)
+	jwtToken, err := jwt2.ParseToken(tokenStr)
 	if err != nil {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
 	logger.Info("check jwtToken : ", jwtToken)
 
-	tokenClaims, err := jwtentity.GetClaimsFromContext(ctx)
+	tokenClaims, err := jwt2.GetClaimsFromContext(ctx)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -176,11 +176,11 @@ func (as *authenticationService) ChangePasswordService(ctx context.Context, requ
 	}
 
 	// Cek apakah old password sama
-	jwtToken, err := jwtentity.ParseTokenFromContext(ctx)
+	jwtToken, err := jwt2.ParseTokenFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
-	claims, err := jwtentity.GetClaimsFromToken(jwtToken)
+	claims, err := jwt2.GetClaimsFromToken(jwtToken)
 	if err != nil {
 		return nil, err
 	}
@@ -223,7 +223,7 @@ func (as *authenticationService) ChangePasswordService(ctx context.Context, requ
 }
 
 func (as *authenticationService) GetProfileService(ctx context.Context, request *authentication.GetProfileRequest) (*authentication.GetProfileResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwt2.GetClaimsFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}

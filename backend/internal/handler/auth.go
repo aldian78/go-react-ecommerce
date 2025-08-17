@@ -2,9 +2,9 @@ package handler
 
 import (
 	"context"
-	"go-grpc-ecommerce-be/internal/service"
-	"go-grpc-ecommerce-be/internal/utils"
-	"go-grpc-ecommerce-be/pb/auth"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/auth"
 )
 
 type authHandler struct {

@@ -4,8 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-
-	"go-grpc-ecommerce-be/internal/entity"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 )
 
 type INewsletterRepository interface {

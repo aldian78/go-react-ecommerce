@@ -6,7 +6,7 @@ import (
 	"go-micro.dev/v4/logger"
 	"strings"
 
-	"go-grpc-ecommerce-be/internal/utils"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	"google.golang.org/grpc/metadata"
 )
 

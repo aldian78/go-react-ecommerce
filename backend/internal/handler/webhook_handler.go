@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/aldian78/go-react-ecommerce/backend/internal/dto"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/gofiber/fiber/v2"
-	"go-grpc-ecommerce-be/internal/dto"
-	"go-grpc-ecommerce-be/internal/service"
 )
 
 type webhookHandler struct {

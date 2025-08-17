@@ -3,17 +3,17 @@ package service
 import (
 	"context"
 	"errors"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	jwt2 "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 	"os"
 	"time"
 
+	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/auth"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	gocache "github.com/patrickmn/go-cache"
-	"go-grpc-ecommerce-be/internal/entity"
-	jwtentity "go-grpc-ecommerce-be/internal/entity/jwt"
-	"go-grpc-ecommerce-be/internal/repository"
-	"go-grpc-ecommerce-be/internal/utils"
-	"go-grpc-ecommerce-be/pb/auth"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -99,7 +99,7 @@ func (as *authService) Login(ctx context.Context, request *auth.LoginRequest) (*
 
 	// generate jwt
 	now := time.Now()
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwtentity.JwtClaims{
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt2.JwtClaims{
 		RegisteredClaims: jwt.RegisteredClaims{
 			Subject:   user.Id,
 			ExpiresAt: jwt.NewNumericDate(now.Add(time.Hour * 24)),
@@ -122,12 +122,12 @@ func (as *authService) Login(ctx context.Context, request *auth.LoginRequest) (*
 }
 
 func (as *authService) Logout(ctx context.Context, request *auth.LogoutRequest) (*auth.LogoutResponse, error) {
-	jwtToken, err := jwtentity.ParseTokenFromContext(ctx)
+	jwtToken, err := jwt2.ParseTokenFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	tokenClaims, err := jwtentity.GetClaimsFromContext(ctx)
+	tokenClaims, err := jwt2.GetClaimsFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -148,11 +148,11 @@ func (as *authService) ChangePassword(ctx context.Context, request *auth.ChangeP
 	}
 
 	// Cek apakah old password sama
-	jwtToken, err := jwtentity.ParseTokenFromContext(ctx)
+	jwtToken, err := jwt2.ParseTokenFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
-	claims, err := jwtentity.GetClaimsFromToken(jwtToken)
+	claims, err := jwt2.GetClaimsFromToken(jwtToken)
 	if err != nil {
 		return nil, err
 	}
@@ -195,7 +195,7 @@ func (as *authService) ChangePassword(ctx context.Context, request *auth.ChangeP
 }
 
 func (as *authService) GetProfile(ctx context.Context, request *auth.GetProfileRequest) (*auth.GetProfileResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwt2.GetClaimsFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}

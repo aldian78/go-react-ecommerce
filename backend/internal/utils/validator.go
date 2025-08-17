@@ -5,7 +5,7 @@ import (
 	"github.com/go-playground/validator/v10"
 
 	"buf.build/go/protovalidate"
-	"go-grpc-ecommerce-be/pb/common"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 	"google.golang.org/protobuf/proto"
 )
 

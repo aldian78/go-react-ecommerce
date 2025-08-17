@@ -4,9 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 	"time"
-
-	"go-grpc-ecommerce-be/internal/entity"
 )
 
 type IAuthRepository interface {

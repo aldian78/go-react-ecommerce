@@ -3,16 +3,16 @@ package service
 import (
 	"context"
 	"fmt"
+	entity2 "github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 	"os"
 	"path/filepath"
 	"time"
 
+	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/product"
 	"github.com/google/uuid"
-	"go-grpc-ecommerce-be/internal/entity"
-	jwtentity "go-grpc-ecommerce-be/internal/entity/jwt"
-	"go-grpc-ecommerce-be/internal/repository"
-	"go-grpc-ecommerce-be/internal/utils"
-	"go-grpc-ecommerce-be/pb/product"
 )
 
 type IProductService interface {
@@ -34,7 +34,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity.UserRoleAdmin {
+	if claims.Role != entity2.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
@@ -51,7 +51,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 		return nil, err
 	}
 
-	productEntity := entity.Product{
+	productEntity := entity2.Product{
 		Id:            uuid.NewString(),
 		Name:          request.Name,
 		Description:   request.Description,
@@ -99,7 +99,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity.UserRoleAdmin {
+	if claims.Role != entity2.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
@@ -133,7 +133,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 		}
 	}
 
-	newProduct := entity.Product{
+	newProduct := entity2.Product{
 		Id:            request.Id,
 		Name:          request.Name,
 		Description:   request.Description,
@@ -159,7 +159,7 @@ func (ps *productService) DeleteProduct(ctx context.Context, request *product.De
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity.UserRoleAdmin {
+	if claims.Role != entity2.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
@@ -212,7 +212,7 @@ func (ps *productService) ListProductAdmin(ctx context.Context, request *product
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity.UserRoleAdmin {
+	if claims.Role != entity2.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 

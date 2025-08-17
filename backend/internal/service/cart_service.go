@@ -3,15 +3,15 @@ package service
 import (
 	"context"
 	"fmt"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 	"os"
 	"time"
 
+	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/cart"
 	"github.com/google/uuid"
-	"go-grpc-ecommerce-be/internal/entity"
-	jwtentity "go-grpc-ecommerce-be/internal/entity/jwt"
-	"go-grpc-ecommerce-be/internal/repository"
-	"go-grpc-ecommerce-be/internal/utils"
-	"go-grpc-ecommerce-be/pb/cart"
 )
 
 type ICartService interface {

@@ -2,10 +2,10 @@ package grpcmiddleware
 
 import (
 	"context"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	gocache "github.com/patrickmn/go-cache"
-	jwtentity "go-grpc-ecommerce-be/internal/entity/jwt"
-	"go-grpc-ecommerce-be/internal/utils"
 	"google.golang.org/grpc"
 )
 
@@ -27,7 +27,7 @@ func (am *authMiddleware) Middleware(ctx context.Context, req any, info *grpc.Un
 		return handler(ctx, req)
 	}
 
-	tokenStr, err := jwtentity.ParseTokenFromContext(ctx)
+	tokenStr, err := jwt.ParseTokenFromContext(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -37,7 +37,7 @@ func (am *authMiddleware) Middleware(ctx context.Context, req any, info *grpc.Un
 		return nil, utils.UnauthenticatedResponse()
 	}
 
-	claims, err := jwtentity.GetClaimsFromToken(tokenStr)
+	claims, err := jwt.GetClaimsFromToken(tokenStr)
 	if err != nil {
 		return nil, err
 	}

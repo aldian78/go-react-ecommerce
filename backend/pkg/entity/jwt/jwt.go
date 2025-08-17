@@ -6,8 +6,8 @@ import (
 	"go-micro.dev/v4/logger"
 	"os"
 
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	"github.com/golang-jwt/jwt/v5"
-	"go-grpc-ecommerce-be/internal/utils"
 )
 
 type JwtEntityContextKey string

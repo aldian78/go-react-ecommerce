@@ -2,13 +2,13 @@ package service
 
 import (
 	"context"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 	"time"
 
+	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/newsletter"
 	"github.com/google/uuid"
-	"go-grpc-ecommerce-be/internal/entity"
-	"go-grpc-ecommerce-be/internal/repository"
-	"go-grpc-ecommerce-be/internal/utils"
-	"go-grpc-ecommerce-be/pb/newsletter"
 )
 
 type INewsletterService interface {

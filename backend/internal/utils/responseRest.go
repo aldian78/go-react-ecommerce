@@ -2,8 +2,8 @@ package utils
 
 import (
 	"encoding/json"
-	cons "go-grpc-ecommerce-be/internal/constants"
-	model "go-grpc-ecommerce-be/internal/entity/rest"
+	cons "github.com/aldian78/go-react-ecommerce/backend/internal/constants"
+	model "github.com/aldian78/go-react-ecommerce/backend/pkg/rest"
 	"reflect"
 	"strconv"
 )

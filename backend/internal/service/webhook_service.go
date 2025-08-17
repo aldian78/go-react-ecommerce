@@ -3,11 +3,11 @@ package service
 import (
 	"context"
 	"errors"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 	"time"
 
-	"go-grpc-ecommerce-be/internal/dto"
-	"go-grpc-ecommerce-be/internal/entity"
-	"go-grpc-ecommerce-be/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/dto"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
 )
 
 type IWebhookService interface {

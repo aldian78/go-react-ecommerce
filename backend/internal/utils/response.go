@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"go-grpc-ecommerce-be/pb/common"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
