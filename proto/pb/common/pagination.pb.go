@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.5
 // 	protoc        v5.29.5
-// source: common/pagination.proto
+// source: basecommon/pagination.proto
 
 package common
 
@@ -252,12 +252,12 @@ func file_common_pagination_proto_rawDescGZIP() []byte {
 
 var file_common_pagination_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_common_pagination_proto_goTypes = []any{
-	(*PaginationSortRequest)(nil), // 0: common.PaginationSortRequest
-	(*PaginationRequest)(nil),     // 1: common.PaginationRequest
-	(*PaginationResponse)(nil),    // 2: common.PaginationResponse
+	(*PaginationSortRequest)(nil), // 0: basecommon.PaginationSortRequest
+	(*PaginationRequest)(nil),     // 1: basecommon.PaginationRequest
+	(*PaginationResponse)(nil),    // 2: basecommon.PaginationResponse
 }
 var file_common_pagination_proto_depIdxs = []int32{
-	0, // 0: common.PaginationRequest.sort:type_name -> common.PaginationSortRequest
+	0, // 0: basecommon.PaginationRequest.sort:type_name -> basecommon.PaginationSortRequest
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

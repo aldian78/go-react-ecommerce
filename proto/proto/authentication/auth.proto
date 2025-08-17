@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package authentication;
 
-import "common/base_response.proto";
+import "basecommon/base_response.proto";
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 

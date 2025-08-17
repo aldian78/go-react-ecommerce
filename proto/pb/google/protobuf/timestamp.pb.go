@@ -47,7 +47,7 @@
 //	t := ts.AsTime()
 //	... // make use of t as a time.Time
 //
-// Converting to a time.Time is a common operation so that the extensive
+// Converting to a time.Time is a basecommon operation so that the extensive
 // set of time-based operations provided by the time package can be leveraged.
 // See https://golang.org/pkg/time for more information.
 //

@@ -1226,24 +1226,24 @@ var file_product_product_proto_goTypes = []any{
 	(*HighlightProductsRequest)(nil),      // 14: product.HighlightProductsRequest
 	(*HighlightProductsResponseItem)(nil), // 15: product.HighlightProductsResponseItem
 	(*HighlightProductsResponse)(nil),     // 16: product.HighlightProductsResponse
-	(*common.BaseResponse)(nil),           // 17: common.BaseResponse
-	(*common.PaginationRequest)(nil),      // 18: common.PaginationRequest
-	(*common.PaginationResponse)(nil),     // 19: common.PaginationResponse
+	(*common.BaseResponse)(nil),           // 17: basecommon.BaseResponse
+	(*common.PaginationRequest)(nil),      // 18: basecommon.PaginationRequest
+	(*common.PaginationResponse)(nil),     // 19: basecommon.PaginationResponse
 }
 var file_product_product_proto_depIdxs = []int32{
-	17, // 0: product.CreateProductResponse.base:type_name -> common.BaseResponse
-	17, // 1: product.DetailProductResponse.base:type_name -> common.BaseResponse
-	17, // 2: product.EditProductResponse.base:type_name -> common.BaseResponse
-	17, // 3: product.DeleteProductResponse.base:type_name -> common.BaseResponse
-	18, // 4: product.ListProductRequest.pagination:type_name -> common.PaginationRequest
-	17, // 5: product.ListProductResponse.base:type_name -> common.BaseResponse
-	19, // 6: product.ListProductResponse.pagination:type_name -> common.PaginationResponse
+	17, // 0: product.CreateProductResponse.base:type_name -> basecommon.BaseResponse
+	17, // 1: product.DetailProductResponse.base:type_name -> basecommon.BaseResponse
+	17, // 2: product.EditProductResponse.base:type_name -> basecommon.BaseResponse
+	17, // 3: product.DeleteProductResponse.base:type_name -> basecommon.BaseResponse
+	18, // 4: product.ListProductRequest.pagination:type_name -> basecommon.PaginationRequest
+	17, // 5: product.ListProductResponse.base:type_name -> basecommon.BaseResponse
+	19, // 6: product.ListProductResponse.pagination:type_name -> basecommon.PaginationResponse
 	9,  // 7: product.ListProductResponse.data:type_name -> product.ListProductResponseItem
-	18, // 8: product.ListProductAdminRequest.pagination:type_name -> common.PaginationRequest
-	17, // 9: product.ListProductAdminResponse.base:type_name -> common.BaseResponse
-	19, // 10: product.ListProductAdminResponse.pagination:type_name -> common.PaginationResponse
+	18, // 8: product.ListProductAdminRequest.pagination:type_name -> basecommon.PaginationRequest
+	17, // 9: product.ListProductAdminResponse.base:type_name -> basecommon.BaseResponse
+	19, // 10: product.ListProductAdminResponse.pagination:type_name -> basecommon.PaginationResponse
 	12, // 11: product.ListProductAdminResponse.data:type_name -> product.ListProductAdminResponseItem
-	17, // 12: product.HighlightProductsResponse.base:type_name -> common.BaseResponse
+	17, // 12: product.HighlightProductsResponse.base:type_name -> basecommon.BaseResponse
 	15, // 13: product.HighlightProductsResponse.data:type_name -> product.HighlightProductsResponseItem
 	0,  // 14: product.ProductService.CreateProduct:input_type -> product.CreateProductRequest
 	2,  // 15: product.ProductService.DetailProduct:input_type -> product.DetailProductRequest

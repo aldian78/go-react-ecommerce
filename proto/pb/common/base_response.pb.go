@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.5
 // 	protoc        v5.29.5
-// source: common/base_response.proto
+// source: basecommon/base_response.proto
 
 package common
 
@@ -182,11 +182,11 @@ func file_common_base_response_proto_rawDescGZIP() []byte {
 
 var file_common_base_response_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_common_base_response_proto_goTypes = []any{
-	(*ValidationError)(nil), // 0: common.ValidationError
-	(*BaseResponse)(nil),    // 1: common.BaseResponse
+	(*ValidationError)(nil), // 0: basecommon.ValidationError
+	(*BaseResponse)(nil),    // 1: basecommon.BaseResponse
 }
 var file_common_base_response_proto_depIdxs = []int32{
-	0, // 0: common.BaseResponse.validation_errors:type_name -> common.ValidationError
+	0, // 0: basecommon.BaseResponse.validation_errors:type_name -> basecommon.ValidationError
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

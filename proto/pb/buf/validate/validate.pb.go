@@ -4660,7 +4660,7 @@ type StringRules struct {
 	//
 	// ```
 	NotIn []string `protobuf:"bytes,11,rep,name=not_in,json=notIn" json:"not_in,omitempty"`
-	// `WellKnown` rules provide advanced constraints against common string
+	// `WellKnown` rules provide advanced constraints against basecommon string
 	// patterns
 	//
 	// Types that are valid to be assigned to WellKnown:
@@ -5315,7 +5315,7 @@ type StringRules_HostAndPort struct {
 }
 
 type StringRules_WellKnownRegex struct {
-	// `well_known_regex` specifies a common well-known pattern
+	// `well_known_regex` specifies a basecommon well-known pattern
 	// defined as a regex. If the field value doesn't match the well-known
 	// regex, an error message will be generated.
 	//
@@ -5511,7 +5511,7 @@ type BytesRules struct {
 	//
 	// ```
 	NotIn [][]byte `protobuf:"bytes,9,rep,name=not_in,json=notIn" json:"not_in,omitempty"`
-	// WellKnown rules provide advanced constraints against common byte
+	// WellKnown rules provide advanced constraints against basecommon byte
 	// patterns
 	//
 	// Types that are valid to be assigned to WellKnown:

@@ -1327,31 +1327,31 @@ var file_order_order_proto_goTypes = []any{
 	(*DetailOrderResponse)(nil),               // 13: order.DetailOrderResponse
 	(*UpdateOrderStatusRequest)(nil),          // 14: order.UpdateOrderStatusRequest
 	(*UpdateOrderStatusResponse)(nil),         // 15: order.UpdateOrderStatusResponse
-	(*common.BaseResponse)(nil),               // 16: common.BaseResponse
-	(*common.PaginationRequest)(nil),          // 17: common.PaginationRequest
+	(*common.BaseResponse)(nil),               // 16: basecommon.BaseResponse
+	(*common.PaginationRequest)(nil),          // 17: basecommon.PaginationRequest
 	(*timestamppb.Timestamp)(nil),             // 18: google.protobuf.Timestamp
-	(*common.PaginationResponse)(nil),         // 19: common.PaginationResponse
+	(*common.PaginationResponse)(nil),         // 19: basecommon.PaginationResponse
 }
 var file_order_order_proto_depIdxs = []int32{
 	0,  // 0: order.CreateOrderRequest.products:type_name -> order.CreateOrderRequestProductItem
-	16, // 1: order.CreateOrderResponse.base:type_name -> common.BaseResponse
-	17, // 2: order.ListOrderAdminRequest.pagination:type_name -> common.PaginationRequest
+	16, // 1: order.CreateOrderResponse.base:type_name -> basecommon.BaseResponse
+	17, // 2: order.ListOrderAdminRequest.pagination:type_name -> basecommon.PaginationRequest
 	18, // 3: order.ListOrderAdminResponseItem.created_at:type_name -> google.protobuf.Timestamp
 	4,  // 4: order.ListOrderAdminResponseItem.products:type_name -> order.ListOrderAdminResponseItemProduct
-	16, // 5: order.ListOrderAdminResponse.base:type_name -> common.BaseResponse
-	19, // 6: order.ListOrderAdminResponse.pagination:type_name -> common.PaginationResponse
+	16, // 5: order.ListOrderAdminResponse.base:type_name -> basecommon.BaseResponse
+	19, // 6: order.ListOrderAdminResponse.pagination:type_name -> basecommon.PaginationResponse
 	5,  // 7: order.ListOrderAdminResponse.items:type_name -> order.ListOrderAdminResponseItem
-	17, // 8: order.ListOrderRequest.pagination:type_name -> common.PaginationRequest
+	17, // 8: order.ListOrderRequest.pagination:type_name -> basecommon.PaginationRequest
 	18, // 9: order.ListOrderResponseItem.created_at:type_name -> google.protobuf.Timestamp
 	8,  // 10: order.ListOrderResponseItem.products:type_name -> order.ListOrderResponseItemProduct
-	16, // 11: order.ListOrderResponse.base:type_name -> common.BaseResponse
-	19, // 12: order.ListOrderResponse.pagination:type_name -> common.PaginationResponse
+	16, // 11: order.ListOrderResponse.base:type_name -> basecommon.BaseResponse
+	19, // 12: order.ListOrderResponse.pagination:type_name -> basecommon.PaginationResponse
 	9,  // 13: order.ListOrderResponse.items:type_name -> order.ListOrderResponseItem
-	16, // 14: order.DetailOrderResponse.base:type_name -> common.BaseResponse
+	16, // 14: order.DetailOrderResponse.base:type_name -> basecommon.BaseResponse
 	18, // 15: order.DetailOrderResponse.created_at:type_name -> google.protobuf.Timestamp
 	12, // 16: order.DetailOrderResponse.items:type_name -> order.DetailOrderResponseItem
 	18, // 17: order.DetailOrderResponse.expired_at:type_name -> google.protobuf.Timestamp
-	16, // 18: order.UpdateOrderStatusResponse.base:type_name -> common.BaseResponse
+	16, // 18: order.UpdateOrderStatusResponse.base:type_name -> basecommon.BaseResponse
 	1,  // 19: order.OrderService.CreateOrder:input_type -> order.CreateOrderRequest
 	3,  // 20: order.OrderService.ListOrderAdmin:input_type -> order.ListOrderAdminRequest
 	7,  // 21: order.OrderService.ListOrder:input_type -> order.ListOrderRequest

@@ -170,10 +170,10 @@ var file_service_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_service_service_proto_goTypes = []any{
 	(*HelloWorldRequest)(nil),   // 0: service.HelloWorldRequest
 	(*HelloWorldResponse)(nil),  // 1: service.HelloWorldResponse
-	(*common.BaseResponse)(nil), // 2: common.BaseResponse
+	(*common.BaseResponse)(nil), // 2: basecommon.BaseResponse
 }
 var file_service_service_proto_depIdxs = []int32{
-	2, // 0: service.HelloWorldResponse.base:type_name -> common.BaseResponse
+	2, // 0: service.HelloWorldResponse.base:type_name -> basecommon.BaseResponse
 	0, // 1: service.HelloWorldService.HelloWorld:input_type -> service.HelloWorldRequest
 	0, // 2: service.HelloWorldService.HelloWorld2:input_type -> service.HelloWorldRequest
 	1, // 3: service.HelloWorldService.HelloWorld:output_type -> service.HelloWorldResponse

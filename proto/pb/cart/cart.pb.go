@@ -583,14 +583,14 @@ var file_cart_cart_proto_goTypes = []any{
 	(*DeleteCartResponse)(nil),         // 6: cart.DeleteCartResponse
 	(*UpdateCartQuantityRequest)(nil),  // 7: cart.UpdateCartQuantityRequest
 	(*UpdateCartQuantityResponse)(nil), // 8: cart.UpdateCartQuantityResponse
-	(*common.BaseResponse)(nil),        // 9: common.BaseResponse
+	(*common.BaseResponse)(nil),        // 9: basecommon.BaseResponse
 }
 var file_cart_cart_proto_depIdxs = []int32{
-	9, // 0: cart.AddProductToCartResponse.base:type_name -> common.BaseResponse
-	9, // 1: cart.ListCartResponse.base:type_name -> common.BaseResponse
+	9, // 0: cart.AddProductToCartResponse.base:type_name -> basecommon.BaseResponse
+	9, // 1: cart.ListCartResponse.base:type_name -> basecommon.BaseResponse
 	3, // 2: cart.ListCartResponse.items:type_name -> cart.ListCartResponseItem
-	9, // 3: cart.DeleteCartResponse.base:type_name -> common.BaseResponse
-	9, // 4: cart.UpdateCartQuantityResponse.base:type_name -> common.BaseResponse
+	9, // 3: cart.DeleteCartResponse.base:type_name -> basecommon.BaseResponse
+	9, // 4: cart.UpdateCartQuantityResponse.base:type_name -> basecommon.BaseResponse
 	0, // 5: cart.CartService.AddProductToCart:input_type -> cart.AddProductToCartRequest
 	2, // 6: cart.CartService.ListCart:input_type -> cart.ListCartRequest
 	5, // 7: cart.CartService.DeleteCart:input_type -> cart.DeleteCartRequest

@@ -7,7 +7,7 @@ import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	fmt "fmt"
 	api1 "github.com/aldian78/go-react-ecommerce/proto/pb/api"
-	_ "github.com/aldian78/go-react-ecommerce/proto/pb/common"
+	_ "github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	proto "google.golang.org/protobuf/proto"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
 	math "math"

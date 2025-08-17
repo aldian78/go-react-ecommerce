@@ -46,7 +46,7 @@
 //	d := dur.AsDuration()
 //	... // make use of d as a time.Duration
 //
-// Converting to a time.Duration is a common operation so that the extensive
+// Converting to a time.Duration is a basecommon operation so that the extensive
 // set of time-based operations provided by the time package can be leveraged.
 // See https://golang.org/pkg/time for more information.
 //

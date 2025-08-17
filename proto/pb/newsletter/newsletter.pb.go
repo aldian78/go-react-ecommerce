@@ -170,10 +170,10 @@ var file_newsletter_newsletter_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_newsletter_newsletter_proto_goTypes = []any{
 	(*SubcribeNewsletterRequest)(nil),  // 0: newsletter.SubcribeNewsletterRequest
 	(*SubcribeNewsletterResponse)(nil), // 1: newsletter.SubcribeNewsletterResponse
-	(*common.BaseResponse)(nil),        // 2: common.BaseResponse
+	(*common.BaseResponse)(nil),        // 2: basecommon.BaseResponse
 }
 var file_newsletter_newsletter_proto_depIdxs = []int32{
-	2, // 0: newsletter.SubcribeNewsletterResponse.base:type_name -> common.BaseResponse
+	2, // 0: newsletter.SubcribeNewsletterResponse.base:type_name -> basecommon.BaseResponse
 	0, // 1: newsletter.NewsletterService.SubscribeNewsletter:input_type -> newsletter.SubcribeNewsletterRequest
 	1, // 2: newsletter.NewsletterService.SubscribeNewsletter:output_type -> newsletter.SubcribeNewsletterResponse
 	2, // [2:3] is the sub-list for method output_type
