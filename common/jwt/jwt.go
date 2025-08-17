@@ -4,8 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/common/utils"
+	gocache "github.com/patrickmn/go-cache"
 	"go-micro.dev/v4/logger"
 	"os"
+	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -48,14 +50,20 @@ func GetClaimsFromToken(token string) (*JwtClaims, error) {
 	return nil, utils.UnauthenticatedResponse()
 }
 
-func GetClaimsFromContext(ctx context.Context) (*JwtClaims, error) {
-	logger.Infof("check ctrsss : %s", ctx)
-	claims, ok := ctx.Value(JwtEntityContextKeyValue).(*JwtClaims)
-	logger.Infof("check claims : %", claims)
-	if !ok {
+func GetClaimsFromContext(token string) (*JwtClaims, error) {
+	logger.Infof("check ctrsss : %s", token)
+	//claims, ok := ctx.Value(JwtEntityContextKeyValue).(*JwtClaims)
+	//logger.Infof("check claims : %", claims)
+	//if !ok {
+	//	return nil, utils.UnauthenticatedResponse()
+	//}
+
+	cacheService := gocache.New(time.Hour*24, time.Hour)
+	tokens, ok := cacheService.Get(token)
+	if ok {
 		return nil, utils.UnauthenticatedResponse()
 	}
-
+	claims := tokens.(*JwtClaims)
 	logger.Infof("check final claims : %", claims)
 	return claims, nil
 }
