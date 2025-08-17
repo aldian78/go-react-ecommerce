@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/basecommon;basecommon";
 
-package common;
+package basecommon;
 
 message PaginationSortRequest {
     string field = 1;
