@@ -6,7 +6,7 @@ import "common/base_response.proto";
 import "buf/validate/validate.proto";
 import "google/protobuf/timestamp.proto";
 
-option go_package = "go-grpc-ecommerce-be/pb/services";
+option go_package = "go-grpc-ecommerce-be/pb/auth";
 
 service AuthService {
     rpc Register(RegisterRequest) returns (RegisterResponse);
