@@ -2,13 +2,13 @@
 // versions:
 // 	protoc-gen-go v1.36.5
 // 	protoc        v5.29.5
-// source: services/services.proto
+// source: auth/auth.proto
 
-package auth
+package services
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
-	common "go-grpc-ecommerce-be/pb/common"
+	common "github.com/aldian78/go-react-ecommerce/proto/pb/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -639,9 +639,9 @@ var file_auth_auth_proto_rawDesc = string([]byte{
 	0x17, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c,
 	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x18, 0x2e, 0x61, 0x75, 0x74, 0x68, 0x2e,
 	0x47, 0x65, 0x74, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x73, 0x65, 0x42, 0x1e, 0x5a, 0x1c, 0x67, 0x6f, 0x2d, 0x67, 0x72, 0x70, 0x63, 0x2d, 0x65, 0x63,
-	0x6f, 0x6d, 0x6d, 0x65, 0x72, 0x63, 0x65, 0x2d, 0x62, 0x65, 0x2f, 0x70, 0x62, 0x2f, 0x61, 0x75,
-	0x74, 0x68, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x65, 0x42, 0x22, 0x5a, 0x20, 0x67, 0x6f, 0x2d, 0x67, 0x72, 0x70, 0x63, 0x2d, 0x65, 0x63,
+	0x6f, 0x6d, 0x6d, 0x65, 0x72, 0x63, 0x65, 0x2d, 0x62, 0x65, 0x2f, 0x70, 0x62, 0x2f, 0x73, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -658,36 +658,36 @@ func file_auth_auth_proto_rawDescGZIP() []byte {
 
 var file_auth_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_auth_auth_proto_goTypes = []any{
-	(*RegisterRequest)(nil),        // 0: services.RegisterRequest
-	(*RegisterResponse)(nil),       // 1: services.RegisterResponse
-	(*LoginRequest)(nil),           // 2: services.LoginRequest
-	(*LoginResponse)(nil),          // 3: services.LoginResponse
-	(*LogoutRequest)(nil),          // 4: services.LogoutRequest
-	(*LogoutResponse)(nil),         // 5: services.LogoutResponse
-	(*ChangePasswordRequest)(nil),  // 6: services.ChangePasswordRequest
-	(*ChangePasswordResponse)(nil), // 7: services.ChangePasswordResponse
-	(*GetProfileRequest)(nil),      // 8: services.GetProfileRequest
-	(*GetProfileResponse)(nil),     // 9: services.GetProfileResponse
+	(*RegisterRequest)(nil),        // 0: auth.RegisterRequest
+	(*RegisterResponse)(nil),       // 1: auth.RegisterResponse
+	(*LoginRequest)(nil),           // 2: auth.LoginRequest
+	(*LoginResponse)(nil),          // 3: auth.LoginResponse
+	(*LogoutRequest)(nil),          // 4: auth.LogoutRequest
+	(*LogoutResponse)(nil),         // 5: auth.LogoutResponse
+	(*ChangePasswordRequest)(nil),  // 6: auth.ChangePasswordRequest
+	(*ChangePasswordResponse)(nil), // 7: auth.ChangePasswordResponse
+	(*GetProfileRequest)(nil),      // 8: auth.GetProfileRequest
+	(*GetProfileResponse)(nil),     // 9: auth.GetProfileResponse
 	(*common.BaseResponse)(nil),    // 10: common.BaseResponse
 	(*timestamppb.Timestamp)(nil),  // 11: google.protobuf.Timestamp
 }
 var file_auth_auth_proto_depIdxs = []int32{
-	10, // 0: services.RegisterResponse.base:type_name -> common.BaseResponse
-	10, // 1: services.LoginResponse.base:type_name -> common.BaseResponse
-	10, // 2: services.LogoutResponse.base:type_name -> common.BaseResponse
-	10, // 3: services.ChangePasswordResponse.base:type_name -> common.BaseResponse
-	10, // 4: services.GetProfileResponse.base:type_name -> common.BaseResponse
-	11, // 5: services.GetProfileResponse.member_since:type_name -> google.protobuf.Timestamp
-	0,  // 6: services.AuthService.Register:input_type -> services.RegisterRequest
-	2,  // 7: services.AuthService.Login:input_type -> services.LoginRequest
-	4,  // 8: services.AuthService.Logout:input_type -> services.LogoutRequest
-	6,  // 9: services.AuthService.ChangePassword:input_type -> services.ChangePasswordRequest
-	8,  // 10: services.AuthService.GetProfile:input_type -> services.GetProfileRequest
-	1,  // 11: services.AuthService.Register:output_type -> services.RegisterResponse
-	3,  // 12: services.AuthService.Login:output_type -> services.LoginResponse
-	5,  // 13: services.AuthService.Logout:output_type -> services.LogoutResponse
-	7,  // 14: services.AuthService.ChangePassword:output_type -> services.ChangePasswordResponse
-	9,  // 15: services.AuthService.GetProfile:output_type -> services.GetProfileResponse
+	10, // 0: auth.RegisterResponse.base:type_name -> common.BaseResponse
+	10, // 1: auth.LoginResponse.base:type_name -> common.BaseResponse
+	10, // 2: auth.LogoutResponse.base:type_name -> common.BaseResponse
+	10, // 3: auth.ChangePasswordResponse.base:type_name -> common.BaseResponse
+	10, // 4: auth.GetProfileResponse.base:type_name -> common.BaseResponse
+	11, // 5: auth.GetProfileResponse.member_since:type_name -> google.protobuf.Timestamp
+	0,  // 6: auth.AuthService.Register:input_type -> auth.RegisterRequest
+	2,  // 7: auth.AuthService.Login:input_type -> auth.LoginRequest
+	4,  // 8: auth.AuthService.Logout:input_type -> auth.LogoutRequest
+	6,  // 9: auth.AuthService.ChangePassword:input_type -> auth.ChangePasswordRequest
+	8,  // 10: auth.AuthService.GetProfile:input_type -> auth.GetProfileRequest
+	1,  // 11: auth.AuthService.Register:output_type -> auth.RegisterResponse
+	3,  // 12: auth.AuthService.Login:output_type -> auth.LoginResponse
+	5,  // 13: auth.AuthService.Logout:output_type -> auth.LogoutResponse
+	7,  // 14: auth.AuthService.ChangePassword:output_type -> auth.ChangePasswordResponse
+	9,  // 15: auth.AuthService.GetProfile:output_type -> auth.GetProfileResponse
 	11, // [11:16] is the sub-list for method output_type
 	6,  // [6:11] is the sub-list for method input_type
 	6,  // [6:6] is the sub-list for extension type_name
