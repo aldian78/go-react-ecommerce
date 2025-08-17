@@ -3,7 +3,7 @@ package utils
 import (
 	"encoding/json"
 	cons "github.com/aldian78/go-react-ecommerce/backend/internal/constants"
-	model "github.com/aldian78/go-react-ecommerce/backend/pkg/rest"
+	model "github.com/aldian78/go-react-ecommerce/common/rest"
 	"reflect"
 	"strconv"
 )

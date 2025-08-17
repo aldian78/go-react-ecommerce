@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
@@ -21,7 +22,7 @@ func (ch *cartHandler) AddProductToCart(ctx context.Context, request *cart.AddPr
 	}
 	if validationErrors != nil {
 		return &cart.AddProductToCartResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -40,7 +41,7 @@ func (ch *cartHandler) ListCart(ctx context.Context, request *cart.ListCartReque
 	}
 	if validationErrors != nil {
 		return &cart.ListCartResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -59,7 +60,7 @@ func (ch *cartHandler) DeleteCart(ctx context.Context, request *cart.DeleteCartR
 	}
 	if validationErrors != nil {
 		return &cart.DeleteCartResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -78,7 +79,7 @@ func (ch *cartHandler) UpdateCartQuantity(ctx context.Context, request *cart.Upd
 	}
 	if validationErrors != nil {
 		return &cart.UpdateCartQuantityResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 

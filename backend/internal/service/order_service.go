@@ -5,13 +5,13 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
-	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
+	jwtentity "github.com/aldian78/go-react-ecommerce/common/jwt"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	operatingsystem "os"
 	"runtime/debug"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
-	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/order"
 	"github.com/google/uuid"
 	"github.com/xendit/xendit-go"
@@ -86,7 +86,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 	for _, p := range request.Products {
 		if productMap[p.Id] == nil {
 			return &order.CreateOrderResponse{
-				Base: utils.NotFoundResponse(fmt.Sprintf("Product %s not found", p.Id)),
+				Base: baseutil.NotFoundResponse(fmt.Sprintf("Product %s not found", p.Id)),
 			}, nil
 		}
 		total += productMap[p.Id].Price * float64(p.Quantity)
@@ -174,7 +174,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 	}
 
 	return &order.CreateOrderResponse{
-		Base: utils.SuccessResponse("Create order success"),
+		Base: baseutil.SuccessResponse("Create order success"),
 		Id:   orderEntity.Id,
 	}, nil
 }
@@ -185,7 +185,7 @@ func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListO
 		return nil, err
 	}
 	if claims.Role != entity.UserRoleAdmin {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	orders, metadata, err := os.orderRepository.GetListOrderAdminPagination(ctx, request.Pagination)
@@ -223,7 +223,7 @@ func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListO
 	}
 
 	return &order.ListOrderAdminResponse{
-		Base:       utils.SuccessResponse("Get list order admin success"),
+		Base:       baseutil.SuccessResponse("Get list order admin success"),
 		Pagination: metadata,
 		Items:      items,
 	}, nil
@@ -275,7 +275,7 @@ func (os *orderService) ListOrder(ctx context.Context, request *order.ListOrderR
 	}
 
 	return &order.ListOrderResponse{
-		Base:       utils.SuccessResponse("Get list order success"),
+		Base:       baseutil.SuccessResponse("Get list order success"),
 		Pagination: metadata,
 		Items:      items,
 	}, nil
@@ -294,7 +294,7 @@ func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOr
 
 	if claims.Role != entity.UserRoleAdmin && claims.Subject != orderEntity.UserId {
 		return &order.DetailOrderResponse{
-			Base: utils.BadRequestResponse("User id is not matched"),
+			Base: baseutil.BadRequestResponse("User id is not matched"),
 		}, nil
 	}
 
@@ -322,7 +322,7 @@ func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOr
 		})
 	}
 	return &order.DetailOrderResponse{
-		Base:             utils.SuccessResponse("Get order detail success"),
+		Base:             baseutil.SuccessResponse("Get order detail success"),
 		Id:               orderEntity.Id,
 		Number:           orderEntity.Number,
 		UserFullName:     orderEntity.UserFullName,
@@ -349,44 +349,44 @@ func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.Up
 	}
 	if orderEntity == nil {
 		return &order.UpdateOrderStatusResponse{
-			Base: utils.NotFoundResponse("Order not found"),
+			Base: baseutil.NotFoundResponse("Order not found"),
 		}, nil
 	}
 
 	if claims.Role != entity.UserRoleAdmin && orderEntity.UserId != claims.Subject {
 		return &order.UpdateOrderStatusResponse{
-			Base: utils.BadRequestResponse("User id is not matched"),
+			Base: baseutil.BadRequestResponse("User id is not matched"),
 		}, nil
 	}
 
 	if request.NewStatusCode == entity.OrderStatusCodePaid {
 		if claims.Role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodeUnpaid {
 			return &order.UpdateOrderStatusResponse{
-				Base: utils.BadRequestResponse("Update status is not allowed"),
+				Base: baseutil.BadRequestResponse("Update status is not allowed"),
 			}, nil
 		}
 	} else if request.NewStatusCode == entity.OrderStatusCodeCanceled {
 		if orderEntity.OrderStatusCode != entity.OrderStatusCodeUnpaid {
 			return &order.UpdateOrderStatusResponse{
-				Base: utils.BadRequestResponse("Update status is not allowed"),
+				Base: baseutil.BadRequestResponse("Update status is not allowed"),
 			}, nil
 		}
 	} else if request.NewStatusCode == entity.OrderStatusCodeShipped {
 		if claims.Role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodePaid {
 			return &order.UpdateOrderStatusResponse{
-				Base: utils.BadRequestResponse("Update status is not allowed"),
+				Base: baseutil.BadRequestResponse("Update status is not allowed"),
 			}, nil
 		}
 
 	} else if request.NewStatusCode == entity.OrderStatusCodeDone {
 		if orderEntity.OrderStatusCode != entity.OrderStatusCodeShipped {
 			return &order.UpdateOrderStatusResponse{
-				Base: utils.BadRequestResponse("Update status is not allowed"),
+				Base: baseutil.BadRequestResponse("Update status is not allowed"),
 			}, nil
 		}
 	} else {
 		return &order.UpdateOrderStatusResponse{
-			Base: utils.BadRequestResponse("Invalid new status code"),
+			Base: baseutil.BadRequestResponse("Invalid new status code"),
 		}, nil
 	}
 
@@ -401,7 +401,7 @@ func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.Up
 	}
 
 	return &order.UpdateOrderStatusResponse{
-		Base: utils.SuccessResponse("Update order status success"),
+		Base: baseutil.SuccessResponse("Update order status success"),
 	}, nil
 }
 

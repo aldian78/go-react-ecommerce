@@ -3,10 +3,10 @@ package service
 import (
 	"context"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
-	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/newsletter"
 	"github.com/google/uuid"
 )
@@ -26,7 +26,7 @@ func (ns *newsletterService) SubscribeNewsletter(ctx context.Context, request *n
 	}
 	if newsletterEntity != nil {
 		return &newsletter.SubcribeNewsletterResponse{
-			Base: utils.SuccessResponse("Subscribe newsletter success"),
+			Base: baseutil.SuccessResponse("Subscribe newsletter success"),
 		}, nil
 	}
 
@@ -43,7 +43,7 @@ func (ns *newsletterService) SubscribeNewsletter(ctx context.Context, request *n
 	}
 
 	return &newsletter.SubcribeNewsletterResponse{
-		Base: utils.SuccessResponse("Subscribe newsletter success"),
+		Base: baseutil.SuccessResponse("Subscribe newsletter success"),
 	}, nil
 }
 

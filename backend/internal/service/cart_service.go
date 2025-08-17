@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
-	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
+	jwtentity "github.com/aldian78/go-react-ecommerce/common/jwt"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	"os"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
-	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/cart"
 	"github.com/google/uuid"
 )
@@ -38,7 +38,7 @@ func (cs *cartService) AddProductToCart(ctx context.Context, request *cart.AddPr
 	}
 	if productEntity == nil {
 		return &cart.AddProductToCartResponse{
-			Base: utils.NotFoundResponse("Product not found"),
+			Base: baseutil.NotFoundResponse("Product not found"),
 		}, nil
 	}
 
@@ -59,7 +59,7 @@ func (cs *cartService) AddProductToCart(ctx context.Context, request *cart.AddPr
 		}
 
 		return &cart.AddProductToCartResponse{
-			Base: utils.SuccessResponse("Add product to cart success"),
+			Base: baseutil.SuccessResponse("Add product to cart success"),
 			Id:   cartEntity.Id,
 		}, nil
 	}
@@ -79,7 +79,7 @@ func (cs *cartService) AddProductToCart(ctx context.Context, request *cart.AddPr
 	}
 
 	return &cart.AddProductToCartResponse{
-		Base: utils.SuccessResponse("Add product to cart success"),
+		Base: baseutil.SuccessResponse("Add product to cart success"),
 		Id:   newCartEntity.Id,
 	}, nil
 }
@@ -110,7 +110,7 @@ func (cs *cartService) ListCart(ctx context.Context, request *cart.ListCartReque
 	}
 
 	return &cart.ListCartResponse{
-		Base:  utils.SuccessResponse("Get list cart success"),
+		Base:  baseutil.SuccessResponse("Get list cart success"),
 		Items: items,
 	}, nil
 }
@@ -127,13 +127,13 @@ func (cs *cartService) DeleteCart(ctx context.Context, request *cart.DeleteCartR
 	}
 	if cartEntity == nil {
 		return &cart.DeleteCartResponse{
-			Base: utils.NotFoundResponse("Cart not found"),
+			Base: baseutil.NotFoundResponse("Cart not found"),
 		}, nil
 	}
 
 	if cartEntity.UserId != claims.Subject {
 		return &cart.DeleteCartResponse{
-			Base: utils.BadRequestResponse("Cart user is is not matched"),
+			Base: baseutil.BadRequestResponse("Cart user is is not matched"),
 		}, nil
 	}
 
@@ -143,7 +143,7 @@ func (cs *cartService) DeleteCart(ctx context.Context, request *cart.DeleteCartR
 	}
 
 	return &cart.DeleteCartResponse{
-		Base: utils.SuccessResponse("Delete cart success"),
+		Base: baseutil.SuccessResponse("Delete cart success"),
 	}, nil
 }
 
@@ -159,13 +159,13 @@ func (cs *cartService) UpdateCartQuantity(ctx context.Context, request *cart.Upd
 	}
 	if cartEntity == nil {
 		return &cart.UpdateCartQuantityResponse{
-			Base: utils.NotFoundResponse("Cart not found"),
+			Base: baseutil.NotFoundResponse("Cart not found"),
 		}, nil
 	}
 
 	if cartEntity.UserId != claims.Subject {
 		return &cart.UpdateCartQuantityResponse{
-			Base: utils.BadRequestResponse("Cart user id is not matched"),
+			Base: baseutil.BadRequestResponse("Cart user id is not matched"),
 		}, nil
 	}
 
@@ -176,7 +176,7 @@ func (cs *cartService) UpdateCartQuantity(ctx context.Context, request *cart.Upd
 		}
 
 		return &cart.UpdateCartQuantityResponse{
-			Base: utils.SuccessResponse("Update cart quantity success"),
+			Base: baseutil.SuccessResponse("Update cart quantity success"),
 		}, nil
 	}
 	now := time.Now()
@@ -190,7 +190,7 @@ func (cs *cartService) UpdateCartQuantity(ctx context.Context, request *cart.Upd
 	}
 
 	return &cart.UpdateCartQuantityResponse{
-		Base: utils.SuccessResponse("Update cart quantity success"),
+		Base: baseutil.SuccessResponse("Update cart quantity success"),
 	}, nil
 }
 

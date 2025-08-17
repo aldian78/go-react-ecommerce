@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
-	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
-	jwt2 "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
+	jwt2 "github.com/aldian78/go-react-ecommerce/common/jwt"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
 	"github.com/golang-jwt/jwt/v5"
@@ -45,7 +45,7 @@ func NewAuthenticationService(authRepository repository.IAuthenticationRepositor
 func (as *authenticationService) RegisterService(ctx context.Context, request *authentication.RegisterRequest) (*authentication.RegisterResponse, error) {
 	if request.Password != request.PasswordConfirmation {
 		return &authentication.RegisterResponse{
-			Base: utils.BadRequestResponse("Password is not matched"),
+			Base: baseutil.BadRequestResponse("Password is not matched"),
 		}, nil
 	}
 
@@ -56,7 +56,7 @@ func (as *authenticationService) RegisterService(ctx context.Context, request *a
 
 	if user != nil {
 		return &authentication.RegisterResponse{
-			Base: utils.BadRequestResponse("User already exist"),
+			Base: baseutil.BadRequestResponse("User already exist"),
 		}, nil
 	}
 
@@ -82,7 +82,7 @@ func (as *authenticationService) RegisterService(ctx context.Context, request *a
 	}
 
 	return &authentication.RegisterResponse{
-		Base: utils.SuccessResponse("User is registered"),
+		Base: baseutil.SuccessResponse("User is registered"),
 	}, nil
 }
 
@@ -93,7 +93,7 @@ func (as *authenticationService) LoginService(ctx context.Context, request *auth
 	}
 	if user == nil {
 		return &authentication.LoginResponse{
-			Base: utils.BadRequestResponse("User is not registered"),
+			Base: baseutil.BadRequestResponse("User is not registered"),
 		}, nil
 	}
 
@@ -140,7 +140,7 @@ func (as *authenticationService) LogoutService(ctx context.Context, request *pro
 
 	authHeader := request.Headers["Authorization"]
 	if authHeader == "" {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
@@ -150,7 +150,7 @@ func (as *authenticationService) LogoutService(ctx context.Context, request *pro
 	// Parse token
 	jwtToken, err := jwt2.ParseToken(tokenStr)
 	if err != nil {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	logger.Info("check jwtToken : ", jwtToken)
@@ -163,7 +163,7 @@ func (as *authenticationService) LogoutService(ctx context.Context, request *pro
 	as.cacheService.Set(jwtToken, "", time.Duration(tokenClaims.ExpiresAt.Time.Unix()-time.Now().Unix())*time.Second)
 
 	return &authentication.LogoutResponse{
-		Base: utils.SuccessResponse("Logout success"),
+		Base: baseutil.SuccessResponse("Logout success"),
 	}, nil
 }
 
@@ -171,7 +171,7 @@ func (as *authenticationService) ChangePasswordService(ctx context.Context, requ
 	// Cek apakah new pass confirmation matched
 	if request.NewPassword != request.NewPasswordConfirmation {
 		return &authentication.ChangePasswordResponse{
-			Base: utils.BadRequestResponse("New password is not matched"),
+			Base: baseutil.BadRequestResponse("New password is not matched"),
 		}, nil
 	}
 
@@ -191,7 +191,7 @@ func (as *authenticationService) ChangePasswordService(ctx context.Context, requ
 	}
 	if user == nil {
 		return &authentication.ChangePasswordResponse{
-			Base: utils.BadRequestResponse("User doesn't exist"),
+			Base: baseutil.BadRequestResponse("User doesn't exist"),
 		}, nil
 	}
 
@@ -199,7 +199,7 @@ func (as *authenticationService) ChangePasswordService(ctx context.Context, requ
 	if err != nil {
 		if errors.Is(err, bcrypt.ErrMismatchedHashAndPassword) {
 			return &authentication.ChangePasswordResponse{
-				Base: utils.BadRequestResponse("Old password is not matched"),
+				Base: baseutil.BadRequestResponse("Old password is not matched"),
 			}, nil
 		}
 
@@ -218,7 +218,7 @@ func (as *authenticationService) ChangePasswordService(ctx context.Context, requ
 
 	// Kirim response
 	return &authentication.ChangePasswordResponse{
-		Base: utils.SuccessResponse("Change password success"),
+		Base: baseutil.SuccessResponse("Change password success"),
 	}, nil
 }
 
@@ -233,12 +233,12 @@ func (as *authenticationService) GetProfileService(ctx context.Context, request 
 	}
 	if user == nil {
 		return &authentication.GetProfileResponse{
-			Base: utils.BadRequestResponse("User doesn't exist"),
+			Base: baseutil.BadRequestResponse("User doesn't exist"),
 		}, nil
 	}
 
 	return &authentication.GetProfileResponse{
-		Base:        utils.SuccessResponse("Get profile success"),
+		Base:        baseutil.SuccessResponse("Get profile success"),
 		UserId:      claims.Subject,
 		FullName:    claims.FullName,
 		Email:       claims.Email,

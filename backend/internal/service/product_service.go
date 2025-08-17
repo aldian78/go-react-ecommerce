@@ -4,13 +4,13 @@ import (
 	"context"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
-	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
+	jwtentity "github.com/aldian78/go-react-ecommerce/common/jwt"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	"os"
 	"path/filepath"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
-	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/product"
 	"github.com/google/uuid"
 )
@@ -35,7 +35,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 		return nil, err
 	}
 	if claims.Role != entity.UserRoleAdmin {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	// cek juga apakah image nya ada ?
@@ -44,7 +44,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 	if err != nil {
 		if os.IsNotExist(err) {
 			return &product.CreateProductResponse{
-				Base: utils.BadRequestResponse("File not found"),
+				Base: baseutil.BadRequestResponse("File not found"),
 			}, nil
 		}
 
@@ -66,7 +66,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 	}
 
 	return &product.CreateProductResponse{
-		Base: utils.SuccessResponse("Product is created"),
+		Base: baseutil.SuccessResponse("Product is created"),
 		Id:   productEntity.Id,
 	}, nil
 }
@@ -80,12 +80,12 @@ func (ps *productService) DetailProduct(ctx context.Context, request *product.De
 	// apabila null, kita return not found
 	if productEntity == nil {
 		return &product.DetailProductResponse{
-			Base: utils.NotFoundResponse("Product not found"),
+			Base: baseutil.NotFoundResponse("Product not found"),
 		}, nil
 	}
 
 	return &product.DetailProductResponse{
-		Base:        utils.SuccessResponse("Get product detail success"),
+		Base:        baseutil.SuccessResponse("Get product detail success"),
 		Id:          productEntity.Id,
 		Name:        productEntity.Name,
 		Description: productEntity.Description,
@@ -100,7 +100,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 		return nil, err
 	}
 	if claims.Role != entity.UserRoleAdmin {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	productEntity, err := ps.productRepository.GetProductById(ctx, request.Id)
@@ -109,7 +109,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 	}
 	if productEntity == nil {
 		return &product.EditProductResponse{
-			Base: utils.NotFoundResponse("Product not found"),
+			Base: baseutil.NotFoundResponse("Product not found"),
 		}, nil
 	}
 
@@ -119,7 +119,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 		if err != nil {
 			if os.IsNotExist(err) {
 				return &product.EditProductResponse{
-					Base: utils.BadRequestResponse("Image not found"),
+					Base: baseutil.BadRequestResponse("Image not found"),
 				}, nil
 			}
 
@@ -149,7 +149,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 	}
 
 	return &product.EditProductResponse{
-		Base: utils.SuccessResponse("Edit product success"),
+		Base: baseutil.SuccessResponse("Edit product success"),
 		Id:   request.Id,
 	}, nil
 }
@@ -160,7 +160,7 @@ func (ps *productService) DeleteProduct(ctx context.Context, request *product.De
 		return nil, err
 	}
 	if claims.Role != entity.UserRoleAdmin {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	productEntity, err := ps.productRepository.GetProductById(ctx, request.Id)
@@ -169,7 +169,7 @@ func (ps *productService) DeleteProduct(ctx context.Context, request *product.De
 	}
 	if productEntity == nil {
 		return &product.DeleteProductResponse{
-			Base: utils.NotFoundResponse("Product not found"),
+			Base: baseutil.NotFoundResponse("Product not found"),
 		}, nil
 	}
 
@@ -179,7 +179,7 @@ func (ps *productService) DeleteProduct(ctx context.Context, request *product.De
 	}
 
 	return &product.DeleteProductResponse{
-		Base: utils.SuccessResponse("Delete product success"),
+		Base: baseutil.SuccessResponse("Delete product success"),
 	}, nil
 }
 
@@ -201,7 +201,7 @@ func (ps *productService) ListProduct(ctx context.Context, request *product.List
 	}
 
 	return &product.ListProductResponse{
-		Base:       utils.SuccessResponse("Get list product success"),
+		Base:       baseutil.SuccessResponse("Get list product success"),
 		Pagination: paginationResponse,
 		Data:       data,
 	}, nil
@@ -213,7 +213,7 @@ func (ps *productService) ListProductAdmin(ctx context.Context, request *product
 		return nil, err
 	}
 	if claims.Role != entity.UserRoleAdmin {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	products, paginationResponse, err := ps.productRepository.GetProductsPaginationAdmin(ctx, request.Pagination)
@@ -233,7 +233,7 @@ func (ps *productService) ListProductAdmin(ctx context.Context, request *product
 	}
 
 	return &product.ListProductAdminResponse{
-		Base:       utils.SuccessResponse("Get list product admin success"),
+		Base:       baseutil.SuccessResponse("Get list product admin success"),
 		Pagination: paginationResponse,
 		Data:       data,
 	}, nil
@@ -257,7 +257,7 @@ func (ps *productService) HighlightProducts(ctx context.Context, request *produc
 	}
 
 	return &product.HighlightProductsResponse{
-		Base: utils.SuccessResponse("Get highlight products success"),
+		Base: baseutil.SuccessResponse("Get highlight products success"),
 		Data: data,
 	}, nil
 }

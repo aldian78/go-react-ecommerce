@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/auth"
 )
 
@@ -20,7 +21,7 @@ func (sh *authHandler) Register(ctx context.Context, request *auth.RegisterReque
 	}
 	if validationErrors != nil {
 		return &auth.RegisterResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -40,7 +41,7 @@ func (sh *authHandler) Login(ctx context.Context, request *auth.LoginRequest) (*
 	}
 	if validationErrors != nil {
 		return &auth.LoginResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -59,7 +60,7 @@ func (sh *authHandler) LoginServ(ctx context.Context, request *auth.LoginRequest
 	}
 	if validationErrors != nil {
 		return &auth.LoginResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -78,7 +79,7 @@ func (sh *authHandler) Logout(ctx context.Context, request *auth.LogoutRequest) 
 	}
 	if validationErrors != nil {
 		return &auth.LogoutResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -97,7 +98,7 @@ func (sh *authHandler) ChangePassword(ctx context.Context, request *auth.ChangeP
 	}
 	if validationErrors != nil {
 		return &auth.ChangePasswordResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 

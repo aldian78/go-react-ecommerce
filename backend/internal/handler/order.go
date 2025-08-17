@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
@@ -21,7 +22,7 @@ func (oh *orderHandler) CreateOrder(ctx context.Context, request *order.CreateOr
 	}
 	if validationErrors != nil {
 		return &order.CreateOrderResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -40,7 +41,7 @@ func (oh *orderHandler) ListOrderAdmin(ctx context.Context, request *order.ListO
 	}
 	if validationErrors != nil {
 		return &order.ListOrderAdminResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -59,7 +60,7 @@ func (oh *orderHandler) ListOrder(ctx context.Context, request *order.ListOrderR
 	}
 	if validationErrors != nil {
 		return &order.ListOrderResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -78,7 +79,7 @@ func (oh *orderHandler) DetailOrder(ctx context.Context, request *order.DetailOr
 	}
 	if validationErrors != nil {
 		return &order.DetailOrderResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -97,7 +98,7 @@ func (oh *orderHandler) UpdateOrderStatus(ctx context.Context, request *order.Up
 	}
 	if validationErrors != nil {
 		return &order.UpdateOrderStatusResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 

@@ -4,7 +4,8 @@ import (
 	"context"
 	"errors"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
-	jwt2 "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
+	jwt2 "github.com/aldian78/go-react-ecommerce/common/jwt"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	"os"
 	"time"
 
@@ -36,7 +37,7 @@ type authService struct {
 func (as *authService) Register(ctx context.Context, request *auth.RegisterRequest) (*auth.RegisterResponse, error) {
 	if request.Password != request.PasswordConfirmation {
 		return &auth.RegisterResponse{
-			Base: utils.BadRequestResponse("Password is not matched"),
+			Base: baseutil.BadRequestResponse("Password is not matched"),
 		}, nil
 	}
 
@@ -47,7 +48,7 @@ func (as *authService) Register(ctx context.Context, request *auth.RegisterReque
 
 	if user != nil {
 		return &auth.RegisterResponse{
-			Base: utils.BadRequestResponse("User already exist"),
+			Base: baseutil.BadRequestResponse("User already exist"),
 		}, nil
 	}
 
@@ -73,7 +74,7 @@ func (as *authService) Register(ctx context.Context, request *auth.RegisterReque
 	}
 
 	return &auth.RegisterResponse{
-		Base: utils.SuccessResponse("User is registered"),
+		Base: baseutil.SuccessResponse("User is registered"),
 	}, nil
 }
 
@@ -84,7 +85,7 @@ func (as *authService) Login(ctx context.Context, request *auth.LoginRequest) (*
 	}
 	if user == nil {
 		return &auth.LoginResponse{
-			Base: utils.BadRequestResponse("User is not registered"),
+			Base: baseutil.BadRequestResponse("User is not registered"),
 		}, nil
 	}
 
@@ -116,7 +117,7 @@ func (as *authService) Login(ctx context.Context, request *auth.LoginRequest) (*
 	}
 
 	return &auth.LoginResponse{
-		Base:        utils.SuccessResponse("Login successful"),
+		Base:        baseutil.SuccessResponse("Login successful"),
 		AccessToken: accessToken,
 	}, nil
 }
@@ -135,7 +136,7 @@ func (as *authService) Logout(ctx context.Context, request *auth.LogoutRequest) 
 	as.cacheService.Set(jwtToken, "", time.Duration(tokenClaims.ExpiresAt.Time.Unix()-time.Now().Unix())*time.Second)
 
 	return &auth.LogoutResponse{
-		Base: utils.SuccessResponse("Logout success"),
+		Base: baseutil.SuccessResponse("Logout success"),
 	}, nil
 }
 
@@ -143,7 +144,7 @@ func (as *authService) ChangePassword(ctx context.Context, request *auth.ChangeP
 	// Cek apakah new pass confirmation matched
 	if request.NewPassword != request.NewPasswordConfirmation {
 		return &auth.ChangePasswordResponse{
-			Base: utils.BadRequestResponse("New password is not matched"),
+			Base: baseutil.BadRequestResponse("New password is not matched"),
 		}, nil
 	}
 
@@ -163,7 +164,7 @@ func (as *authService) ChangePassword(ctx context.Context, request *auth.ChangeP
 	}
 	if user == nil {
 		return &auth.ChangePasswordResponse{
-			Base: utils.BadRequestResponse("User doesn't exist"),
+			Base: baseutil.BadRequestResponse("User doesn't exist"),
 		}, nil
 	}
 
@@ -171,7 +172,7 @@ func (as *authService) ChangePassword(ctx context.Context, request *auth.ChangeP
 	if err != nil {
 		if errors.Is(err, bcrypt.ErrMismatchedHashAndPassword) {
 			return &auth.ChangePasswordResponse{
-				Base: utils.BadRequestResponse("Old password is not matched"),
+				Base: baseutil.BadRequestResponse("Old password is not matched"),
 			}, nil
 		}
 
@@ -190,7 +191,7 @@ func (as *authService) ChangePassword(ctx context.Context, request *auth.ChangeP
 
 	// Kirim response
 	return &auth.ChangePasswordResponse{
-		Base: utils.SuccessResponse("Change password success"),
+		Base: baseutil.SuccessResponse("Change password success"),
 	}, nil
 }
 
@@ -205,12 +206,12 @@ func (as *authService) GetProfile(ctx context.Context, request *auth.GetProfileR
 	}
 	if user == nil {
 		return &auth.GetProfileResponse{
-			Base: utils.BadRequestResponse("User doesn't exist"),
+			Base: baseutil.BadRequestResponse("User doesn't exist"),
 		}, nil
 	}
 
 	return &auth.GetProfileResponse{
-		Base:        utils.SuccessResponse("Get profile success"),
+		Base:        baseutil.SuccessResponse("Get profile success"),
 		UserId:      claims.Subject,
 		FullName:    claims.FullName,
 		Email:       claims.Email,

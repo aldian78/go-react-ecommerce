@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
@@ -21,7 +22,7 @@ func (ph *productHandler) CreateProduct(ctx context.Context, request *product.Cr
 	}
 	if validationErrors != nil {
 		return &product.CreateProductResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -40,7 +41,7 @@ func (ph *productHandler) DetailProduct(ctx context.Context, request *product.De
 	}
 	if validationErrors != nil {
 		return &product.DetailProductResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -59,7 +60,7 @@ func (ph *productHandler) EditProduct(ctx context.Context, request *product.Edit
 	}
 	if validationErrors != nil {
 		return &product.EditProductResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -78,7 +79,7 @@ func (ph *productHandler) DeleteProduct(ctx context.Context, request *product.De
 	}
 	if validationErrors != nil {
 		return &product.DeleteProductResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -97,7 +98,7 @@ func (ph *productHandler) ListProduct(ctx context.Context, request *product.List
 	}
 	if validationErrors != nil {
 		return &product.ListProductResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -116,7 +117,7 @@ func (ph *productHandler) ListProductAdmin(ctx context.Context, request *product
 	}
 	if validationErrors != nil {
 		return &product.ListProductAdminResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
@@ -135,7 +136,7 @@ func (ph *productHandler) HighlightProducts(ctx context.Context, request *produc
 	}
 	if validationErrors != nil {
 		return &product.HighlightProductsResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 
