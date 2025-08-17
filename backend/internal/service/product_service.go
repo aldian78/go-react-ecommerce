@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
-	entity2 "github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 	"os"
 	"path/filepath"
@@ -34,7 +34,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity2.UserRoleAdmin {
+	if claims.Role != entity.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
@@ -51,7 +51,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 		return nil, err
 	}
 
-	productEntity := entity2.Product{
+	productEntity := entity.Product{
 		Id:            uuid.NewString(),
 		Name:          request.Name,
 		Description:   request.Description,
@@ -99,7 +99,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity2.UserRoleAdmin {
+	if claims.Role != entity.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
@@ -133,7 +133,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 		}
 	}
 
-	newProduct := entity2.Product{
+	newProduct := entity.Product{
 		Id:            request.Id,
 		Name:          request.Name,
 		Description:   request.Description,
@@ -159,7 +159,7 @@ func (ps *productService) DeleteProduct(ctx context.Context, request *product.De
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity2.UserRoleAdmin {
+	if claims.Role != entity.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
@@ -212,7 +212,7 @@ func (ps *productService) ListProductAdmin(ctx context.Context, request *product
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity2.UserRoleAdmin {
+	if claims.Role != entity.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 

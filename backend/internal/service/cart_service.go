@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
-	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 	"os"
 	"time"

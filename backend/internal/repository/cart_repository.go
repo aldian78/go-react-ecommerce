@@ -4,15 +4,15 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	entity2 "github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 )
 
 type ICartRepository interface {
-	GetCartByProductAndUserId(ctx context.Context, productId, userId string) (*entity2.UserCart, error)
-	CreateNewCart(ctx context.Context, cart *entity2.UserCart) error
-	UpdateCart(ctx context.Context, cart *entity2.UserCart) error
-	GetListCart(ctx context.Context, userId string) ([]*entity2.UserCart, error)
-	GetCartById(ctx context.Context, cartId string) (*entity2.UserCart, error)
+	GetCartByProductAndUserId(ctx context.Context, productId, userId string) (*entity.UserCart, error)
+	CreateNewCart(ctx context.Context, cart *entity.UserCart) error
+	UpdateCart(ctx context.Context, cart *entity.UserCart) error
+	GetListCart(ctx context.Context, userId string) ([]*entity.UserCart, error)
+	GetCartById(ctx context.Context, cartId string) (*entity.UserCart, error)
 	DeleteCart(ctx context.Context, cartId string) error
 }
 
@@ -20,7 +20,7 @@ type cartRepository struct {
 	db *sql.DB
 }
 
-func (cr *cartRepository) GetCartByProductAndUserId(ctx context.Context, productId, userId string) (*entity2.UserCart, error) {
+func (cr *cartRepository) GetCartByProductAndUserId(ctx context.Context, productId, userId string) (*entity.UserCart, error) {
 	row := cr.db.QueryRowContext(
 		ctx,
 		"SELECT id, product_id, user_id, quantity, created_at, created_by, updated_at, updated_by FROM user_cart WHERE product_id = $1 AND user_id = $2",
@@ -31,7 +31,7 @@ func (cr *cartRepository) GetCartByProductAndUserId(ctx context.Context, product
 		return nil, row.Err()
 	}
 
-	var cartEntity entity2.UserCart
+	var cartEntity entity.UserCart
 	err := row.Scan(
 		&cartEntity.Id,
 		&cartEntity.ProductId,
@@ -53,7 +53,7 @@ func (cr *cartRepository) GetCartByProductAndUserId(ctx context.Context, product
 	return &cartEntity, nil
 }
 
-func (cs *cartRepository) CreateNewCart(ctx context.Context, cart *entity2.UserCart) error {
+func (cs *cartRepository) CreateNewCart(ctx context.Context, cart *entity.UserCart) error {
 	_, err := cs.db.ExecContext(
 		ctx,
 		"INSERT INTO user_cart (id, product_id, user_id, quantity, created_at, created_by, updated_at, updated_by) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
@@ -73,7 +73,7 @@ func (cs *cartRepository) CreateNewCart(ctx context.Context, cart *entity2.UserC
 	return nil
 }
 
-func (cs *cartRepository) UpdateCart(ctx context.Context, cart *entity2.UserCart) error {
+func (cs *cartRepository) UpdateCart(ctx context.Context, cart *entity.UserCart) error {
 	_, err := cs.db.ExecContext(
 		ctx,
 		"UPDATE user_cart SET product_id = $1, user_id = $2, quantity = $3, updated_at = $4, updated_by = $5 WHERE id = $6",
@@ -91,7 +91,7 @@ func (cs *cartRepository) UpdateCart(ctx context.Context, cart *entity2.UserCart
 	return nil
 }
 
-func (cr *cartRepository) GetListCart(ctx context.Context, userId string) ([]*entity2.UserCart, error) {
+func (cr *cartRepository) GetListCart(ctx context.Context, userId string) ([]*entity.UserCart, error) {
 	rows, err := cr.db.QueryContext(
 		ctx,
 		"SELECT uc.id, uc.product_id, uc.user_id, uc.quantity, uc.created_at, uc.created_by, uc.updated_at, uc.updated_by, p.id, p.name, p.image_file_name, p.price FROM user_cart uc JOIN product p ON uc.product_id = p.id WHERE uc.user_id = $1 AND p.is_deleted = false",
@@ -101,10 +101,10 @@ func (cr *cartRepository) GetListCart(ctx context.Context, userId string) ([]*en
 		return nil, err
 	}
 
-	var carts []*entity2.UserCart = make([]*entity2.UserCart, 0)
+	var carts []*entity.UserCart = make([]*entity.UserCart, 0)
 	for rows.Next() {
-		var cart entity2.UserCart
-		cart.Product = &entity2.Product{}
+		var cart entity.UserCart
+		cart.Product = &entity.Product{}
 
 		err = rows.Scan(
 			&cart.Id,
@@ -130,7 +130,7 @@ func (cr *cartRepository) GetListCart(ctx context.Context, userId string) ([]*en
 	return carts, nil
 }
 
-func (cr *cartRepository) GetCartById(ctx context.Context, cartId string) (*entity2.UserCart, error) {
+func (cr *cartRepository) GetCartById(ctx context.Context, cartId string) (*entity.UserCart, error) {
 	row := cr.db.QueryRowContext(
 		ctx,
 		"SELECT id, product_id, user_id, quantity, created_at, created_by, updated_at, updated_by FROM user_cart WHERE id = $1",
@@ -140,7 +140,7 @@ func (cr *cartRepository) GetCartById(ctx context.Context, cartId string) (*enti
 		return nil, row.Err()
 	}
 
-	var cart entity2.UserCart
+	var cart entity.UserCart
 	err := row.Scan(
 		&cart.Id,
 		&cart.ProductId,

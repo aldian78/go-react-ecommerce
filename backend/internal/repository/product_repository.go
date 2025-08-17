@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
-	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	"strings"
 	"time"
 

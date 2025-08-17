@@ -2,7 +2,7 @@ package service
 
 import (
 	"context"
-	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"

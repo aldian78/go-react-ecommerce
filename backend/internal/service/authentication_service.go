@@ -2,9 +2,9 @@ package service
 
 import (
 	"context"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
-	"github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
 	jwt2 "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/authentication"

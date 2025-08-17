@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"fmt"
-	entity2 "github.com/aldian78/go-react-ecommerce/backend/pkg/entity"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	jwtentity "github.com/aldian78/go-react-ecommerce/backend/pkg/jwt"
 	operatingsystem "os"
 	"runtime/debug"
@@ -77,7 +77,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 		return nil, err
 	}
 
-	productMap := make(map[string]*entity2.Product)
+	productMap := make(map[string]*entity.Product)
 	for i := range products {
 		productMap[products[i].Id] = products[i]
 	}
@@ -94,11 +94,11 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 
 	now := time.Now()
 	expiredAt := now.Add(24 * time.Hour)
-	orderEntity := entity2.Order{
+	orderEntity := entity.Order{
 		Id:              uuid.NewString(),
 		Number:          fmt.Sprintf("ORD-%d%08d", now.Year(), numbering.Number),
 		UserId:          claims.Subject,
-		OrderStatusCode: entity2.OrderStatusCodeUnpaid,
+		OrderStatusCode: entity.OrderStatusCodeUnpaid,
 		UserFullName:    request.FullName,
 		Address:         request.Address,
 		PhoneNumber:     request.PhoneNumber,
@@ -144,7 +144,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 	}
 
 	for _, p := range request.Products {
-		var orderItem = entity2.OrderItem{
+		var orderItem = entity.OrderItem{
 			Id:                   uuid.NewString(),
 			ProductId:            p.Id,
 			ProductName:          productMap[p.Id].Name,
@@ -184,7 +184,7 @@ func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListO
 	if err != nil {
 		return nil, err
 	}
-	if claims.Role != entity2.UserRoleAdmin {
+	if claims.Role != entity.UserRoleAdmin {
 		return nil, utils.UnauthenticatedResponse()
 	}
 
@@ -207,8 +207,8 @@ func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListO
 		}
 
 		orderStatusCode := o.OrderStatusCode
-		if o.OrderStatusCode == entity2.OrderStatusCodeUnpaid && time.Now().After(*o.ExpiredAt) {
-			orderStatusCode = entity2.OrderStatusCodeExpired
+		if o.OrderStatusCode == entity.OrderStatusCodeUnpaid && time.Now().After(*o.ExpiredAt) {
+			orderStatusCode = entity.OrderStatusCodeExpired
 		}
 
 		items = append(items, &order.ListOrderAdminResponseItem{
@@ -254,8 +254,8 @@ func (os *orderService) ListOrder(ctx context.Context, request *order.ListOrderR
 		}
 
 		orderStatusCode := o.OrderStatusCode
-		if o.OrderStatusCode == entity2.OrderStatusCodeUnpaid && time.Now().After(*o.ExpiredAt) {
-			orderStatusCode = entity2.OrderStatusCodeExpired
+		if o.OrderStatusCode == entity.OrderStatusCodeUnpaid && time.Now().After(*o.ExpiredAt) {
+			orderStatusCode = entity.OrderStatusCodeExpired
 		}
 
 		xenditInvoiceUrl := ""
@@ -292,7 +292,7 @@ func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOr
 		return nil, err
 	}
 
-	if claims.Role != entity2.UserRoleAdmin && claims.Subject != orderEntity.UserId {
+	if claims.Role != entity.UserRoleAdmin && claims.Subject != orderEntity.UserId {
 		return &order.DetailOrderResponse{
 			Base: utils.BadRequestResponse("User id is not matched"),
 		}, nil
@@ -308,8 +308,8 @@ func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOr
 	}
 
 	orderStatusCode := orderEntity.OrderStatusCode
-	if orderEntity.OrderStatusCode == entity2.OrderStatusCodeUnpaid && time.Now().After(*orderEntity.ExpiredAt) {
-		orderStatusCode = entity2.OrderStatusCodeExpired
+	if orderEntity.OrderStatusCode == entity.OrderStatusCodeUnpaid && time.Now().After(*orderEntity.ExpiredAt) {
+		orderStatusCode = entity.OrderStatusCodeExpired
 	}
 
 	items := make([]*order.DetailOrderResponseItem, 0)
@@ -353,33 +353,33 @@ func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.Up
 		}, nil
 	}
 
-	if claims.Role != entity2.UserRoleAdmin && orderEntity.UserId != claims.Subject {
+	if claims.Role != entity.UserRoleAdmin && orderEntity.UserId != claims.Subject {
 		return &order.UpdateOrderStatusResponse{
 			Base: utils.BadRequestResponse("User id is not matched"),
 		}, nil
 	}
 
-	if request.NewStatusCode == entity2.OrderStatusCodePaid {
-		if claims.Role != entity2.UserRoleAdmin || orderEntity.OrderStatusCode != entity2.OrderStatusCodeUnpaid {
+	if request.NewStatusCode == entity.OrderStatusCodePaid {
+		if claims.Role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodeUnpaid {
 			return &order.UpdateOrderStatusResponse{
 				Base: utils.BadRequestResponse("Update status is not allowed"),
 			}, nil
 		}
-	} else if request.NewStatusCode == entity2.OrderStatusCodeCanceled {
-		if orderEntity.OrderStatusCode != entity2.OrderStatusCodeUnpaid {
+	} else if request.NewStatusCode == entity.OrderStatusCodeCanceled {
+		if orderEntity.OrderStatusCode != entity.OrderStatusCodeUnpaid {
 			return &order.UpdateOrderStatusResponse{
 				Base: utils.BadRequestResponse("Update status is not allowed"),
 			}, nil
 		}
-	} else if request.NewStatusCode == entity2.OrderStatusCodeShipped {
-		if claims.Role != entity2.UserRoleAdmin || orderEntity.OrderStatusCode != entity2.OrderStatusCodePaid {
+	} else if request.NewStatusCode == entity.OrderStatusCodeShipped {
+		if claims.Role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodePaid {
 			return &order.UpdateOrderStatusResponse{
 				Base: utils.BadRequestResponse("Update status is not allowed"),
 			}, nil
 		}
 
-	} else if request.NewStatusCode == entity2.OrderStatusCodeDone {
-		if orderEntity.OrderStatusCode != entity2.OrderStatusCodeShipped {
+	} else if request.NewStatusCode == entity.OrderStatusCodeDone {
+		if orderEntity.OrderStatusCode != entity.OrderStatusCodeShipped {
 			return &order.UpdateOrderStatusResponse{
 				Base: utils.BadRequestResponse("Update status is not allowed"),
 			}, nil
