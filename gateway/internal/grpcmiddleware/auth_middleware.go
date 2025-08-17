@@ -3,8 +3,8 @@ package grpcmiddleware
 import (
 	"context"
 
-	jwtentity "github.com/aldian78/go-react-ecommerce/backend/internal/entity/jwt"
-	"github.com/aldian78/go-react-ecommerce/gateway/internal/utils"
+	jwtentity "github.com/aldian78/go-react-ecommerce/common/jwt"
+	"github.com/aldian78/go-react-ecommerce/common/utils"
 	gocache "github.com/patrickmn/go-cache"
 	"google.golang.org/grpc"
 )

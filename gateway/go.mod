@@ -7,6 +7,8 @@ toolchain go1.24.5
 require (
 	buf.build/go/protovalidate v0.14.0
 	github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250817154712-f1f7f0cd54bd
+	github.com/aldian78/go-react-ecommerce/common v0.0.0-20250817160710-166c668fad34
+	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250817154712-f1f7f0cd54bd
 	github.com/asim/go-micro/v3 v3.7.1
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/gin-contrib/cors v1.7.6
@@ -24,7 +26,7 @@ require (
 )
 
 require (
-	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250717165733-d22d418d82d8.1 // indirect
+	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1 // indirect
 	cel.dev/expr v0.23.1 // indirect
 	dario.cat/mergo v1.0.2 // indirect
 	github.com/DataDog/appsec-internal-go v1.13.0 // indirect
@@ -74,7 +76,7 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
+	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/cel-go v0.25.0 // indirect
