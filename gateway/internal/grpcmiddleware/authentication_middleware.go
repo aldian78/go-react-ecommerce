@@ -2,13 +2,13 @@ package grpcmiddleware
 
 import (
 	"context"
-	//jwtentity "github.com/aldian78/go-react-ecommerce/backend/internal/entity/jwt"
+	jwtentity "github.com/aldian78/go-react-ecommerce/internal/entity/jwt"
 	"github.com/gin-gonic/gin"
-	//gocache "github.com/patrickmn/go-cache"
+	gocache "github.com/patrickmn/go-cache"
 	"go-micro.dev/v4/logger"
 	"google.golang.org/grpc/metadata"
-	//"net/http"
-	//"time"
+	"net/http"
+	"time"
 )
 
 //
@@ -58,26 +58,26 @@ func AuthenticationMiddleware() gin.HandlerFunc {
 		ctx = metadata.NewIncomingContext(ctx, md)
 
 		logger.Info("ctx :", ctx)
-		//tokenStr, err := jwtentity.ParseTokenFromContext(ctx)
-		//if err != nil {
-		//	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token revoked 1"})
-		//	return
-		//}
-		//
-		//cacheService := gocache.New(time.Hour*24, time.Hour)
-		//_, ok := cacheService.Get(tokenStr)
-		//if ok {
-		//	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token revoked 2"})
-		//	return
-		//}
-		//
-		//claims, err := jwtentity.GetClaimsFromToken(tokenStr)
-		//if err != nil {
-		//	c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token revoked 3"})
-		//	return
-		//}
-		//
-		//ctx = claims.SetToContext(ctx)
+		tokenStr, err := jwtentity.ParseTokenFromContext(ctx)
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token revoked 1"})
+			return
+		}
+
+		cacheService := gocache.New(time.Hour*24, time.Hour)
+		_, ok := cacheService.Get(tokenStr)
+		if ok {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token revoked 2"})
+			return
+		}
+
+		claims, err := jwtentity.GetClaimsFromToken(tokenStr)
+		if err != nil {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token revoked 3"})
+			return
+		}
+
+		ctx = claims.SetToContext(ctx)
 
 		// Simpan context baru ini ke Gin supaya bisa dipakai di handler
 		c.Request = c.Request.WithContext(ctx)

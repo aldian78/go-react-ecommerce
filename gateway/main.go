@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"gateway/internal/repository"
-	"gateway/pkg/database"
-	"gateway/service"
+	"github.com/aldian78/go-react-ecommerce/gateway/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/gateway/pkg/database"
+	"github.com/aldian78/go-react-ecommerce/gateway/service"
 	"github.com/asim/go-micro/v3/client"
 	"github.com/asim/go-micro/v3/web"
 	"github.com/go-micro/plugins/v3/client/grpc"

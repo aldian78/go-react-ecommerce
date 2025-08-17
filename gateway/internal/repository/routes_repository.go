@@ -3,8 +3,8 @@ package repository
 import (
 	"context"
 	"fmt"
-	"gateway/internal/entity"
-	"gateway/pkg/database"
+	"github.com/aldian78/go-react-ecommerce/gateway/internal/entity"
+	"github.com/aldian78/go-react-ecommerce/gateway/pkg/database"
 	"github.com/lib/pq"
 	"log"
 )

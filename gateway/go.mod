@@ -6,6 +6,7 @@ toolchain go1.24.5
 
 require (
 	buf.build/go/protovalidate v0.14.0
+	github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250815173345-251f30f207c9
 	github.com/asim/go-micro/v3 v3.7.1
 	github.com/bwmarrin/snowflake v0.3.0
 	github.com/gin-contrib/cors v1.7.6
@@ -73,6 +74,7 @@ require (
 	github.com/go-viper/mapstructure/v2 v2.2.1 // indirect
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
+	github.com/golang-jwt/jwt/v5 v5.2.2 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/cel-go v0.25.0 // indirect

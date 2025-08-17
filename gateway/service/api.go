@@ -2,16 +2,16 @@ package service
 
 import (
 	"context"
-	"gateway/internal/constants"
-	"gateway/internal/entity"
-	"gateway/internal/grpcmiddleware"
-	"gateway/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/gateway/internal/constants"
+	"github.com/aldian78/go-react-ecommerce/gateway/internal/entity"
+	"github.com/aldian78/go-react-ecommerce/gateway/internal/grpcmiddleware"
+	"github.com/aldian78/go-react-ecommerce/gateway/internal/repository"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"go-micro.dev/v4/logger"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 
-	protoApi "gateway/protoc/proto-api"
+	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"net/http"
 )
 

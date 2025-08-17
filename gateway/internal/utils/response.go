@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"gateway/protoc/proto-common"
+	proto_common "github.com/aldian78/go-react-ecommerce/proto/pb/common"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )

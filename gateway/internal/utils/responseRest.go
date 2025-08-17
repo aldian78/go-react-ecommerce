@@ -2,8 +2,8 @@ package utils
 
 import (
 	"encoding/json"
-	cons "gateway/internal/constants"
-	model "gateway/internal/entity/rest"
+	cons "github.com/aldian78/go-react-ecommerce/gateway/internal/constants"
+	model "github.com/aldian78/go-react-ecommerce/gateway/internal/entity/rest"
 	"reflect"
 )
 
