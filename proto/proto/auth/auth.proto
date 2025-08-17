@@ -24,7 +24,7 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }
 
 message LoginRequest {
@@ -33,14 +33,14 @@ message LoginRequest {
 }
 
 message LoginResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string access_token = 2;
 }
 
 message LogoutRequest {}
 
 message LogoutResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }
 
 message ChangePasswordRequest {
@@ -50,13 +50,13 @@ message ChangePasswordRequest {
 }
 
 message ChangePasswordResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }
 
 message GetProfileRequest {}
 
 message GetProfileResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string user_id = 2;
     string full_name = 3;
     string email = 4;

@@ -4,7 +4,7 @@ package service;
 
 option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/services";
 
-import "common/base_response.proto";
+import "basecommon/base_response.proto";
 import "buf/validate/validate.proto";
 
 
@@ -18,6 +18,6 @@ message HelloWorldRequest {
 }
 
 message HelloWorldResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string message = 2;
 }

@@ -6,7 +6,7 @@ package newsletter
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	fmt "fmt"
-	_ "github.com/aldian78/go-react-ecommerce/proto/pb/common"
+	_ "github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
 )

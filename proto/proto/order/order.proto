@@ -3,8 +3,8 @@ syntax = "proto3";
 option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/order";
 
 import "buf/validate/validate.proto";
-import "common/base_response.proto";
-import "common/pagination.proto";
+import "basecommon/base_response.proto";
+import "basecommon/pagination.proto";
 import "google/protobuf/timestamp.proto";
 
 package order;
@@ -31,13 +31,13 @@ message CreateOrderRequest {
 }
 
 message CreateOrderResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string id = 2;
 }
 
 // List Order Admin
 message ListOrderAdminRequest {
-    common.PaginationRequest pagination = 1;
+    basecommon.PaginationRequest pagination = 1;
 }
 
 message ListOrderAdminResponseItemProduct {
@@ -58,14 +58,14 @@ message ListOrderAdminResponseItem {
 }
 
 message ListOrderAdminResponse {
-    common.BaseResponse base = 1;
-    common.PaginationResponse pagination = 2;
+    basecommon.BaseResponse base = 1;
+    basecommon.PaginationResponse pagination = 2;
     repeated ListOrderAdminResponseItem items = 3;
 }
 
 // List Order
 message ListOrderRequest {
-    common.PaginationRequest pagination = 1;
+    basecommon.PaginationRequest pagination = 1;
 }
 
 message ListOrderResponseItemProduct {
@@ -87,8 +87,8 @@ message ListOrderResponseItem {
 }
 
 message ListOrderResponse {
-    common.BaseResponse base = 1;
-    common.PaginationResponse pagination = 2;
+    basecommon.BaseResponse base = 1;
+    basecommon.PaginationResponse pagination = 2;
     repeated ListOrderResponseItem items = 3;
 }
 
@@ -104,7 +104,7 @@ message DetailOrderResponseItem {
 }
 
 message DetailOrderResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string id = 2;
     string number = 3;
     string user_full_name = 4;
@@ -125,5 +125,5 @@ message UpdateOrderStatusRequest {
 }
 
 message UpdateOrderStatusResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }

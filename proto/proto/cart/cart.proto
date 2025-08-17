@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/cart";
 
-import "common/base_response.proto";
+import "basecommon/base_response.proto";
 import "buf/validate/validate.proto";
 
 package cart;
@@ -19,7 +19,7 @@ message AddProductToCartRequest {
 }
 
 message AddProductToCartResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string id = 2;
 }
 
@@ -35,7 +35,7 @@ message ListCartResponseItem {
 }
 
 message ListCartResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     repeated ListCartResponseItem items = 2;
 }
 
@@ -44,7 +44,7 @@ message DeleteCartRequest {
 }
 
 message DeleteCartResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }
 
 message UpdateCartQuantityRequest {
@@ -53,5 +53,5 @@ message UpdateCartQuantityRequest {
 }
 
 message UpdateCartQuantityResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }

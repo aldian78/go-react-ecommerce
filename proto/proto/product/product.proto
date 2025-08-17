@@ -2,8 +2,8 @@ syntax = "proto3";
 
 option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/product";
 
-import "common/base_response.proto";
-import "common/pagination.proto";
+import "basecommon/base_response.proto";
+import "basecommon/pagination.proto";
 import "buf/validate/validate.proto";
 
 package product;
@@ -26,7 +26,7 @@ message CreateProductRequest {
 }
 
 message CreateProductResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string id = 2;
 }
 
@@ -35,7 +35,7 @@ message DetailProductRequest {
 }
 
 message DetailProductResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string id = 2;
     string name = 3;
     string description = 4;
@@ -52,7 +52,7 @@ message EditProductRequest {
 }
 
 message EditProductResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     string id = 2;
 }
 
@@ -61,11 +61,11 @@ message DeleteProductRequest {
 }
 
 message DeleteProductResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }
 
 message ListProductRequest {
-    common.PaginationRequest pagination = 1;
+    basecommon.PaginationRequest pagination = 1;
 }
 
 message ListProductResponseItem {
@@ -77,13 +77,13 @@ message ListProductResponseItem {
 }
 
 message ListProductResponse {
-    common.BaseResponse base = 1;
-    common.PaginationResponse pagination = 2;
+    basecommon.BaseResponse base = 1;
+    basecommon.PaginationResponse pagination = 2;
     repeated ListProductResponseItem data = 3;
 }
 
 message ListProductAdminRequest {
-    common.PaginationRequest pagination = 1;
+    basecommon.PaginationRequest pagination = 1;
 }
 
 message ListProductAdminResponseItem {
@@ -95,8 +95,8 @@ message ListProductAdminResponseItem {
 }
 
 message ListProductAdminResponse {
-    common.BaseResponse base = 1;
-    common.PaginationResponse pagination = 2;
+    basecommon.BaseResponse base = 1;
+    basecommon.PaginationResponse pagination = 2;
     repeated ListProductAdminResponseItem data = 3;
 }
 
@@ -111,6 +111,6 @@ message HighlightProductsResponseItem {
 }
 
 message HighlightProductsResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
     repeated HighlightProductsResponseItem data = 2;
 }

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "common/base_response.proto";
+import "basecommon/base_response.proto";
 import "buf/validate/validate.proto";
 
 option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/newsletter";
@@ -17,5 +17,5 @@ message SubcribeNewsletterRequest {
 }
 
 message SubcribeNewsletterResponse {
-    common.BaseResponse base = 1;
+    basecommon.BaseResponse base = 1;
 }
