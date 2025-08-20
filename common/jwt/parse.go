@@ -3,6 +3,7 @@ package jwt
 import (
 	"context"
 	"fmt"
+	"github.com/golang-jwt/jwt/v5"
 	"go-micro.dev/v4/logger"
 	"strings"
 
@@ -65,4 +66,28 @@ func ParseToken(tokenStr string) (string, error) {
 	}
 
 	return tokenStr, nil
+}
+
+func ParseTokenJWT(tokenStr string, secretKey string) (*JwtClaims, error) {
+	claims := &JwtClaims{}
+
+	// Parse token
+	token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
+		// Pastikan algoritma HS256
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+		return []byte(secretKey), nil
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	// Validasi
+	if !token.Valid {
+		return nil, fmt.Errorf("invalid token")
+	}
+
+	return claims, nil
 }

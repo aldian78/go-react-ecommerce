@@ -67,3 +67,21 @@ func GetClaimsFromContext(token string) (*JwtClaims, error) {
 	logger.Infof("check final claims : %", claims)
 	return claims, nil
 }
+
+func CreateToken(secretKey string, id string, fullName string, email string, role string) (string, error) {
+	// generate jwt
+	now := time.Now()
+	claims := JwtClaims{
+		RegisteredClaims: jwt.RegisteredClaims{
+			Subject:   id,
+			ExpiresAt: jwt.NewNumericDate(now.Add(time.Hour * 24)),
+			IssuedAt:  jwt.NewNumericDate(now),
+		},
+		Email:    email,
+		FullName: fullName,
+		Role:     role,
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	return token.SignedString([]byte(secretKey))
+}
