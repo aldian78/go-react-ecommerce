@@ -81,9 +81,10 @@ func AuthenticationMiddleware() gin.HandlerFunc {
 			return
 		}
 
+		reqApi.Params["customerId"] = claims.Subject
+		reqApi.Params["fullName"] = claims.FullName
 		reqApi.Params["email"] = claims.Email
 		reqApi.Params["role"] = claims.Role
-		reqApi.Params["fullName"] = claims.FullName
 
 		ctx = claims.SetToContext(ctx)
 
