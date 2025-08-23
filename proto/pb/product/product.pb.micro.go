@@ -6,6 +6,7 @@ package product
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	fmt "fmt"
+	api1 "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	_ "github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -38,13 +39,13 @@ func NewProductServiceEndpoints() []*api.Endpoint {
 // Client API for ProductService service
 
 type ProductService interface {
-	CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...client.CallOption) (*CreateProductResponse, error)
-	DetailProduct(ctx context.Context, in *DetailProductRequest, opts ...client.CallOption) (*DetailProductResponse, error)
-	EditProduct(ctx context.Context, in *EditProductRequest, opts ...client.CallOption) (*EditProductResponse, error)
-	DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...client.CallOption) (*DeleteProductResponse, error)
-	ListProduct(ctx context.Context, in *ListProductRequest, opts ...client.CallOption) (*ListProductResponse, error)
-	ListProductAdmin(ctx context.Context, in *ListProductAdminRequest, opts ...client.CallOption) (*ListProductAdminResponse, error)
-	HighlightProducts(ctx context.Context, in *HighlightProductsRequest, opts ...client.CallOption) (*HighlightProductsResponse, error)
+	CreateProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	DetailProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	EditProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	DeleteProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	ListProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	ListProductAdmin(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	HighlightProducts(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 }
 
 type productService struct {
@@ -59,9 +60,9 @@ func NewProductService(name string, c client.Client) ProductService {
 	}
 }
 
-func (c *productService) CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...client.CallOption) (*CreateProductResponse, error) {
+func (c *productService) CreateProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "ProductService.CreateProduct", in)
-	out := new(CreateProductResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -69,9 +70,9 @@ func (c *productService) CreateProduct(ctx context.Context, in *CreateProductReq
 	return out, nil
 }
 
-func (c *productService) DetailProduct(ctx context.Context, in *DetailProductRequest, opts ...client.CallOption) (*DetailProductResponse, error) {
+func (c *productService) DetailProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "ProductService.DetailProduct", in)
-	out := new(DetailProductResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -79,9 +80,9 @@ func (c *productService) DetailProduct(ctx context.Context, in *DetailProductReq
 	return out, nil
 }
 
-func (c *productService) EditProduct(ctx context.Context, in *EditProductRequest, opts ...client.CallOption) (*EditProductResponse, error) {
+func (c *productService) EditProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "ProductService.EditProduct", in)
-	out := new(EditProductResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -89,9 +90,9 @@ func (c *productService) EditProduct(ctx context.Context, in *EditProductRequest
 	return out, nil
 }
 
-func (c *productService) DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...client.CallOption) (*DeleteProductResponse, error) {
+func (c *productService) DeleteProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "ProductService.DeleteProduct", in)
-	out := new(DeleteProductResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -99,9 +100,9 @@ func (c *productService) DeleteProduct(ctx context.Context, in *DeleteProductReq
 	return out, nil
 }
 
-func (c *productService) ListProduct(ctx context.Context, in *ListProductRequest, opts ...client.CallOption) (*ListProductResponse, error) {
+func (c *productService) ListProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "ProductService.ListProduct", in)
-	out := new(ListProductResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -109,9 +110,9 @@ func (c *productService) ListProduct(ctx context.Context, in *ListProductRequest
 	return out, nil
 }
 
-func (c *productService) ListProductAdmin(ctx context.Context, in *ListProductAdminRequest, opts ...client.CallOption) (*ListProductAdminResponse, error) {
+func (c *productService) ListProductAdmin(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "ProductService.ListProductAdmin", in)
-	out := new(ListProductAdminResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -119,9 +120,9 @@ func (c *productService) ListProductAdmin(ctx context.Context, in *ListProductAd
 	return out, nil
 }
 
-func (c *productService) HighlightProducts(ctx context.Context, in *HighlightProductsRequest, opts ...client.CallOption) (*HighlightProductsResponse, error) {
+func (c *productService) HighlightProducts(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "ProductService.HighlightProducts", in)
-	out := new(HighlightProductsResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -132,24 +133,24 @@ func (c *productService) HighlightProducts(ctx context.Context, in *HighlightPro
 // Server API for ProductService service
 
 type ProductServiceHandler interface {
-	CreateProduct(context.Context, *CreateProductRequest, *CreateProductResponse) error
-	DetailProduct(context.Context, *DetailProductRequest, *DetailProductResponse) error
-	EditProduct(context.Context, *EditProductRequest, *EditProductResponse) error
-	DeleteProduct(context.Context, *DeleteProductRequest, *DeleteProductResponse) error
-	ListProduct(context.Context, *ListProductRequest, *ListProductResponse) error
-	ListProductAdmin(context.Context, *ListProductAdminRequest, *ListProductAdminResponse) error
-	HighlightProducts(context.Context, *HighlightProductsRequest, *HighlightProductsResponse) error
+	CreateProduct(context.Context, *api1.APIREQ, *api1.APIRES) error
+	DetailProduct(context.Context, *api1.APIREQ, *api1.APIRES) error
+	EditProduct(context.Context, *api1.APIREQ, *api1.APIRES) error
+	DeleteProduct(context.Context, *api1.APIREQ, *api1.APIRES) error
+	ListProduct(context.Context, *api1.APIREQ, *api1.APIRES) error
+	ListProductAdmin(context.Context, *api1.APIREQ, *api1.APIRES) error
+	HighlightProducts(context.Context, *api1.APIREQ, *api1.APIRES) error
 }
 
 func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, opts ...server.HandlerOption) error {
 	type productService interface {
-		CreateProduct(ctx context.Context, in *CreateProductRequest, out *CreateProductResponse) error
-		DetailProduct(ctx context.Context, in *DetailProductRequest, out *DetailProductResponse) error
-		EditProduct(ctx context.Context, in *EditProductRequest, out *EditProductResponse) error
-		DeleteProduct(ctx context.Context, in *DeleteProductRequest, out *DeleteProductResponse) error
-		ListProduct(ctx context.Context, in *ListProductRequest, out *ListProductResponse) error
-		ListProductAdmin(ctx context.Context, in *ListProductAdminRequest, out *ListProductAdminResponse) error
-		HighlightProducts(ctx context.Context, in *HighlightProductsRequest, out *HighlightProductsResponse) error
+		CreateProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		DetailProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		EditProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		DeleteProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		ListProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		ListProductAdmin(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		HighlightProducts(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 	}
 	type ProductService struct {
 		productService
@@ -162,30 +163,30 @@ type productServiceHandler struct {
 	ProductServiceHandler
 }
 
-func (h *productServiceHandler) CreateProduct(ctx context.Context, in *CreateProductRequest, out *CreateProductResponse) error {
+func (h *productServiceHandler) CreateProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.CreateProduct(ctx, in, out)
 }
 
-func (h *productServiceHandler) DetailProduct(ctx context.Context, in *DetailProductRequest, out *DetailProductResponse) error {
+func (h *productServiceHandler) DetailProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.DetailProduct(ctx, in, out)
 }
 
-func (h *productServiceHandler) EditProduct(ctx context.Context, in *EditProductRequest, out *EditProductResponse) error {
+func (h *productServiceHandler) EditProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.EditProduct(ctx, in, out)
 }
 
-func (h *productServiceHandler) DeleteProduct(ctx context.Context, in *DeleteProductRequest, out *DeleteProductResponse) error {
+func (h *productServiceHandler) DeleteProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.DeleteProduct(ctx, in, out)
 }
 
-func (h *productServiceHandler) ListProduct(ctx context.Context, in *ListProductRequest, out *ListProductResponse) error {
+func (h *productServiceHandler) ListProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.ListProduct(ctx, in, out)
 }
 
-func (h *productServiceHandler) ListProductAdmin(ctx context.Context, in *ListProductAdminRequest, out *ListProductAdminResponse) error {
+func (h *productServiceHandler) ListProductAdmin(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.ListProductAdmin(ctx, in, out)
 }
 
-func (h *productServiceHandler) HighlightProducts(ctx context.Context, in *HighlightProductsRequest, out *HighlightProductsResponse) error {
+func (h *productServiceHandler) HighlightProducts(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.HighlightProducts(ctx, in, out)
 }

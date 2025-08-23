@@ -5,11 +5,11 @@ import (
 	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
-	"github.com/aldian78/go-react-ecommerce/proto/pb/auth"
+	auth "github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
 )
 
 type authHandler struct {
-	auth.UnimplementedAuthServiceServer
+	//auth.UnimplementedAuthServiceServer
 
 	authService service.IAuthService
 }

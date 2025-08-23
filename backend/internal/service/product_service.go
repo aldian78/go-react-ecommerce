@@ -30,7 +30,7 @@ type productService struct {
 }
 
 func (ps *productService) CreateProduct(ctx context.Context, request *product.CreateProductRequest) (*product.CreateProductResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -95,7 +95,7 @@ func (ps *productService) DetailProduct(ctx context.Context, request *product.De
 }
 
 func (ps *productService) EditProduct(ctx context.Context, request *product.EditProductRequest) (*product.EditProductResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +155,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 }
 
 func (ps *productService) DeleteProduct(ctx context.Context, request *product.DeleteProductRequest) (*product.DeleteProductResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -208,7 +208,7 @@ func (ps *productService) ListProduct(ctx context.Context, request *product.List
 }
 
 func (ps *productService) ListProductAdmin(ctx context.Context, request *product.ListProductAdminRequest) (*product.ListProductAdminResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}

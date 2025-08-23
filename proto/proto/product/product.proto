@@ -5,17 +5,18 @@ option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/product";
 import "basecommon/base_response.proto";
 import "basecommon/pagination.proto";
 import "buf/validate/validate.proto";
+import "api/api.proto";
 
 package product;
 
 service ProductService {
-    rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
-    rpc DetailProduct(DetailProductRequest) returns (DetailProductResponse);
-    rpc EditProduct(EditProductRequest) returns (EditProductResponse);
-    rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
-    rpc ListProduct(ListProductRequest) returns (ListProductResponse);
-    rpc ListProductAdmin(ListProductAdminRequest) returns (ListProductAdminResponse);
-    rpc HighlightProducts(HighlightProductsRequest) returns (HighlightProductsResponse);
+    rpc CreateProduct(api.APIREQ) returns (api.APIRES);
+    rpc DetailProduct(api.APIREQ) returns (api.APIRES);
+    rpc EditProduct(api.APIREQ) returns (api.APIRES);
+    rpc DeleteProduct(api.APIREQ) returns (api.APIRES);
+    rpc ListProduct(api.APIREQ) returns (api.APIRES);
+    rpc ListProductAdmin(api.APIREQ) returns (api.APIRES);
+    rpc HighlightProducts(api.APIREQ) returns (api.APIRES);
 }
 
 message CreateProductRequest {

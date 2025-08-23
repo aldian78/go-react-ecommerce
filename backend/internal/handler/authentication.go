@@ -11,6 +11,7 @@ import (
 	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
 	gocache "github.com/patrickmn/go-cache"
+	"github.com/redis/go-redis/v9"
 	gtc "github.com/shengyanli1982/go-trycatch"
 	"go-micro.dev/v4/logger"
 	"runtime/debug"
@@ -20,9 +21,9 @@ type AuthenticationHandler struct {
 	authService service.IAuthenticationService
 }
 
-func NewAuthenticationHandler(db *sql.DB, cacheService *gocache.Cache) *AuthenticationHandler {
+func NewAuthenticationHandler(db *sql.DB, rdb *redis.Client, cacheService *gocache.Cache) *AuthenticationHandler {
 	authRepository := repository.NewAuthenticationRepository(db)
-	authSrv := service.NewAuthenticationService(authRepository, cacheService)
+	authSrv := service.NewAuthenticationService(authRepository, rdb, cacheService)
 
 	return &AuthenticationHandler{authService: authSrv}
 }

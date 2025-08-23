@@ -2,6 +2,7 @@ package handler
 
 import (
 	"context"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
@@ -21,7 +22,7 @@ func (nh *newsletterHandler) SubscribeNewsletter(ctx context.Context, request *n
 	}
 	if validationErrors != nil {
 		return &newsletter.SubcribeNewsletterResponse{
-			Base: utils.ValidationErrorResponse(validationErrors),
+			Base: baseutil.ValidationErrorResponse(validationErrors),
 		}, nil
 	}
 

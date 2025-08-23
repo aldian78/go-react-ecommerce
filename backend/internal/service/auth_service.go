@@ -6,12 +6,11 @@ import (
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	jwt2 "github.com/aldian78/go-react-ecommerce/common/jwt"
 	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
+	auth "github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
 	"os"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
-	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
-	"github.com/aldian78/go-react-ecommerce/proto/pb/auth"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	gocache "github.com/patrickmn/go-cache"
@@ -128,7 +127,7 @@ func (as *authService) Logout(ctx context.Context, request *auth.LogoutRequest) 
 		return nil, err
 	}
 
-	tokenClaims, err := jwt2.GetClaimsFromContext(ctx)
+	tokenClaims, err := jwt2.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -196,7 +195,7 @@ func (as *authService) ChangePassword(ctx context.Context, request *auth.ChangeP
 }
 
 func (as *authService) GetProfile(ctx context.Context, request *auth.GetProfileRequest) (*auth.GetProfileResponse, error) {
-	claims, err := jwt2.GetClaimsFromContext(ctx)
+	claims, err := jwt2.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}

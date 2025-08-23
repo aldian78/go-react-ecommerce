@@ -8,6 +8,7 @@ import (
 	auth "github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
 	"github.com/joho/godotenv"
 	gocache "github.com/patrickmn/go-cache"
+	"github.com/redis/go-redis/v9"
 	gtc "github.com/shengyanli1982/go-trycatch"
 	"go-micro.dev/v4"
 	"go-micro.dev/v4/client"
@@ -46,8 +47,18 @@ func main() {
 
 			cacheService := gocache.New(time.Hour*24, time.Hour)
 
+			addrRedis := os.Getenv("USER_REDIS")
+
+			logger.Infof("redis addr: %v", addrRedis)
+			//passRedis := os.Getenv("PASS_REDIS")
+			rdb := redis.NewClient(&redis.Options{
+				Addr:     addrRedis,
+				Password: "",
+				DB:       0, // default DB
+			})
+
 			_ = svc.Client().Init(client.RequestTimeout(rpcTimeout))
-			_ = auth.RegisterAuthenticationServiceHandler(svc.Server(), handler.NewAuthenticationHandler(db, cacheService))
+			_ = auth.RegisterAuthenticationServiceHandler(svc.Server(), handler.NewAuthenticationHandler(db, rdb, cacheService))
 
 			// Run Service
 			if err := svc.Run(); err != nil {

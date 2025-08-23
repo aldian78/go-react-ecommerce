@@ -34,7 +34,7 @@ type orderService struct {
 }
 
 func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOrderRequest) (*order.CreateOrderResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -180,7 +180,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 }
 
 func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListOrderAdminRequest) (*order.ListOrderAdminResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -230,7 +230,7 @@ func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListO
 }
 
 func (os *orderService) ListOrder(ctx context.Context, request *order.ListOrderRequest) (*order.ListOrderResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -282,7 +282,7 @@ func (os *orderService) ListOrder(ctx context.Context, request *order.ListOrderR
 }
 
 func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOrderRequest) (*order.DetailOrderResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -339,7 +339,7 @@ func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOr
 }
 
 func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.UpdateOrderStatusRequest) (*order.UpdateOrderStatusResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}

@@ -3,8 +3,8 @@ package grpcmiddleware
 import (
 	"context"
 	"github.com/aldian78/go-react-ecommerce/common/jwt"
+	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 
-	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
 	gocache "github.com/patrickmn/go-cache"
 	"google.golang.org/grpc"
 )
@@ -34,7 +34,7 @@ func (am *authMiddleware) Middleware(ctx context.Context, req any, info *grpc.Un
 
 	_, ok := am.cacheService.Get(tokenStr)
 	if ok {
-		return nil, utils.UnauthenticatedResponse()
+		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	claims, err := jwt.GetClaimsFromToken(tokenStr)

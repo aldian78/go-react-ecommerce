@@ -27,7 +27,7 @@ type cartService struct {
 }
 
 func (cs *cartService) AddProductToCart(ctx context.Context, request *cart.AddProductToCartRequest) (*cart.AddProductToCartResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +85,7 @@ func (cs *cartService) AddProductToCart(ctx context.Context, request *cart.AddPr
 }
 
 func (cs *cartService) ListCart(ctx context.Context, request *cart.ListCartRequest) (*cart.ListCartResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func (cs *cartService) ListCart(ctx context.Context, request *cart.ListCartReque
 }
 
 func (cs *cartService) DeleteCart(ctx context.Context, request *cart.DeleteCartRequest) (*cart.DeleteCartResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ func (cs *cartService) DeleteCart(ctx context.Context, request *cart.DeleteCartR
 }
 
 func (cs *cartService) UpdateCartQuantity(ctx context.Context, request *cart.UpdateCartQuantityRequest) (*cart.UpdateCartQuantityResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext(ctx)
+	claims, err := jwtentity.GetClaimsFromContext("xxx")
 	if err != nil {
 		return nil, err
 	}

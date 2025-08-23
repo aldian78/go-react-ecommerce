@@ -8,17 +8,16 @@ import (
 	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
 	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
-	"github.com/golang-jwt/jwt/v5"
+	"github.com/asim/go-micro/v3/logger"
 	"github.com/google/uuid"
 	gocache "github.com/patrickmn/go-cache"
 	"github.com/pkg/errors"
-	"go-micro.dev/v4/logger"
+	"github.com/redis/go-redis/v9"
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"os"
-	"strings"
 	"time"
 )
 
@@ -32,12 +31,14 @@ type IAuthenticationService interface {
 
 type authenticationService struct {
 	authRepository repository.IAuthenticationRepository
+	redisClient    *redis.Client
 	cacheService   *gocache.Cache
 }
 
-func NewAuthenticationService(authRepository repository.IAuthenticationRepository, cacheService *gocache.Cache) IAuthenticationService {
+func NewAuthenticationService(authRepository repository.IAuthenticationRepository, redisClient *redis.Client, cacheService *gocache.Cache) IAuthenticationService {
 	return &authenticationService{
 		authRepository: authRepository,
+		redisClient:    redisClient,
 		cacheService:   cacheService,
 	}
 }
@@ -106,21 +107,17 @@ func (as *authenticationService) LoginService(ctx context.Context, request *auth
 		return nil, err
 	}
 
-	// generate jwt
-	now := time.Now()
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt2.JwtClaims{
-		RegisteredClaims: jwt.RegisteredClaims{
-			Subject:   user.Id,
-			ExpiresAt: jwt.NewNumericDate(now.Add(time.Hour * 24)),
-			IssuedAt:  jwt.NewNumericDate(now),
-		},
-		Email:    user.Email,
-		FullName: user.FullName,
-		Role:     user.RoleCode,
-	})
+	//Create Token JWT
 	secretKey := os.Getenv("JWT_SECRET")
-	accessToken, err := token.SignedString([]byte(secretKey))
+	accessToken, err := jwt2.CreateToken(secretKey, user.Id, user.FullName, user.Email, user.RoleCode)
 	if err != nil {
+		panic(err)
+	}
+
+	//Set token in redis
+	_, err = as.redisClient.Set(ctx, "jwt", accessToken, time.Minute*30).Result()
+	if err != nil {
+		logger.Infof("Failed to set JWT token in redis: %v", err.Error())
 		return nil, err
 	}
 
@@ -131,36 +128,17 @@ func (as *authenticationService) LoginService(ctx context.Context, request *auth
 }
 
 func (as *authenticationService) LogoutService(ctx context.Context, request *protoApi.APIREQ) (*authentication.LogoutResponse, error) {
-	//ctx = metadata.AppendToOutgoingContext(ctx, "authorization", "Bearer "+request.Headers["Authorization"])
-	//
-	//jwtToken, err := jwtentity.ParseTokenFromContext(ctx)
-	//if err != nil {
-	//	panic(err.Error())
-	//}
-
-	authHeader := request.Headers["Authorization"]
-	if authHeader == "" {
-		return nil, baseutil.UnauthenticatedResponse()
-	}
-
-	tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
-	tokenStr = strings.TrimSpace(tokenStr)
-
-	logger.Info("check tokenStr : ", tokenStr)
-	// Parse token
-	jwtToken, err := jwt2.ParseToken(tokenStr)
+	//Delete login token in redis
+	deletedAt, err := as.redisClient.Del(ctx, "jwt").Result()
 	if err != nil {
-		return nil, baseutil.UnauthenticatedResponse()
+		return nil, err
 	}
 
-	logger.Info("check jwtToken : ", jwtToken)
-
-	tokenClaims, err := jwt2.GetClaimsFromContext(ctx)
-	if err != nil {
-		panic(err.Error())
+	if deletedAt != 1 {
+		return &authentication.LogoutResponse{
+			Base: baseutil.SuccessResponse("Logout gagal. Silahkan coba lagi!"),
+		}, nil
 	}
-
-	as.cacheService.Set(jwtToken, "", time.Duration(tokenClaims.ExpiresAt.Time.Unix()-time.Now().Unix())*time.Second)
 
 	return &authentication.LogoutResponse{
 		Base: baseutil.SuccessResponse("Logout success"),
@@ -223,7 +201,7 @@ func (as *authenticationService) ChangePasswordService(ctx context.Context, requ
 }
 
 func (as *authenticationService) GetProfileService(ctx context.Context, request *authentication.GetProfileRequest) (*authentication.GetProfileResponse, error) {
-	claims, err := jwt2.GetClaimsFromContext(ctx)
+	claims, err := jwt2.GetClaimsFromContext("TEST")
 	if err != nil {
 		return nil, err
 	}

@@ -6,7 +6,6 @@ toolchain go1.24.5
 
 require (
 	buf.build/go/protovalidate v0.14.0
-	github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250817154712-f1f7f0cd54bd
 	github.com/aldian78/go-react-ecommerce/common v0.0.0-20250817160710-166c668fad34
 	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250817154712-f1f7f0cd54bd
 	github.com/asim/go-micro/v3 v3.7.1
