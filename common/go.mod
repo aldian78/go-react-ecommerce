@@ -7,7 +7,7 @@ require (
 	github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7 // indirect
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250817154712-f1f7f0cd54bd // indirect
-	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250817154712-f1f7f0cd54bd // indirect
+	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250823150040-7f7a9b1287ae // indirect
 	github.com/bitly/go-simplejson v0.5.0 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
