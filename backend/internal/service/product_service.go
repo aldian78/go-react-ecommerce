@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
-	jwtentity "github.com/aldian78/go-react-ecommerce/common/jwt"
 	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
+	"go-micro.dev/v4/logger"
 	"os"
 	"path/filepath"
 	"time"
@@ -16,12 +16,12 @@ import (
 )
 
 type IProductService interface {
-	CreateProduct(ctx context.Context, request *product.CreateProductRequest) (*product.CreateProductResponse, error)
+	CreateProduct(ctx context.Context, request *product.CreateProductRequest, params map[string]string) (*product.CreateProductResponse, error)
 	DetailProduct(ctx context.Context, request *product.DetailProductRequest) (*product.DetailProductResponse, error)
-	EditProduct(ctx context.Context, request *product.EditProductRequest) (*product.EditProductResponse, error)
-	DeleteProduct(ctx context.Context, request *product.DeleteProductRequest) (*product.DeleteProductResponse, error)
+	EditProduct(ctx context.Context, request *product.EditProductRequest, params map[string]string) (*product.EditProductResponse, error)
+	DeleteProduct(ctx context.Context, request *product.DeleteProductRequest, params map[string]string) (*product.DeleteProductResponse, error)
 	ListProduct(ctx context.Context, request *product.ListProductRequest) (*product.ListProductResponse, error)
-	ListProductAdmin(ctx context.Context, request *product.ListProductAdminRequest) (*product.ListProductAdminResponse, error)
+	ListProductAdmin(ctx context.Context, request *product.ListProductAdminRequest, params map[string]string) (*product.ListProductAdminResponse, error)
 	HighlightProducts(ctx context.Context, request *product.HighlightProductsRequest) (*product.HighlightProductsResponse, error)
 }
 
@@ -29,18 +29,15 @@ type productService struct {
 	productRepository repository.IProductRepository
 }
 
-func (ps *productService) CreateProduct(ctx context.Context, request *product.CreateProductRequest) (*product.CreateProductResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
-	if claims.Role != entity.UserRoleAdmin {
+func (ps *productService) CreateProduct(ctx context.Context, request *product.CreateProductRequest, params map[string]string) (*product.CreateProductResponse, error) {
+	logger.Infof("check role : %s", params["role"])
+	if params["role"] != entity.UserRoleAdmin {
 		return nil, baseutil.UnauthenticatedResponse()
 	}
 
 	// cek juga apakah image nya ada ?
 	imagePath := filepath.Join("storage", "product", request.ImageFileName)
-	_, err = os.Stat(imagePath)
+	_, err := os.Stat(imagePath)
 	if err != nil {
 		if os.IsNotExist(err) {
 			return &product.CreateProductResponse{
@@ -58,7 +55,7 @@ func (ps *productService) CreateProduct(ctx context.Context, request *product.Cr
 		Price:         request.Price,
 		ImageFileName: request.ImageFileName,
 		CreatedAt:     time.Now(),
-		CreatedBy:     claims.FullName,
+		CreatedBy:     params["fullName"],
 	}
 	err = ps.productRepository.CreateNewProduct(ctx, &productEntity)
 	if err != nil {
@@ -94,12 +91,9 @@ func (ps *productService) DetailProduct(ctx context.Context, request *product.De
 	}, nil
 }
 
-func (ps *productService) EditProduct(ctx context.Context, request *product.EditProductRequest) (*product.EditProductResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
-	if claims.Role != entity.UserRoleAdmin {
+func (ps *productService) EditProduct(ctx context.Context, request *product.EditProductRequest, params map[string]string) (*product.EditProductResponse, error) {
+	logger.Infof("check role : %s", params["role"])
+	if params["role"] != entity.UserRoleAdmin {
 		return nil, baseutil.UnauthenticatedResponse()
 	}
 
@@ -133,6 +127,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 		}
 	}
 
+	fullName := params["fullName"]
 	newProduct := entity.Product{
 		Id:            request.Id,
 		Name:          request.Name,
@@ -140,7 +135,7 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 		Price:         request.Price,
 		ImageFileName: request.ImageFileName,
 		UpdatedAt:     time.Now(),
-		UpdatedBy:     &claims.FullName,
+		UpdatedBy:     &fullName,
 	}
 
 	err = ps.productRepository.UpdateProduct(ctx, &newProduct)
@@ -154,12 +149,9 @@ func (ps *productService) EditProduct(ctx context.Context, request *product.Edit
 	}, nil
 }
 
-func (ps *productService) DeleteProduct(ctx context.Context, request *product.DeleteProductRequest) (*product.DeleteProductResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
-	if claims.Role != entity.UserRoleAdmin {
+func (ps *productService) DeleteProduct(ctx context.Context, request *product.DeleteProductRequest, params map[string]string) (*product.DeleteProductResponse, error) {
+	logger.Infof("check role : %s", params["role"])
+	if params["role"] != entity.UserRoleAdmin {
 		return nil, baseutil.UnauthenticatedResponse()
 	}
 
@@ -173,7 +165,7 @@ func (ps *productService) DeleteProduct(ctx context.Context, request *product.De
 		}, nil
 	}
 
-	err = ps.productRepository.DeleteProduct(ctx, request.Id, time.Now(), claims.FullName)
+	err = ps.productRepository.DeleteProduct(ctx, request.Id, time.Now(), params["fullName"])
 	if err != nil {
 		return nil, err
 	}
@@ -207,12 +199,9 @@ func (ps *productService) ListProduct(ctx context.Context, request *product.List
 	}, nil
 }
 
-func (ps *productService) ListProductAdmin(ctx context.Context, request *product.ListProductAdminRequest) (*product.ListProductAdminResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
-	if claims.Role != entity.UserRoleAdmin {
+func (ps *productService) ListProductAdmin(ctx context.Context, request *product.ListProductAdminRequest, params map[string]string) (*product.ListProductAdminResponse, error) {
+	logger.Infof("check role : %s", params["role"])
+	if params["role"] != entity.UserRoleAdmin {
 		return nil, baseutil.UnauthenticatedResponse()
 	}
 

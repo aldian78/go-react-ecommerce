@@ -3,6 +3,7 @@ package grpcmiddleware
 import (
 	"context"
 	jwtentity "github.com/aldian78/go-react-ecommerce/common/jwt"
+	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"github.com/gin-gonic/gin"
 	gocache "github.com/patrickmn/go-cache"
 	"go-micro.dev/v4/logger"
@@ -52,6 +53,9 @@ func AuthenticationMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		ctx := context.TODO()
 		authHeader := c.GetHeader("Authorization")
+
+		apiReq, _ := c.Get("api.req")
+		reqApi := apiReq.(*protoApi.APIREQ)
 		logger.Infof("Auth Header: %s", authHeader)
 
 		md := metadata.Pairs("authorization", authHeader)
@@ -76,6 +80,10 @@ func AuthenticationMiddleware() gin.HandlerFunc {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token revoked 3"})
 			return
 		}
+
+		reqApi.Params["email"] = claims.Email
+		reqApi.Params["role"] = claims.Role
+		reqApi.Params["fullName"] = claims.FullName
 
 		ctx = claims.SetToContext(ctx)
 

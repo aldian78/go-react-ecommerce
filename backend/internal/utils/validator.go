@@ -2,20 +2,21 @@ package utils
 
 import (
 	"errors"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 	"github.com/go-playground/validator/v10"
 
 	"buf.build/go/protovalidate"
-	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 	"google.golang.org/protobuf/proto"
 )
 
-func CheckValidation(req proto.Message) ([]*common.ValidationError, error) {
+func CheckValidation(req proto.Message) ([]*basecommon.ValidationError, error) {
 	if err := protovalidate.Validate(req); err != nil {
 		var validationError *protovalidate.ValidationError
 		if errors.As(err, &validationError) {
-			var validationErrorResponse []*common.ValidationError = make([]*common.ValidationError, 0)
+			var validationErrorResponse []*basecommon.ValidationError = make([]*basecommon.ValidationError, 0)
 			for _, violation := range validationError.Violations {
-				validationErrorResponse = append(validationErrorResponse, &common.ValidationError{
+				validationErrorResponse = append(validationErrorResponse, &basecommon.ValidationError{
 					Field:   *violation.Proto.Field.Elements[0].FieldName,
 					Message: *violation.Proto.Message,
 				})

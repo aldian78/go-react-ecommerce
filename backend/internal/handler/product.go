@@ -69,7 +69,13 @@ func (ph *ProductHandler) CreateProduct(ctx context.Context, req *protoApi.APIRE
 		return nil
 	}
 
-	result, err := ph.productService.CreateProduct(ctx, request)
+	//param from jwt
+	customerParams := make(map[string]string)
+	customerParams["email"] = req.Params["email"]
+	customerParams["role"] = req.Params["role"]
+	customerParams["fullName"] = req.Params["fullName"]
+
+	result, err := ph.productService.CreateProduct(ctx, request, customerParams)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -150,10 +156,10 @@ func (ph *ProductHandler) EditProduct(ctx context.Context, req *protoApi.APIREQ,
 	priceFloat, err := strconv.ParseFloat(req.Params["price"], 64)
 	request := &product.EditProductRequest{
 		Id:            req.Params["id"],
-		Name:          req.Params["Name"],
-		Description:   req.Params["Description"],
+		Name:          req.Params["name"],
+		Description:   req.Params["description"],
 		Price:         priceFloat,
-		ImageFileName: req.Params["ImageFileName"],
+		ImageFileName: req.Params["imageFileName"],
 	}
 
 	validationErrors, err := utils.CheckValidation(request)
@@ -166,7 +172,13 @@ func (ph *ProductHandler) EditProduct(ctx context.Context, req *protoApi.APIREQ,
 		return nil
 	}
 
-	result, err := ph.productService.EditProduct(ctx, request)
+	//param from jwt
+	customerParams := make(map[string]string)
+	customerParams["email"] = req.Params["email"]
+	customerParams["role"] = req.Params["role"]
+	customerParams["fullName"] = req.Params["fullName"]
+
+	result, err := ph.productService.EditProduct(ctx, request, customerParams)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -212,7 +224,12 @@ func (ph *ProductHandler) DeleteProduct(ctx context.Context, req *protoApi.APIRE
 		return nil
 	}
 
-	result, err := ph.productService.DeleteProduct(ctx, request)
+	//param from jwt
+	customerParams := make(map[string]string)
+	customerParams["email"] = req.Params["email"]
+	customerParams["role"] = req.Params["role"]
+	customerParams["fullName"] = req.Params["fullName"]
+	result, err := ph.productService.DeleteProduct(ctx, request, customerParams)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -330,7 +347,12 @@ func (ph *ProductHandler) ListProductAdmin(ctx context.Context, req *protoApi.AP
 		return nil
 	}
 
-	result, err := ph.productService.ListProductAdmin(ctx, request)
+	//param from jwt
+	customerParams := make(map[string]string)
+	customerParams["email"] = req.Params["email"]
+	customerParams["role"] = req.Params["role"]
+	customerParams["fullName"] = req.Params["fullName"]
+	result, err := ph.productService.ListProductAdmin(ctx, request, customerParams)
 	if err != nil {
 		panic(err.Error())
 	}

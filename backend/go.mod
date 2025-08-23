@@ -3,8 +3,9 @@ module github.com/aldian78/go-react-ecommerce/backend
 go 1.24
 
 require (
-	github.com/aldian78/go-react-ecommerce/common v0.0.0-20250820153244-482ee57dc615
-	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250817163941-adb2a5dd0f98
+	buf.build/go/protovalidate v0.14.0
+	github.com/aldian78/go-react-ecommerce/common v0.0.0-20250823171423-a92b488cbbf3
+	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250823165957-6f6221103efb
 	github.com/asim/go-micro/v3 v3.7.1
 	github.com/gin-gonic/gin v1.10.1
 	github.com/go-playground/validator/v10 v10.26.0
@@ -15,6 +16,7 @@ require (
 	github.com/lib/pq v1.10.9
 	github.com/patrickmn/go-cache v2.1.0+incompatible
 	github.com/pkg/errors v0.9.1
+	github.com/redis/go-redis/v9 v9.12.1
 	github.com/shengyanli1982/go-trycatch v0.0.3
 	github.com/xendit/xendit-go v1.0.25
 	go-micro.dev/v4 v4.11.0
@@ -25,7 +27,6 @@ require (
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1 // indirect
-	buf.build/go/protovalidate v0.14.0 // indirect
 	cel.dev/expr v0.23.1 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7 // indirect
@@ -78,7 +79,6 @@ require (
 	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
-	github.com/redis/go-redis/v9 v9.12.1 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect

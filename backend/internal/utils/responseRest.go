@@ -5,7 +5,7 @@ import (
 	"fmt"
 	cons "github.com/aldian78/go-react-ecommerce/backend/internal/constants"
 	model "github.com/aldian78/go-react-ecommerce/common/rest"
-	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	"reflect"
 	"strconv"
 	"strings"
@@ -98,7 +98,7 @@ func InternalServerError() (result []byte) {
 	return
 }
 
-func LoopValidationError(validationErrors []*common.ValidationError) string {
+func LoopValidationError(validationErrors []*basecommon.ValidationError) string {
 	var messages []string
 	for _, ve := range validationErrors {
 		messages = append(messages, fmt.Sprintf("%s: %s", ve.Field, ve.Message))

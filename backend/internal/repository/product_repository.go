@@ -6,11 +6,11 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	"strings"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/pkg/database"
-	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 )
 
 type IProductRepository interface {
@@ -20,8 +20,8 @@ type IProductRepository interface {
 	GetProductsByIds(ctx context.Context, ids []string) ([]*entity.Product, error)
 	UpdateProduct(ctx context.Context, product *entity.Product) error
 	DeleteProduct(ctx context.Context, id string, deletedAt time.Time, deletedBy string) error
-	GetProductsPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Product, *common.PaginationResponse, error)
-	GetProductsPaginationAdmin(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Product, *common.PaginationResponse, error)
+	GetProductsPagination(ctx context.Context, pagination *basecommon.PaginationRequest) ([]*entity.Product, *basecommon.PaginationResponse, error)
+	GetProductsPaginationAdmin(ctx context.Context, pagination *basecommon.PaginationRequest) ([]*entity.Product, *basecommon.PaginationResponse, error)
 	GetProductHighlight(ctx context.Context) ([]*entity.Product, error)
 }
 
@@ -154,7 +154,7 @@ func (repo *productRepository) DeleteProduct(ctx context.Context, id string, del
 	return nil
 }
 
-func (repo *productRepository) GetProductsPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Product, *common.PaginationResponse, error) {
+func (repo *productRepository) GetProductsPagination(ctx context.Context, pagination *basecommon.PaginationRequest) ([]*entity.Product, *basecommon.PaginationResponse, error) {
 
 	row := repo.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM product WHERE is_deleted = false")
 	if row.Err() != nil {
@@ -198,7 +198,7 @@ func (repo *productRepository) GetProductsPagination(ctx context.Context, pagina
 		products = append(products, &product)
 	}
 
-	paginationResponse := &common.PaginationResponse{
+	paginationResponse := &basecommon.PaginationResponse{
 		CurrentPage:    pagination.CurrentPage,
 		ItemPerPage:    pagination.ItemPerPage,
 		TotalItemCount: int32(totalCount),
@@ -207,7 +207,7 @@ func (repo *productRepository) GetProductsPagination(ctx context.Context, pagina
 	return products, paginationResponse, nil
 }
 
-func (repo *productRepository) GetProductsPaginationAdmin(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Product, *common.PaginationResponse, error) {
+func (repo *productRepository) GetProductsPaginationAdmin(ctx context.Context, pagination *basecommon.PaginationRequest) ([]*entity.Product, *basecommon.PaginationResponse, error) {
 	row := repo.db.QueryRowContext(ctx, "SELECT COUNT(*) FROM product WHERE is_deleted = false")
 	if row.Err() != nil {
 		return nil, nil, row.Err()
@@ -266,7 +266,7 @@ func (repo *productRepository) GetProductsPaginationAdmin(ctx context.Context, p
 		products = append(products, &product)
 	}
 
-	paginationResponse := &common.PaginationResponse{
+	paginationResponse := &basecommon.PaginationResponse{
 		CurrentPage:    pagination.CurrentPage,
 		ItemPerPage:    pagination.ItemPerPage,
 		TotalItemCount: int32(totalCount),

@@ -6,10 +6,10 @@ import (
 	"errors"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	"strings"
 
 	"github.com/aldian78/go-react-ecommerce/backend/pkg/database"
-	"github.com/aldian78/go-react-ecommerce/proto/pb/common"
 )
 
 type IOrderRepository interface {
@@ -20,8 +20,8 @@ type IOrderRepository interface {
 	CreateOrderItem(ctx context.Context, orderItem *entity.OrderItem) error
 	GetOrderById(ctx context.Context, orderId string) (*entity.Order, error)
 	UpdateOrder(ctx context.Context, order *entity.Order) error
-	GetListOrderAdminPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Order, *common.PaginationResponse, error)
-	GetListOrderPagination(ctx context.Context, pagination *common.PaginationRequest, userId string) ([]*entity.Order, *common.PaginationResponse, error)
+	GetListOrderAdminPagination(ctx context.Context, pagination *basecommon.PaginationRequest) ([]*entity.Order, *basecommon.PaginationResponse, error)
+	GetListOrderPagination(ctx context.Context, pagination *basecommon.PaginationRequest, userId string) ([]*entity.Order, *basecommon.PaginationResponse, error)
 }
 
 type orderRepository struct {
@@ -217,7 +217,7 @@ func (or *orderRepository) UpdateOrder(ctx context.Context, order *entity.Order)
 	return nil
 }
 
-func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagination *common.PaginationRequest) ([]*entity.Order, *common.PaginationResponse, error) {
+func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagination *basecommon.PaginationRequest) ([]*entity.Order, *basecommon.PaginationResponse, error) {
 	row := or.db.QueryRowContext(
 		ctx,
 		"SELECT COUNT(*) FROM \"order\" WHERE is_deleted = false",
@@ -320,7 +320,7 @@ func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagi
 		}
 	}
 
-	var metadata common.PaginationResponse = common.PaginationResponse{
+	var metadata basecommon.PaginationResponse = basecommon.PaginationResponse{
 		CurrentPage:    pagination.CurrentPage,
 		TotalPageCount: int32(totalPages),
 		ItemPerPage:    pagination.ItemPerPage,
@@ -329,7 +329,7 @@ func (or *orderRepository) GetListOrderAdminPagination(ctx context.Context, pagi
 	return orders, &metadata, nil
 }
 
-func (or *orderRepository) GetListOrderPagination(ctx context.Context, pagination *common.PaginationRequest, userId string) ([]*entity.Order, *common.PaginationResponse, error) {
+func (or *orderRepository) GetListOrderPagination(ctx context.Context, pagination *basecommon.PaginationRequest, userId string) ([]*entity.Order, *basecommon.PaginationResponse, error) {
 	row := or.db.QueryRowContext(
 		ctx,
 		"SELECT COUNT(*) FROM \"order\" WHERE is_deleted = false AND user_id = $1",
@@ -435,7 +435,7 @@ func (or *orderRepository) GetListOrderPagination(ctx context.Context, paginatio
 		}
 	}
 
-	var metadata common.PaginationResponse = common.PaginationResponse{
+	var metadata basecommon.PaginationResponse = basecommon.PaginationResponse{
 		CurrentPage:    pagination.CurrentPage,
 		TotalPageCount: int32(totalPages),
 		ItemPerPage:    pagination.ItemPerPage,
