@@ -115,7 +115,7 @@ func (as *authenticationService) LoginService(ctx context.Context, request *auth
 	}
 
 	//Set token in redis
-	_, err = as.redisClient.Set(ctx, "jwt", accessToken, time.Minute*30).Result()
+	_, err = as.redisClient.Set(ctx, "jwt-"+user.Id, accessToken, time.Minute*30).Result()
 	if err != nil {
 		logger.Infof("Failed to set JWT token in redis: %v", err.Error())
 		return nil, err
