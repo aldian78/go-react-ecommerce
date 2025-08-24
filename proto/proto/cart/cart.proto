@@ -4,14 +4,15 @@ option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/cart";
 
 import "basecommon/base_response.proto";
 import "buf/validate/validate.proto";
+import "api/api.proto";
 
 package cart;
 
 service CartService {
-    rpc AddProductToCart(AddProductToCartRequest) returns (AddProductToCartResponse);
-    rpc ListCart(ListCartRequest) returns (ListCartResponse);
-    rpc DeleteCart(DeleteCartRequest) returns (DeleteCartResponse);
-    rpc UpdateCartQuantity(UpdateCartQuantityRequest) returns (UpdateCartQuantityResponse);
+    rpc AddProductToCart(api.APIREQ) returns (api.APIRES);
+    rpc ListCart(api.APIREQ) returns (api.APIRES);
+    rpc DeleteCart(api.APIREQ) returns (api.APIRES);
+    rpc UpdateCartQuantity(api.APIREQ) returns (api.APIRES);
 }
 
 message AddProductToCartRequest {
