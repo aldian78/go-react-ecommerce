@@ -6,6 +6,7 @@ package cart
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	fmt "fmt"
+	api1 "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	_ "github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -38,10 +39,10 @@ func NewCartServiceEndpoints() []*api.Endpoint {
 // Client API for CartService service
 
 type CartService interface {
-	AddProductToCart(ctx context.Context, in *AddProductToCartRequest, opts ...client.CallOption) (*AddProductToCartResponse, error)
-	ListCart(ctx context.Context, in *ListCartRequest, opts ...client.CallOption) (*ListCartResponse, error)
-	DeleteCart(ctx context.Context, in *DeleteCartRequest, opts ...client.CallOption) (*DeleteCartResponse, error)
-	UpdateCartQuantity(ctx context.Context, in *UpdateCartQuantityRequest, opts ...client.CallOption) (*UpdateCartQuantityResponse, error)
+	AddProductToCart(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	ListCart(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	DeleteCart(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	UpdateCartQuantity(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 }
 
 type cartService struct {
@@ -56,9 +57,9 @@ func NewCartService(name string, c client.Client) CartService {
 	}
 }
 
-func (c *cartService) AddProductToCart(ctx context.Context, in *AddProductToCartRequest, opts ...client.CallOption) (*AddProductToCartResponse, error) {
+func (c *cartService) AddProductToCart(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "CartService.AddProductToCart", in)
-	out := new(AddProductToCartResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,9 +67,9 @@ func (c *cartService) AddProductToCart(ctx context.Context, in *AddProductToCart
 	return out, nil
 }
 
-func (c *cartService) ListCart(ctx context.Context, in *ListCartRequest, opts ...client.CallOption) (*ListCartResponse, error) {
+func (c *cartService) ListCart(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "CartService.ListCart", in)
-	out := new(ListCartResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -76,9 +77,9 @@ func (c *cartService) ListCart(ctx context.Context, in *ListCartRequest, opts ..
 	return out, nil
 }
 
-func (c *cartService) DeleteCart(ctx context.Context, in *DeleteCartRequest, opts ...client.CallOption) (*DeleteCartResponse, error) {
+func (c *cartService) DeleteCart(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "CartService.DeleteCart", in)
-	out := new(DeleteCartResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -86,9 +87,9 @@ func (c *cartService) DeleteCart(ctx context.Context, in *DeleteCartRequest, opt
 	return out, nil
 }
 
-func (c *cartService) UpdateCartQuantity(ctx context.Context, in *UpdateCartQuantityRequest, opts ...client.CallOption) (*UpdateCartQuantityResponse, error) {
+func (c *cartService) UpdateCartQuantity(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "CartService.UpdateCartQuantity", in)
-	out := new(UpdateCartQuantityResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -99,18 +100,18 @@ func (c *cartService) UpdateCartQuantity(ctx context.Context, in *UpdateCartQuan
 // Server API for CartService service
 
 type CartServiceHandler interface {
-	AddProductToCart(context.Context, *AddProductToCartRequest, *AddProductToCartResponse) error
-	ListCart(context.Context, *ListCartRequest, *ListCartResponse) error
-	DeleteCart(context.Context, *DeleteCartRequest, *DeleteCartResponse) error
-	UpdateCartQuantity(context.Context, *UpdateCartQuantityRequest, *UpdateCartQuantityResponse) error
+	AddProductToCart(context.Context, *api1.APIREQ, *api1.APIRES) error
+	ListCart(context.Context, *api1.APIREQ, *api1.APIRES) error
+	DeleteCart(context.Context, *api1.APIREQ, *api1.APIRES) error
+	UpdateCartQuantity(context.Context, *api1.APIREQ, *api1.APIRES) error
 }
 
 func RegisterCartServiceHandler(s server.Server, hdlr CartServiceHandler, opts ...server.HandlerOption) error {
 	type cartService interface {
-		AddProductToCart(ctx context.Context, in *AddProductToCartRequest, out *AddProductToCartResponse) error
-		ListCart(ctx context.Context, in *ListCartRequest, out *ListCartResponse) error
-		DeleteCart(ctx context.Context, in *DeleteCartRequest, out *DeleteCartResponse) error
-		UpdateCartQuantity(ctx context.Context, in *UpdateCartQuantityRequest, out *UpdateCartQuantityResponse) error
+		AddProductToCart(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		ListCart(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		DeleteCart(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		UpdateCartQuantity(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 	}
 	type CartService struct {
 		cartService
@@ -123,18 +124,18 @@ type cartServiceHandler struct {
 	CartServiceHandler
 }
 
-func (h *cartServiceHandler) AddProductToCart(ctx context.Context, in *AddProductToCartRequest, out *AddProductToCartResponse) error {
+func (h *cartServiceHandler) AddProductToCart(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.CartServiceHandler.AddProductToCart(ctx, in, out)
 }
 
-func (h *cartServiceHandler) ListCart(ctx context.Context, in *ListCartRequest, out *ListCartResponse) error {
+func (h *cartServiceHandler) ListCart(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.CartServiceHandler.ListCart(ctx, in, out)
 }
 
-func (h *cartServiceHandler) DeleteCart(ctx context.Context, in *DeleteCartRequest, out *DeleteCartResponse) error {
+func (h *cartServiceHandler) DeleteCart(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.CartServiceHandler.DeleteCart(ctx, in, out)
 }
 
-func (h *cartServiceHandler) UpdateCartQuantity(ctx context.Context, in *UpdateCartQuantityRequest, out *UpdateCartQuantityResponse) error {
+func (h *cartServiceHandler) UpdateCartQuantity(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.CartServiceHandler.UpdateCartQuantity(ctx, in, out)
 }
