@@ -4,3 +4,15 @@ type Login struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
 }
+
+type ParseParamJWT struct {
+	DataSession map[string]string
+}
+
+type ParseParamJWT2 struct {
+	CustomerId string `json:"customerId"`
+	Name       string `json:"name"`
+	FullName   string `json:"fullName"`
+	Email      string `json:"email"`
+	Role       string `json:"role"`
+}

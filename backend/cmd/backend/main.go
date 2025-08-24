@@ -6,6 +6,7 @@ import (
 	"github.com/aldian78/go-react-ecommerce/backend/internal/handler"
 	"github.com/aldian78/go-react-ecommerce/backend/pkg/database"
 	auth "github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/cart"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/product"
 	"github.com/joho/godotenv"
 	gocache "github.com/patrickmn/go-cache"
@@ -61,6 +62,7 @@ func main() {
 			_ = svc.Client().Init(client.RequestTimeout(rpcTimeout))
 			_ = auth.RegisterAuthenticationServiceHandler(svc.Server(), handler.NewAuthenticationHandler(db, rdb, cacheService))
 			_ = product.RegisterProductServiceHandler(svc.Server(), handler.NewProductHandler(db))
+			_ = cart.RegisterCartServiceHandler(svc.Server(), handler.NewCartHandler(db))
 
 			// Run Service
 			if err := svc.Run(); err != nil {

@@ -5,7 +5,7 @@ go 1.24
 require (
 	buf.build/go/protovalidate v0.14.0
 	github.com/aldian78/go-react-ecommerce/common v0.0.0-20250823171423-a92b488cbbf3
-	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250823165957-6f6221103efb
+	github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250824060207-0b9885a7ed90
 	github.com/asim/go-micro/v3 v3.7.1
 	github.com/gin-gonic/gin v1.10.1
 	github.com/go-playground/validator/v10 v10.26.0
