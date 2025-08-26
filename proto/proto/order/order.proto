@@ -7,14 +7,16 @@ import "basecommon/base_response.proto";
 import "basecommon/pagination.proto";
 import "google/protobuf/timestamp.proto";
 
+import "api/api.proto";
+
 package order;
 
 service OrderService {
-    rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
-    rpc ListOrderAdmin(ListOrderAdminRequest) returns (ListOrderAdminResponse);
-    rpc ListOrder(ListOrderRequest) returns (ListOrderResponse);
-    rpc DetailOrder(DetailOrderRequest) returns (DetailOrderResponse);
-    rpc UpdateOrderStatus(UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+    rpc CreateOrder(api.APIREQ) returns (api.APIRES);
+    rpc ListOrderAdmin(api.APIREQ) returns (api.APIRES);
+    rpc ListOrder(api.APIREQ) returns (api.APIRES);
+    rpc DetailOrder(api.APIREQ) returns (api.APIRES);
+    rpc UpdateOrderStatus(api.APIREQ) returns (api.APIRES);
 }
 
 message CreateOrderRequestProductItem {

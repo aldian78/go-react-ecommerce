@@ -6,6 +6,7 @@ package order
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	fmt "fmt"
+	api1 "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	_ "github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	proto "google.golang.org/protobuf/proto"
 	_ "google.golang.org/protobuf/types/known/timestamppb"
@@ -39,11 +40,11 @@ func NewOrderServiceEndpoints() []*api.Endpoint {
 // Client API for OrderService service
 
 type OrderService interface {
-	CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...client.CallOption) (*CreateOrderResponse, error)
-	ListOrderAdmin(ctx context.Context, in *ListOrderAdminRequest, opts ...client.CallOption) (*ListOrderAdminResponse, error)
-	ListOrder(ctx context.Context, in *ListOrderRequest, opts ...client.CallOption) (*ListOrderResponse, error)
-	DetailOrder(ctx context.Context, in *DetailOrderRequest, opts ...client.CallOption) (*DetailOrderResponse, error)
-	UpdateOrderStatus(ctx context.Context, in *UpdateOrderStatusRequest, opts ...client.CallOption) (*UpdateOrderStatusResponse, error)
+	CreateOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	ListOrderAdmin(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	ListOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	DetailOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 }
 
 type orderService struct {
@@ -58,9 +59,9 @@ func NewOrderService(name string, c client.Client) OrderService {
 	}
 }
 
-func (c *orderService) CreateOrder(ctx context.Context, in *CreateOrderRequest, opts ...client.CallOption) (*CreateOrderResponse, error) {
+func (c *orderService) CreateOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "OrderService.CreateOrder", in)
-	out := new(CreateOrderResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -68,9 +69,9 @@ func (c *orderService) CreateOrder(ctx context.Context, in *CreateOrderRequest, 
 	return out, nil
 }
 
-func (c *orderService) ListOrderAdmin(ctx context.Context, in *ListOrderAdminRequest, opts ...client.CallOption) (*ListOrderAdminResponse, error) {
+func (c *orderService) ListOrderAdmin(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "OrderService.ListOrderAdmin", in)
-	out := new(ListOrderAdminResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -78,9 +79,9 @@ func (c *orderService) ListOrderAdmin(ctx context.Context, in *ListOrderAdminReq
 	return out, nil
 }
 
-func (c *orderService) ListOrder(ctx context.Context, in *ListOrderRequest, opts ...client.CallOption) (*ListOrderResponse, error) {
+func (c *orderService) ListOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "OrderService.ListOrder", in)
-	out := new(ListOrderResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -88,9 +89,9 @@ func (c *orderService) ListOrder(ctx context.Context, in *ListOrderRequest, opts
 	return out, nil
 }
 
-func (c *orderService) DetailOrder(ctx context.Context, in *DetailOrderRequest, opts ...client.CallOption) (*DetailOrderResponse, error) {
+func (c *orderService) DetailOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "OrderService.DetailOrder", in)
-	out := new(DetailOrderResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -98,9 +99,9 @@ func (c *orderService) DetailOrder(ctx context.Context, in *DetailOrderRequest, 
 	return out, nil
 }
 
-func (c *orderService) UpdateOrderStatus(ctx context.Context, in *UpdateOrderStatusRequest, opts ...client.CallOption) (*UpdateOrderStatusResponse, error) {
+func (c *orderService) UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "OrderService.UpdateOrderStatus", in)
-	out := new(UpdateOrderStatusResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -111,20 +112,20 @@ func (c *orderService) UpdateOrderStatus(ctx context.Context, in *UpdateOrderSta
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
-	CreateOrder(context.Context, *CreateOrderRequest, *CreateOrderResponse) error
-	ListOrderAdmin(context.Context, *ListOrderAdminRequest, *ListOrderAdminResponse) error
-	ListOrder(context.Context, *ListOrderRequest, *ListOrderResponse) error
-	DetailOrder(context.Context, *DetailOrderRequest, *DetailOrderResponse) error
-	UpdateOrderStatus(context.Context, *UpdateOrderStatusRequest, *UpdateOrderStatusResponse) error
+	CreateOrder(context.Context, *api1.APIREQ, *api1.APIRES) error
+	ListOrderAdmin(context.Context, *api1.APIREQ, *api1.APIRES) error
+	ListOrder(context.Context, *api1.APIREQ, *api1.APIRES) error
+	DetailOrder(context.Context, *api1.APIREQ, *api1.APIRES) error
+	UpdateOrderStatus(context.Context, *api1.APIREQ, *api1.APIRES) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
-		CreateOrder(ctx context.Context, in *CreateOrderRequest, out *CreateOrderResponse) error
-		ListOrderAdmin(ctx context.Context, in *ListOrderAdminRequest, out *ListOrderAdminResponse) error
-		ListOrder(ctx context.Context, in *ListOrderRequest, out *ListOrderResponse) error
-		DetailOrder(ctx context.Context, in *DetailOrderRequest, out *DetailOrderResponse) error
-		UpdateOrderStatus(ctx context.Context, in *UpdateOrderStatusRequest, out *UpdateOrderStatusResponse) error
+		CreateOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		ListOrderAdmin(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		ListOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		DetailOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 	}
 	type OrderService struct {
 		orderService
@@ -137,22 +138,22 @@ type orderServiceHandler struct {
 	OrderServiceHandler
 }
 
-func (h *orderServiceHandler) CreateOrder(ctx context.Context, in *CreateOrderRequest, out *CreateOrderResponse) error {
+func (h *orderServiceHandler) CreateOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.OrderServiceHandler.CreateOrder(ctx, in, out)
 }
 
-func (h *orderServiceHandler) ListOrderAdmin(ctx context.Context, in *ListOrderAdminRequest, out *ListOrderAdminResponse) error {
+func (h *orderServiceHandler) ListOrderAdmin(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.OrderServiceHandler.ListOrderAdmin(ctx, in, out)
 }
 
-func (h *orderServiceHandler) ListOrder(ctx context.Context, in *ListOrderRequest, out *ListOrderResponse) error {
+func (h *orderServiceHandler) ListOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.OrderServiceHandler.ListOrder(ctx, in, out)
 }
 
-func (h *orderServiceHandler) DetailOrder(ctx context.Context, in *DetailOrderRequest, out *DetailOrderResponse) error {
+func (h *orderServiceHandler) DetailOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.OrderServiceHandler.DetailOrder(ctx, in, out)
 }
 
-func (h *orderServiceHandler) UpdateOrderStatus(ctx context.Context, in *UpdateOrderStatusRequest, out *UpdateOrderStatusResponse) error {
+func (h *orderServiceHandler) UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.OrderServiceHandler.UpdateOrderStatus(ctx, in, out)
 }
