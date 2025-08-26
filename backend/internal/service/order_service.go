@@ -3,10 +3,11 @@ package service
 import (
 	"context"
 	"database/sql"
+	"encoding/json"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
-	jwtentity "github.com/aldian78/go-react-ecommerce/common/jwt"
 	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
+	"go-micro.dev/v4/logger"
 	operatingsystem "os"
 	"runtime/debug"
 	"time"
@@ -20,11 +21,11 @@ import (
 )
 
 type IOrderService interface {
-	CreateOrder(ctx context.Context, request *order.CreateOrderRequest) (*order.CreateOrderResponse, error)
-	ListOrderAdmin(ctx context.Context, request *order.ListOrderAdminRequest) (*order.ListOrderAdminResponse, error)
-	ListOrder(ctx context.Context, request *order.ListOrderRequest) (*order.ListOrderResponse, error)
-	DetailOrder(ctx context.Context, request *order.DetailOrderRequest) (*order.DetailOrderResponse, error)
-	UpdateOrderStatus(ctx context.Context, request *order.UpdateOrderStatusRequest) (*order.UpdateOrderStatusResponse, error)
+	CreateOrder(ctx context.Context, request *order.CreateOrderRequest, params map[string]string) (*order.CreateOrderResponse, error)
+	ListOrderAdmin(ctx context.Context, request *order.ListOrderAdminRequest, params map[string]string) (*order.ListOrderAdminResponse, error)
+	ListOrder(ctx context.Context, request *order.ListOrderRequest, params map[string]string) (*order.ListOrderResponse, error)
+	DetailOrder(ctx context.Context, request *order.DetailOrderRequest, params map[string]string) (*order.DetailOrderResponse, error)
+	UpdateOrderStatus(ctx context.Context, request *order.UpdateOrderStatusRequest, params map[string]string) (*order.UpdateOrderStatusResponse, error)
 }
 
 type orderService struct {
@@ -33,11 +34,17 @@ type orderService struct {
 	productRepository repository.IProductRepository
 }
 
-func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOrderRequest) (*order.CreateOrderResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
+func NewOrderService(db *sql.DB, orderRepository repository.IOrderRepository, productRepository repository.IProductRepository) IOrderService {
+	return &orderService{
+		db:                db,
+		orderRepository:   orderRepository,
+		productRepository: productRepository,
 	}
+}
+
+func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOrderRequest, params map[string]string) (*order.CreateOrderResponse, error) {
+	jsonxx, _ := json.Marshal(request)
+	logger.Infof("check jsonxxx : %s", string(jsonxx))
 
 	tx, err := os.db.Begin()
 	if err != nil {
@@ -50,10 +57,12 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 			}
 
 			debug.PrintStack()
+			logger.Infof("err rollback : %s", string(debug.Stack()))
 			panic(e)
 		}
 	}()
 	defer func() {
+		logger.Infof("err rollback : %s", string(debug.Stack()))
 		if err != nil && tx != nil {
 			tx.Rollback()
 		}
@@ -69,6 +78,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 
 	var productIds = make([]string, len(request.Products))
 	for i := range request.Products {
+		logger.Infof("product id : %s", request.Products[i].Quantity)
 		productIds[i] = request.Products[i].Id
 	}
 
@@ -89,15 +99,19 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 				Base: baseutil.NotFoundResponse(fmt.Sprintf("Product %s not found", p.Id)),
 			}, nil
 		}
+		logger.Infof("product id is : %s", productMap[p.Id].Id)
+		logger.Infof("product id is PRICE : %s", productMap[p.Id].Price)
+		logger.Infof("p qty : %s", p.Quantity)
 		total += productMap[p.Id].Price * float64(p.Quantity)
 	}
+	logger.Infof("total : %f", total)
 
 	now := time.Now()
 	expiredAt := now.Add(24 * time.Hour)
 	orderEntity := entity.Order{
 		Id:              uuid.NewString(),
 		Number:          fmt.Sprintf("ORD-%d%08d", now.Year(), numbering.Number),
-		UserId:          claims.Subject,
+		UserId:          params["custId"],
 		OrderStatusCode: entity.OrderStatusCodeUnpaid,
 		UserFullName:    request.FullName,
 		Address:         request.Address,
@@ -106,7 +120,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 		Total:           total,
 		ExpiredAt:       &expiredAt,
 		CreatedAt:       now,
-		CreatedBy:       claims.FullName,
+		CreatedBy:       params["fullName"],
 	}
 
 	invoiceItems := make([]xendit.InvoiceItem, 0)
@@ -124,12 +138,13 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 		ExternalID: orderEntity.Id,
 		Amount:     total,
 		Customer: xendit.InvoiceCustomer{
-			GivenNames: claims.FullName,
+			GivenNames: params["fullName"],
 		},
 		Currency:           "IDR",
 		SuccessRedirectURL: fmt.Sprintf("%s/checkout/%s/success", operatingsystem.Getenv("FRONTEND_BASE_URL"), orderEntity.Id),
 		Items:              invoiceItems,
 	})
+	logger.Infof("check xendit : %s", xenditErr)
 	if xenditErr != nil {
 		err = xenditErr
 		return nil, err
@@ -153,7 +168,7 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 			Quantity:             p.Quantity,
 			OrderId:              orderEntity.Id,
 			CreatedAt:            now,
-			CreatedBy:            claims.FullName,
+			CreatedBy:            params["fullName"],
 		}
 
 		err = orderRepo.CreateOrderItem(ctx, &orderItem)
@@ -179,12 +194,9 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 	}, nil
 }
 
-func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListOrderAdminRequest) (*order.ListOrderAdminResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
-	if claims.Role != entity.UserRoleAdmin {
+func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListOrderAdminRequest, params map[string]string) (*order.ListOrderAdminResponse, error) {
+
+	if params["role"] != entity.UserRoleAdmin {
 		return nil, baseutil.UnauthenticatedResponse()
 	}
 
@@ -229,13 +241,8 @@ func (os *orderService) ListOrderAdmin(ctx context.Context, request *order.ListO
 	}, nil
 }
 
-func (os *orderService) ListOrder(ctx context.Context, request *order.ListOrderRequest) (*order.ListOrderResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
-
-	orders, metadata, err := os.orderRepository.GetListOrderPagination(ctx, request.Pagination, claims.Subject)
+func (os *orderService) ListOrder(ctx context.Context, request *order.ListOrderRequest, params map[string]string) (*order.ListOrderResponse, error) {
+	orders, metadata, err := os.orderRepository.GetListOrderPagination(ctx, request.Pagination, params["custId"])
 	if err != nil {
 		return nil, err
 	}
@@ -281,18 +288,14 @@ func (os *orderService) ListOrder(ctx context.Context, request *order.ListOrderR
 	}, nil
 }
 
-func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOrderRequest) (*order.DetailOrderResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
+func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOrderRequest, params map[string]string) (*order.DetailOrderResponse, error) {
 
 	orderEntity, err := os.orderRepository.GetOrderById(ctx, request.Id)
 	if err != nil {
 		return nil, err
 	}
 
-	if claims.Role != entity.UserRoleAdmin && claims.Subject != orderEntity.UserId {
+	if params["role"] != entity.UserRoleAdmin && params["custId"] != orderEntity.UserId {
 		return &order.DetailOrderResponse{
 			Base: baseutil.BadRequestResponse("User id is not matched"),
 		}, nil
@@ -338,11 +341,10 @@ func (os *orderService) DetailOrder(ctx context.Context, request *order.DetailOr
 	}, nil
 }
 
-func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.UpdateOrderStatusRequest) (*order.UpdateOrderStatusResponse, error) {
-	claims, err := jwtentity.GetClaimsFromContext("xxx")
-	if err != nil {
-		return nil, err
-	}
+func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.UpdateOrderStatusRequest, params map[string]string) (*order.UpdateOrderStatusResponse, error) {
+	role := params["role"]
+	custId := params["custId"]
+
 	orderEntity, err := os.orderRepository.GetOrderById(ctx, request.OrderId)
 	if err != nil {
 		return nil, err
@@ -353,14 +355,14 @@ func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.Up
 		}, nil
 	}
 
-	if claims.Role != entity.UserRoleAdmin && orderEntity.UserId != claims.Subject {
+	if role != entity.UserRoleAdmin && orderEntity.UserId != custId {
 		return &order.UpdateOrderStatusResponse{
 			Base: baseutil.BadRequestResponse("User id is not matched"),
 		}, nil
 	}
 
 	if request.NewStatusCode == entity.OrderStatusCodePaid {
-		if claims.Role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodeUnpaid {
+		if role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodeUnpaid {
 			return &order.UpdateOrderStatusResponse{
 				Base: baseutil.BadRequestResponse("Update status is not allowed"),
 			}, nil
@@ -372,7 +374,7 @@ func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.Up
 			}, nil
 		}
 	} else if request.NewStatusCode == entity.OrderStatusCodeShipped {
-		if claims.Role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodePaid {
+		if role != entity.UserRoleAdmin || orderEntity.OrderStatusCode != entity.OrderStatusCodePaid {
 			return &order.UpdateOrderStatusResponse{
 				Base: baseutil.BadRequestResponse("Update status is not allowed"),
 			}, nil
@@ -393,7 +395,7 @@ func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.Up
 	now := time.Now()
 	orderEntity.OrderStatusCode = request.NewStatusCode
 	orderEntity.UpdatedAt = &now
-	orderEntity.UpdatedBy = &claims.Subject
+	orderEntity.UpdatedBy = &custId
 
 	err = os.orderRepository.UpdateOrder(ctx, orderEntity)
 	if err != nil {
@@ -403,12 +405,4 @@ func (os *orderService) UpdateOrderStatus(ctx context.Context, request *order.Up
 	return &order.UpdateOrderStatusResponse{
 		Base: baseutil.SuccessResponse("Update order status success"),
 	}, nil
-}
-
-func NewOrderService(db *sql.DB, orderRepository repository.IOrderRepository, productRepository repository.IProductRepository) IOrderService {
-	return &orderService{
-		db:                db,
-		orderRepository:   orderRepository,
-		productRepository: productRepository,
-	}
 }

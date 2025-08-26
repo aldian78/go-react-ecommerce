@@ -23,10 +23,10 @@ type MListProductRes struct {
 }
 
 type Pagination struct {
-	CurrentPage int `json:"current_page"`
-	ItemPerPage int `json:"item_per_page"`
-	TotalPage   int `json:"total_page_count"`
-	TotalItem   int `json:"total_item_count"`
+	CurrentPage int `json:"current_page,omitempty"`
+	ItemPerPage int `json:"item_per_page,omitempty"`
+	TotalPage   int `json:"total_page_count,omitempty"`
+	TotalItem   int `json:"total_item_count,omitempty"`
 }
 
 type Product struct {
