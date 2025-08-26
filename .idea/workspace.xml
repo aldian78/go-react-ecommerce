@@ -4,19 +4,11 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="basecommon proto response">
+    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="fix feature cart">
+      <change afterPath="$PROJECT_DIR$/backend/internal/model/product_model.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/internal/handler/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/handler/product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/repository/order_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/repository/order_repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/repository/product_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/repository/product_repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/service/product_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/service/product_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/utils/responseRest.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/utils/responseRest.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/utils/validator.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/utils/validator.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/storage/product/product_1741845244785075200.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/internal/grpcmiddleware/authentication_middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/internal/grpcmiddleware/authentication_middleware.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +136,12 @@
     <MESSAGE value="create and parse jwt, proto product &amp; penyesuaian" />
     <MESSAGE value="function product with api req, api res" />
     <MESSAGE value="basecommon proto response" />
-    <option name="LAST_COMMIT_MESSAGE" value="basecommon proto response" />
+    <MESSAGE value="get data jwt for product function" />
+    <MESSAGE value="add field customerId in middleware" />
+    <MESSAGE value="login save redis with flag customerId" />
+    <MESSAGE value="proto cart api req and res" />
+    <MESSAGE value="fix feature cart" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix feature cart" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

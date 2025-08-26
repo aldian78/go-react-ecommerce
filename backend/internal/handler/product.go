@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/model"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/utils"
@@ -80,7 +81,17 @@ func (ph *ProductHandler) CreateProduct(ctx context.Context, req *protoApi.APIRE
 		panic(err.Error())
 	}
 
-	res.Response = utils.ResSuccess(result)
+	if result.Base.StatusCode != 200 {
+		res.Response = utils.Error(result.Base.StatusCode, result.Base.Message)
+		return nil
+	}
+
+	response := &model.MProductRes{
+		Id:      result.Id,
+		Message: result.Base.Message,
+	}
+
+	res.Response = utils.ResSuccess(response)
 	return nil
 }
 
@@ -126,7 +137,21 @@ func (ph *ProductHandler) DetailProduct(ctx context.Context, req *protoApi.APIRE
 		panic(err.Error())
 	}
 
-	res.Response = utils.ResSuccess(result)
+	if result.Base.StatusCode != 200 {
+		res.Response = utils.Error(result.Base.StatusCode, result.Base.Message)
+		return nil
+	}
+
+	response := &model.MGetProductRes{
+		Id:          result.Id,
+		Message:     result.Base.Message,
+		ProductName: result.Name,
+		Description: result.Description,
+		Price:       result.Price,
+		ImageUrl:    result.ImageUrl,
+	}
+
+	res.Response = utils.ResSuccess(response)
 	return nil
 }
 
@@ -183,7 +208,17 @@ func (ph *ProductHandler) EditProduct(ctx context.Context, req *protoApi.APIREQ,
 		panic(err.Error())
 	}
 
-	res.Response = utils.ResSuccess(result)
+	if result.Base.StatusCode != 200 {
+		res.Response = utils.Error(result.Base.StatusCode, result.Base.Message)
+		return nil
+	}
+
+	response := &model.MProductRes{
+		Id:      result.Id,
+		Message: result.Base.Message,
+	}
+
+	res.Response = utils.ResSuccess(response)
 	return nil
 }
 
@@ -234,7 +269,16 @@ func (ph *ProductHandler) DeleteProduct(ctx context.Context, req *protoApi.APIRE
 		panic(err.Error())
 	}
 
-	res.Response = utils.ResSuccess(result)
+	if result.Base.StatusCode != 200 {
+		res.Response = utils.Error(result.Base.StatusCode, result.Base.Message)
+		return nil
+	}
+
+	response := &model.MProductRes{
+		Message: result.Base.Message,
+	}
+
+	res.Response = utils.ResSuccess(response)
 	return nil
 }
 
@@ -291,6 +335,11 @@ func (ph *ProductHandler) ListProduct(ctx context.Context, req *protoApi.APIREQ,
 	result, err := ph.productService.ListProduct(ctx, request)
 	if err != nil {
 		panic(err.Error())
+	}
+
+	if result.Base.StatusCode != 200 {
+		res.Response = utils.Error(result.Base.StatusCode, result.Base.Message)
+		return nil
 	}
 
 	res.Response = utils.ResSuccess(result)
@@ -357,6 +406,11 @@ func (ph *ProductHandler) ListProductAdmin(ctx context.Context, req *protoApi.AP
 		panic(err.Error())
 	}
 
+	if result.Base.StatusCode != 200 {
+		res.Response = utils.Error(result.Base.StatusCode, result.Base.Message)
+		return nil
+	}
+
 	res.Response = utils.ResSuccess(result)
 	return nil
 }
@@ -398,6 +452,11 @@ func (ph *ProductHandler) HighlightProducts(ctx context.Context, req *protoApi.A
 	result, err := ph.productService.HighlightProducts(ctx, request)
 	if err != nil {
 		panic(err.Error())
+	}
+
+	if result.Base.StatusCode != 200 {
+		res.Response = utils.Error(result.Base.StatusCode, result.Base.Message)
+		return nil
 	}
 
 	res.Response = utils.ResSuccess(result)
