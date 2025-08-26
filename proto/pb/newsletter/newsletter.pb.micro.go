@@ -6,6 +6,7 @@ package newsletter
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	fmt "fmt"
+	api1 "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	_ "github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	proto "google.golang.org/protobuf/proto"
 	math "math"
@@ -38,7 +39,7 @@ func NewNewsletterServiceEndpoints() []*api.Endpoint {
 // Client API for NewsletterService service
 
 type NewsletterService interface {
-	SubscribeNewsletter(ctx context.Context, in *SubcribeNewsletterRequest, opts ...client.CallOption) (*SubcribeNewsletterResponse, error)
+	SubscribeNewsletter(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 }
 
 type newsletterService struct {
@@ -53,9 +54,9 @@ func NewNewsletterService(name string, c client.Client) NewsletterService {
 	}
 }
 
-func (c *newsletterService) SubscribeNewsletter(ctx context.Context, in *SubcribeNewsletterRequest, opts ...client.CallOption) (*SubcribeNewsletterResponse, error) {
+func (c *newsletterService) SubscribeNewsletter(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
 	req := c.c.NewRequest(c.name, "NewsletterService.SubscribeNewsletter", in)
-	out := new(SubcribeNewsletterResponse)
+	out := new(api1.APIRES)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,12 +67,12 @@ func (c *newsletterService) SubscribeNewsletter(ctx context.Context, in *Subcrib
 // Server API for NewsletterService service
 
 type NewsletterServiceHandler interface {
-	SubscribeNewsletter(context.Context, *SubcribeNewsletterRequest, *SubcribeNewsletterResponse) error
+	SubscribeNewsletter(context.Context, *api1.APIREQ, *api1.APIRES) error
 }
 
 func RegisterNewsletterServiceHandler(s server.Server, hdlr NewsletterServiceHandler, opts ...server.HandlerOption) error {
 	type newsletterService interface {
-		SubscribeNewsletter(ctx context.Context, in *SubcribeNewsletterRequest, out *SubcribeNewsletterResponse) error
+		SubscribeNewsletter(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 	}
 	type NewsletterService struct {
 		newsletterService
@@ -84,6 +85,6 @@ type newsletterServiceHandler struct {
 	NewsletterServiceHandler
 }
 
-func (h *newsletterServiceHandler) SubscribeNewsletter(ctx context.Context, in *SubcribeNewsletterRequest, out *SubcribeNewsletterResponse) error {
+func (h *newsletterServiceHandler) SubscribeNewsletter(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.NewsletterServiceHandler.SubscribeNewsletter(ctx, in, out)
 }

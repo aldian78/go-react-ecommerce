@@ -5,10 +5,11 @@ import "buf/validate/validate.proto";
 
 option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/newsletter";
 
+import "api/api.proto";
 package newsletter;
 
 service NewsletterService {
-    rpc SubscribeNewsletter(SubcribeNewsletterRequest) returns (SubcribeNewsletterResponse);
+    rpc SubscribeNewsletter(api.APIREQ) returns (api.APIRES);
 }
 
 message SubcribeNewsletterRequest {
