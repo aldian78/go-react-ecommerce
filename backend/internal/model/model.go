@@ -16,3 +16,9 @@ type ParseParamJWT2 struct {
 	Email      string `json:"email"`
 	Role       string `json:"role"`
 }
+
+type MResponse struct {
+	Id         string `json:"id,omitempty"`
+	StatusCode string `json:"status_code,omitempty"`
+	Message    string `json:"message,omitempty"`
+}
