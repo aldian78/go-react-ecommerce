@@ -45,6 +45,7 @@ type OrderService interface {
 	ListOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 	DetailOrder(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 	UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	WebhookXendit(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 }
 
 type orderService struct {
@@ -109,6 +110,16 @@ func (c *orderService) UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, o
 	return out, nil
 }
 
+func (c *orderService) WebhookXendit(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
+	req := c.c.NewRequest(c.name, "OrderService.WebhookXendit", in)
+	out := new(api1.APIRES)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
@@ -117,6 +128,7 @@ type OrderServiceHandler interface {
 	ListOrder(context.Context, *api1.APIREQ, *api1.APIRES) error
 	DetailOrder(context.Context, *api1.APIREQ, *api1.APIRES) error
 	UpdateOrderStatus(context.Context, *api1.APIREQ, *api1.APIRES) error
+	WebhookXendit(context.Context, *api1.APIREQ, *api1.APIRES) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
@@ -126,6 +138,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		ListOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 		DetailOrder(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 		UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		WebhookXendit(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 	}
 	type OrderService struct {
 		orderService
@@ -156,4 +169,8 @@ func (h *orderServiceHandler) DetailOrder(ctx context.Context, in *api1.APIREQ, 
 
 func (h *orderServiceHandler) UpdateOrderStatus(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.OrderServiceHandler.UpdateOrderStatus(ctx, in, out)
+}
+
+func (h *orderServiceHandler) WebhookXendit(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
+	return h.OrderServiceHandler.WebhookXendit(ctx, in, out)
 }

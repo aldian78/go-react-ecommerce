@@ -17,6 +17,7 @@ service OrderService {
     rpc ListOrder(api.APIREQ) returns (api.APIRES);
     rpc DetailOrder(api.APIREQ) returns (api.APIRES);
     rpc UpdateOrderStatus(api.APIREQ) returns (api.APIRES);
+    rpc WebhookXendit(api.APIREQ) returns (api.APIRES);
 }
 
 message CreateOrderRequestProductItem {
