@@ -70,6 +70,8 @@ github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250826175710-b4060585a234 
 github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250826175710-b4060585a234/go.mod h1:Hwx57EYqRnvMAqmUYbP/M40w+yIEdzPqChDQJA4Bqcg=
 github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250827154618-eb38dcdfaf98 h1:alhX2Ejbvg7IPu+GND3Dle4lp6P8YZzlQEBJWACI3uE=
 github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250827154618-eb38dcdfaf98/go.mod h1:Hwx57EYqRnvMAqmUYbP/M40w+yIEdzPqChDQJA4Bqcg=
+github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250827164619-473cee3a428f h1:FhaksuyyokI0aBosDFq/Brt+o14U0PWBfyscMCQCWQQ=
+github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250827164619-473cee3a428f/go.mod h1:Hwx57EYqRnvMAqmUYbP/M40w+yIEdzPqChDQJA4Bqcg=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/aliyun/alibaba-cloud-sdk-go v1.61.976/go.mod h1:pUKYbK5JQ+1Dfxk80P0qxGqe5dkxDoabbZS7zOcouyA=

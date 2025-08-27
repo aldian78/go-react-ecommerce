@@ -3,6 +3,7 @@ package handler
 import (
 	"context"
 	"database/sql"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/model"
@@ -12,10 +13,19 @@ import (
 	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/basecommon"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/product"
+	"github.com/gofiber/fiber/v2"
 	gtc "github.com/shengyanli1982/go-trycatch"
 	"go-micro.dev/v4/logger"
+	"image"
+	"mime"
+	"net/http"
+	"os"
+	"path"
+	"path/filepath"
 	"runtime/debug"
 	"strconv"
+	"strings"
+	"time"
 )
 
 type ProductHandler struct {
@@ -461,4 +471,185 @@ func (ph *ProductHandler) HighlightProducts(ctx context.Context, req *protoApi.A
 
 	res.Response = utils.ResSuccess(result)
 	return nil
+}
+
+func (ph *ProductHandler) GetFileName(_ context.Context, req *protoApi.APIREQ, res *protoApi.APIRES) error {
+	defer gtc.New().
+		Try(func() error {
+			fmt.Println("Execute... ", req.Headers["Request-Func"])
+			return nil
+		}).
+		Catch(func(err error) {
+			// Tangkap error atau panic
+			logger.Errorf("[%s] exception: %v\nStack:\n%s",
+				req.Headers["Request-ID"], err, string(debug.Stack()))
+
+			res.Response = utils.InternalServerError()
+		}).
+		Finally(func() {
+			// Logging response
+			logger.Infof("[%s] response: %v",
+				req.Headers["Request-ID"], string(res.Response))
+		}).
+		Do()
+
+	jsonReq, _ := json.Marshal(req)
+	logger.Infof("[%s] request: %v", req.Headers["Request-ID"], string(jsonReq))
+
+	fileNameParam := req.Params["filename"]
+	filePath := path.Join("storage", "product", fileNameParam)
+	if _, err := os.Stat(filePath); err != nil {
+		if os.IsNotExist(err) {
+			res.Response = utils.Error(http.StatusNotFound, "Not Found")
+			return nil
+		}
+
+		logger.Infof(err.Error())
+		res.Response = utils.Error(http.StatusInternalServerError, "Internal Server Error")
+		return nil
+	}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		logger.Infof(err.Error())
+		res.Response = utils.Error(http.StatusInternalServerError, "Internal Server Error")
+		return nil
+	}
+
+	ext := path.Ext(filePath)
+	mimeType := mime.TypeByExtension(ext)
+
+	res.Headers["Content-Type"] = mimeType
+	res.Response = utils.ResSuccess(file)
+	return nil
+}
+
+func (ph *ProductHandler) UploadProductImage(ctx context.Context, req *protoApi.APIREQ, res *protoApi.APIRES) error {
+	defer gtc.New().
+		Try(func() error {
+			fmt.Println("Execute... ", req.Headers["Request-Func"])
+			return nil
+		}).
+		Catch(func(err error) {
+			// Tangkap error atau panic
+			logger.Errorf("[%s] exception: %v\nStack:\n%s",
+				req.Headers["Request-ID"], err, string(debug.Stack()))
+
+			res.Response = utils.InternalServerError()
+		}).
+		Finally(func() {
+			// Logging response
+			logger.Infof("[%s] response: %v",
+				req.Headers["Request-ID"], string(res.Response))
+		}).
+		Do()
+
+	jsonReq, _ := json.Marshal(req)
+	logger.Infof("[%s] request: %v", req.Headers["Request-ID"], string(jsonReq))
+
+	//file, err := c.FormFile("image")
+	//if err != nil {
+	//	return c.Status(http.StatusBadRequest).JSON(fiber.Map{
+	//		"success": false,
+	//		"message": "image data not found",
+	//	})
+	//}
+
+	// validasi gambar
+	// validasi extension
+
+	ext := strings.ToLower(filepath.Ext(req.Params["filename"]))
+	allowedExts := map[string]bool{
+		".jpg":  true,
+		".jpeg": true,
+		".png":  true,
+		".webp": true,
+	}
+	if !allowedExts[ext] {
+		res.Response = utils.Error(http.StatusBadRequest, "Image extension is not allowed (jpg, jpeg, png, webp")
+		return nil
+	}
+
+	// validasi content type
+	contentType := req.Headers["Content-Type"]
+	allowedContentType := map[string]bool{
+		"image/jpeg": true,
+		"image/png":  true,
+		"image/webp": true,
+	}
+	if !allowedContentType[contentType] {
+		res.Response = utils.Error(http.StatusBadRequest, "Content type is not allowed")
+		return nil
+	}
+
+	timestamp := time.Now().UnixNano()
+	fileName := fmt.Sprintf("product_%d%s", timestamp, filepath.Ext(req.Params["filename"]))
+	uploadPath := "./storage/product/" + fileName
+
+	var saveImgRes bool
+	if strings.Contains(req.Params["filename"], "base64") {
+		sImages := strings.Split(req.Params["filename"], "base64,")
+
+		resBool, err := ph.SaveImages(map[string]string{uploadPath: sImages[1]}, uploadPath)
+		if err != nil {
+			res.Response = utils.Error(http.StatusInternalServerError, "Internal server error")
+			return nil
+		}
+		saveImgRes = resBool
+	}
+
+	result := &fiber.Map{
+		"success":   saveImgRes,
+		"message":   "Upload success",
+		"file_name": fileName,
+	}
+	res.Response = utils.ResSuccess(result)
+	return nil
+
+}
+
+func (c *ProductHandler) SaveImages(files map[string]string, location string) (bool, error) {
+	logger.Info("SaveImages")
+	for k, v := range files {
+		dec, err := base64.StdEncoding.DecodeString(v)
+		if err != nil {
+			logger.Infof("error decode image: %v", err.Error())
+			logger.Info("err 1")
+
+			return false, err
+		}
+
+		f, err := os.Create(location + k)
+		if err != nil {
+			logger.Infof("error open location image: %v", err.Error())
+			logger.Info("err 2")
+
+			return false, err
+		}
+		defer func() {
+			_ = f.Close()
+		}()
+
+		if _, err := f.Write(dec); err != nil {
+			logger.Infof("error write image: %v", err.Error())
+			logger.Info("err 3")
+
+			return false, err
+		}
+		if err := f.Sync(); err != nil {
+			logger.Infof("error Syncr image: %v", err.Error())
+			logger.Info("err 4")
+
+			return false, err
+		}
+
+		_, _, err = image.Decode(f)
+		if err != nil {
+			if f.Name() == "" {
+				logger.Info(f.Name() + " seems corrupt")
+				return false, err
+			}
+		}
+	}
+	return true, nil
 }

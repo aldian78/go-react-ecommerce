@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="fix webhook xendit with api req &amp; res">
+    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="proto rpc get &amp; upload image product">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/product/product.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/product/product.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/internal/handler/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/handler/product.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/internal/handler/product_upload_image.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/handler/product_upload_image.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -147,7 +150,8 @@
     <MESSAGE value="update rpc order" />
     <MESSAGE value="add proto rpc webhook xendit" />
     <MESSAGE value="fix webhook xendit with api req &amp; res" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix webhook xendit with api req &amp; res" />
+    <MESSAGE value="proto rpc get &amp; upload image product" />
+    <option name="LAST_COMMIT_MESSAGE" value="proto rpc get &amp; upload image product" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
