@@ -38,7 +38,7 @@ PostgreSQL
 
 📧 Kontak
 
-📩 Email: yourname@example.com
-🐙 GitHub: username
+📩 Email: dwialdian2@gmail.com
+🐙 GitHub: aldian78
 
 ✨ Selamat berkoding & semoga project ini membantu membangun e-commerce modern dengan Go + gRPC 🚀
