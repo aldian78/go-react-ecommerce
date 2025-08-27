@@ -17,6 +17,8 @@ service ProductService {
     rpc ListProduct(api.APIREQ) returns (api.APIRES);
     rpc ListProductAdmin(api.APIREQ) returns (api.APIRES);
     rpc HighlightProducts(api.APIREQ) returns (api.APIRES);
+    rpc GetFileName(api.APIREQ) returns (api.APIRES);
+    rpc UploadProductImage(api.APIREQ) returns (api.APIRES);
 }
 
 message CreateProductRequest {

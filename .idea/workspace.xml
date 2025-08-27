@@ -4,17 +4,10 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="add proto rpc webhook xendit">
-      <change afterPath="$PROJECT_DIR$/backend/internal/utils/timea.go" afterDir="false" />
+    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="fix webhook xendit with api req &amp; res">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/cmd/backend/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cmd/backend/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/cmd/rest/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cmd/rest/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/handler/order.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/handler/order.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/service/order_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/service/order_service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/service/webhook_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/service/webhook_service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto/product/product.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/product/product.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +146,8 @@
     <MESSAGE value="update proto order req dan res" />
     <MESSAGE value="update rpc order" />
     <MESSAGE value="add proto rpc webhook xendit" />
-    <option name="LAST_COMMIT_MESSAGE" value="add proto rpc webhook xendit" />
+    <MESSAGE value="fix webhook xendit with api req &amp; res" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix webhook xendit with api req &amp; res" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

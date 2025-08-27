@@ -46,6 +46,8 @@ type ProductService interface {
 	ListProduct(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 	ListProductAdmin(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 	HighlightProducts(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	GetFileName(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	UploadProductImage(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 }
 
 type productService struct {
@@ -130,6 +132,26 @@ func (c *productService) HighlightProducts(ctx context.Context, in *api1.APIREQ,
 	return out, nil
 }
 
+func (c *productService) GetFileName(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
+	req := c.c.NewRequest(c.name, "ProductService.GetFileName", in)
+	out := new(api1.APIRES)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *productService) UploadProductImage(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
+	req := c.c.NewRequest(c.name, "ProductService.UploadProductImage", in)
+	out := new(api1.APIRES)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ProductService service
 
 type ProductServiceHandler interface {
@@ -140,6 +162,8 @@ type ProductServiceHandler interface {
 	ListProduct(context.Context, *api1.APIREQ, *api1.APIRES) error
 	ListProductAdmin(context.Context, *api1.APIREQ, *api1.APIRES) error
 	HighlightProducts(context.Context, *api1.APIREQ, *api1.APIRES) error
+	GetFileName(context.Context, *api1.APIREQ, *api1.APIRES) error
+	UploadProductImage(context.Context, *api1.APIREQ, *api1.APIRES) error
 }
 
 func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, opts ...server.HandlerOption) error {
@@ -151,6 +175,8 @@ func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, 
 		ListProduct(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 		ListProductAdmin(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 		HighlightProducts(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		GetFileName(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		UploadProductImage(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 	}
 	type ProductService struct {
 		productService
@@ -189,4 +215,12 @@ func (h *productServiceHandler) ListProductAdmin(ctx context.Context, in *api1.A
 
 func (h *productServiceHandler) HighlightProducts(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.HighlightProducts(ctx, in, out)
+}
+
+func (h *productServiceHandler) GetFileName(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
+	return h.ProductServiceHandler.GetFileName(ctx, in, out)
+}
+
+func (h *productServiceHandler) UploadProductImage(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
+	return h.ProductServiceHandler.UploadProductImage(ctx, in, out)
 }
