@@ -1,6 +1,6 @@
-🛒 gocommerc — E-Commerce Backend with Go + gRPC
+🛒 gocommerce — E-Commerce Backend with Go + gRPC
 
-⚡ gocommerc adalah backend e-commerce modern berbasis Golang + gRPC dengan dukungan PostgreSQL dan Docker.
+⚡ gocommerce adalah backend e-commerce modern berbasis Golang + gRPC dengan dukungan PostgreSQL dan Docker.
 Dirancang untuk performa tinggi, modular, dan siap diintegrasikan dengan frontend (React).
 
 ✨ Fitur Utama
