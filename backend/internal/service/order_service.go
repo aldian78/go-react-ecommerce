@@ -3,11 +3,9 @@ package service
 import (
 	"context"
 	"database/sql"
-	"encoding/json"
 	"fmt"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
 	baseutil "github.com/aldian78/go-react-ecommerce/common/utils"
-	"go-micro.dev/v4/logger"
 	operatingsystem "os"
 	"runtime/debug"
 	"time"
@@ -43,9 +41,6 @@ func NewOrderService(db *sql.DB, orderRepository repository.IOrderRepository, pr
 }
 
 func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOrderRequest, params map[string]string) (*order.CreateOrderResponse, error) {
-	jsonxx, _ := json.Marshal(request)
-	logger.Infof("check jsonxxx : %s", string(jsonxx))
-
 	tx, err := os.db.Begin()
 	if err != nil {
 		return nil, err
@@ -57,12 +52,10 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 			}
 
 			debug.PrintStack()
-			logger.Infof("err rollback : %s", string(debug.Stack()))
 			panic(e)
 		}
 	}()
 	defer func() {
-		logger.Infof("err rollback : %s", string(debug.Stack()))
 		if err != nil && tx != nil {
 			tx.Rollback()
 		}
@@ -78,7 +71,6 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 
 	var productIds = make([]string, len(request.Products))
 	for i := range request.Products {
-		logger.Infof("product id : %s", request.Products[i].Quantity)
 		productIds[i] = request.Products[i].Id
 	}
 
@@ -99,12 +91,8 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 				Base: baseutil.NotFoundResponse(fmt.Sprintf("Product %s not found", p.Id)),
 			}, nil
 		}
-		logger.Infof("product id is : %s", productMap[p.Id].Id)
-		logger.Infof("product id is PRICE : %s", productMap[p.Id].Price)
-		logger.Infof("p qty : %s", p.Quantity)
 		total += productMap[p.Id].Price * float64(p.Quantity)
 	}
-	logger.Infof("total : %f", total)
 
 	now := time.Now()
 	expiredAt := now.Add(24 * time.Hour)
@@ -144,7 +132,6 @@ func (os *orderService) CreateOrder(ctx context.Context, request *order.CreateOr
 		SuccessRedirectURL: fmt.Sprintf("%s/checkout/%s/success", operatingsystem.Getenv("FRONTEND_BASE_URL"), orderEntity.Id),
 		Items:              invoiceItems,
 	})
-	logger.Infof("check xendit : %s", xenditErr)
 	if xenditErr != nil {
 		err = xenditErr
 		return nil, err

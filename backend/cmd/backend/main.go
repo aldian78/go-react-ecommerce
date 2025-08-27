@@ -14,6 +14,7 @@ import (
 	gocache "github.com/patrickmn/go-cache"
 	"github.com/redis/go-redis/v9"
 	gtc "github.com/shengyanli1982/go-trycatch"
+	"github.com/xendit/xendit-go"
 	"go-micro.dev/v4"
 	"go-micro.dev/v4/client"
 	"go-micro.dev/v4/logger"
@@ -36,6 +37,9 @@ func main() {
 			)
 
 			godotenv.Load()
+
+			xendit.Opt.SecretKey = os.Getenv("XENDIT_SECRET")
+			logger.Infof("check xendit secret : %s", os.Getenv("XENDIT_SECRET"))
 
 			rto, _ := strconv.Atoi("60")
 			var rpcTimeout = time.Second * 60

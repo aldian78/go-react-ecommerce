@@ -2,8 +2,10 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/aldian78/go-react-ecommerce/backend/internal/entity"
+	"go-micro.dev/v4/logger"
 	"time"
 
 	"github.com/aldian78/go-react-ecommerce/backend/internal/dto"
@@ -19,6 +21,9 @@ type webhookService struct {
 }
 
 func (ws *webhookService) ReceiveInvoice(ctx context.Context, request *dto.XenditInvoiceRequest) error {
+
+	jsoz, _ := json.Marshal(request)
+	logger.Infof("check jsoz : %s", string(jsoz))
 	orderEntity, err := ws.orderRepository.GetOrderById(ctx, request.ExternalID)
 	if err != nil {
 		return err

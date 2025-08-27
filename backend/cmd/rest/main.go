@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/handler"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/repository"
+	"github.com/aldian78/go-react-ecommerce/backend/internal/service"
+	"github.com/aldian78/go-react-ecommerce/backend/pkg/database"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
-	"go-grpc-ecommerce-be/internal/handler"
-	"go-grpc-ecommerce-be/internal/repository"
-	"go-grpc-ecommerce-be/internal/service"
-	"go-grpc-ecommerce-be/pkg/database"
 	"log"
 	"mime"
 	"net/http"
