@@ -19,15 +19,14 @@ Dirancang untuk performa tinggi, modular, dan siap diintegrasikan dengan fronten
 
 🌐 REST Gateway untuk akses dari client HTTP
 
-📂 gocommerc/
-├── cmd/                # entrypoint service (auth, order, product)
-├── internal/           # business logic & repository
-├── proto/              # protobuf definitions
-├── migrations/         # database migrations
-├── docker-compose.yml
-├── Dockerfile
-└── README.md
-
+📦 gocommerc/
+ ┣ 📂 cmd/          → entrypoint service (auth, order, product)
+ ┣ 📂 internal/     → business logic & repository
+ ┣ 📂 proto/        → protobuf definitions
+ ┣ 📂 migrations/   → database migrations
+ ┣ 📜 docker-compose.yml
+ ┣ 📜 Dockerfile
+ ┗ 📜 README.md
 
 👉 Ini akan menjalankan:
 
