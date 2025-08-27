@@ -19,8 +19,7 @@ Dirancang untuk performa tinggi, modular, dan siap diintegrasikan dengan fronten
 
 🌐 REST Gateway untuk akses dari client HTTP
 
-📂 Struktur Project
-gocommerc/
+📂 gocommerc/
 ├── cmd/                # entrypoint service (auth, order, product)
 ├── internal/           # business logic & repository
 ├── proto/              # protobuf definitions
