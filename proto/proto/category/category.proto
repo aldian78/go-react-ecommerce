@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/category";
+
+import "basecommon/base_response.proto";
+import "basecommon/pagination.proto";
+import "api/api.proto";
+
+package category;
+
+service CategoryService {
+  rpc CreateCategory(api.APIREQ) returns (api.APIRES);
+  rpc EditCategory(api.APIREQ) returns (api.APIRES);
+  rpc DeleteCategory(api.APIREQ) returns (api.APIRES);
+  rpc ListCategory(api.APIREQ) returns (api.APIRES);
+}
+
+message CreateCategoryResponse {
+  basecommon.BaseResponse base = 1;
+  string id = 2;
+}
+
+message DetailCategoryResponse {
+  basecommon.BaseResponse base = 1;
+  string id = 2;
+  string name = 3;
+}
+
+message EditCategoryResponse {
+  basecommon.BaseResponse base = 1;
+  string id = 2;
+}
+
+message DeleteCategoryResponse {
+  basecommon.BaseResponse base = 1;
+}
+
+message ListCategoryResponseItem {
+  string id = 1;
+  string name = 2;
+}
+
+message ListCategoryResponse {
+  basecommon.BaseResponse base = 1;
+  basecommon.PaginationResponse pagination = 2;
+  repeated ListCategoryResponseItem data = 3;
+}
