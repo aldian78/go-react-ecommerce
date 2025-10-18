@@ -4,6 +4,7 @@ option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/category";
 
 import "basecommon/base_response.proto";
 import "basecommon/pagination.proto";
+import "buf/validate/validate.proto";
 import "api/api.proto";
 
 package category;
@@ -15,15 +16,18 @@ service CategoryService {
   rpc ListCategory(api.APIREQ) returns (api.APIRES);
 }
 
+message CreateCategoryRequest {
+  string name = 1 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+}
+
 message CreateCategoryResponse {
   basecommon.BaseResponse base = 1;
   string id = 2;
 }
 
-message DetailCategoryResponse {
-  basecommon.BaseResponse base = 1;
-  string id = 2;
-  string name = 3;
+message EditCategoryRequest {
+  string id = 1 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+  string name = 2 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
 }
 
 message EditCategoryResponse {
@@ -31,8 +35,16 @@ message EditCategoryResponse {
   string id = 2;
 }
 
+message DeleteCategoryRequest {
+  string id = 1 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+}
+
 message DeleteCategoryResponse {
   basecommon.BaseResponse base = 1;
+}
+
+message ListCategoryRequest {
+  basecommon.PaginationRequest pagination = 1;
 }
 
 message ListCategoryResponseItem {
