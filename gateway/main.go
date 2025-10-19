@@ -43,7 +43,7 @@ func main() {
 				grpc.MaxSendMsgSize(15*1024*1024),
 			)
 
-			corsOrigins := "http://127.0.0.1:8080"
+			corsOrigins := "*"
 			corsMethods := "GET,POST,PUT,DELETE,OPTIONS"
 			corsHeaders := "Content-Type,Authorization,X-Requested-With"
 

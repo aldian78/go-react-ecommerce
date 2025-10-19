@@ -108,6 +108,8 @@ func (sh *AuthenticationHandler) LoginHandler(ctx context.Context, req *protoApi
 	jsonReq, _ := json.Marshal(req)
 	logger.Infof("[%s] request: %v", req.Headers["Request-ID"], string(jsonReq))
 
+	logger.Infof("mail : %s password : %s", req.Params["email"], req.Params["password"])
+
 	protoReq := &authentication.LoginRequest{
 		Email:    req.Params["email"],
 		Password: req.Params["password"],

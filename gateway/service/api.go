@@ -10,6 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-micro.dev/v4/logger"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+	"path/filepath"
 
 	protoApi "github.com/aldian78/go-react-ecommerce/proto/pb/api"
 	"net/http"
@@ -50,6 +51,14 @@ func Init(baseURL string, gatewayTimeout int, corsOrigins []string, corsMehthods
 	} else {
 		g = r.Group(baseURL)
 	}
+
+	// Serve static files
+	absPath, err := filepath.Abs("../backend/storage")
+	if err != nil {
+		logger.Infof("get absolute path err: %v", err.Error())
+	}
+
+	r.Static("/storage", absPath)
 
 	//logger := middleware.Logger()
 

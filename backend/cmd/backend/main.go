@@ -7,9 +7,12 @@ import (
 	"github.com/aldian78/go-react-ecommerce/backend/pkg/database"
 	auth "github.com/aldian78/go-react-ecommerce/proto/pb/authentication"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/cart"
+	"github.com/aldian78/go-react-ecommerce/proto/pb/category"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/newsletter"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/order"
 	"github.com/aldian78/go-react-ecommerce/proto/pb/product"
+	productType "github.com/aldian78/go-react-ecommerce/proto/pb/product_type"
+	_ "github.com/go-micro/plugins/v4/registry/consul"
 	"github.com/joho/godotenv"
 	gocache "github.com/patrickmn/go-cache"
 	"github.com/redis/go-redis/v9"
@@ -71,6 +74,8 @@ func main() {
 			_ = cart.RegisterCartServiceHandler(svc.Server(), handler.NewCartHandler(db))
 			_ = newsletter.RegisterNewsletterServiceHandler(svc.Server(), handler.NewNewsletterHandler(db))
 			_ = order.RegisterOrderServiceHandler(svc.Server(), handler.NewOrderHandler(db))
+			_ = category.RegisterCategoryServiceHandler(svc.Server(), handler.NewCategoryHandler(db))
+			_ = productType.RegisterProductTypeServiceHandler(svc.Server(), handler.NewProductTypeHandler(db))
 
 			// Run Service
 			if err := svc.Run(); err != nil {

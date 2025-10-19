@@ -1,6 +1,4 @@
 bazil.org/fuse v0.0.0-20160811212531-371fbbdaa898/go.mod h1:Xbm+BRKSBEpa4q4hTSxohYNQpsxXPbPry4JJWOB3LB8=
-buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250717165733-d22d418d82d8.1 h1:VahIvw/JagkamVOb0q87Az0zu2tmrzlqvO2IKIGOwnI=
-buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.6-20250717165733-d22d418d82d8.1/go.mod h1:avRlCjnFzl98VPaeCtJ24RrV/wwHFzB8sWXhj26+n/U=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1 h1:/AZH8sVB6LHv8G+hZlAMCP31NevnesHwYgnlgS5Vt14=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.7-20250717185734-6c6e0d3c608e.1/go.mod h1:eva/VCrd8X7xuJw+JtwCEyrCKiRRASukFqmirnWBvFU=
 buf.build/go/protovalidate v0.14.0 h1:kr/rC/no+DtRyYX+8KXLDxNnI1rINz0imk5K44ZpZ3A=
@@ -107,14 +105,6 @@ github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWX
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
 github.com/acomagu/bufpipe v1.0.3/go.mod h1:mxdxdup/WdsKVreO5GpW4+M/1CE2sMG4jeGJ2sYmHc4=
 github.com/akamai/AkamaiOPEN-edgegrid-golang v1.1.0/go.mod h1:kX6YddBkXqqywAe8c9LyvgTCyFuZCTMF4cRPQhc3Fy8=
-github.com/aldian78/go-react-ecommerce v0.0.0-20250815173345-251f30f207c9 h1:GvGEiq7sW3mk6sFV6zJ4hes2jmEsH8MMnJfrG96yhxU=
-github.com/aldian78/go-react-ecommerce v0.0.0-20250815173345-251f30f207c9/go.mod h1:Py+W9fpbYFe66Ul9chQvIlP2o13X9WT0fxWq6g/1+9E=
-github.com/aldian78/go-react-ecommerce v0.0.0-20250815175130-823e6cb2d929 h1:jHyy1jA9yM5UGl2mn/XDUumrjZ4iewPnYGw961CgXdQ=
-github.com/aldian78/go-react-ecommerce v0.0.0-20250815175130-823e6cb2d929/go.mod h1:Py+W9fpbYFe66Ul9chQvIlP2o13X9WT0fxWq6g/1+9E=
-github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250815173345-251f30f207c9 h1:Ox1wbkgFEHSzuadg3zfi1CL86wFrjI8K4/Vis9Za49w=
-github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250815173345-251f30f207c9/go.mod h1:E60vwsNzuE8jPo18PUupJ0aGLDXyvTrOa9yNgfYnzmk=
-github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250817154712-f1f7f0cd54bd h1:OABvHOut6pbvYhGbVwSiO2OFFRSq6cE1lQvEtMbLsEI=
-github.com/aldian78/go-react-ecommerce/backend v0.0.0-20250817154712-f1f7f0cd54bd/go.mod h1:E60vwsNzuE8jPo18PUupJ0aGLDXyvTrOa9yNgfYnzmk=
 github.com/aldian78/go-react-ecommerce/common v0.0.0-20250817160710-166c668fad34 h1:fUByUiVVQUzmbTcho+HxzsXOpSF9tb9hYf+EZ6lNnoI=
 github.com/aldian78/go-react-ecommerce/common v0.0.0-20250817160710-166c668fad34/go.mod h1:3NprW3aZH3pT6b9in4Q0NpWT3soTVB8gHKqPUv5hGcc=
 github.com/aldian78/go-react-ecommerce/proto v0.0.0-20250817154712-f1f7f0cd54bd h1:IfBqVYSjDGbE9kHq3G2cKcV/WTXoicePS2C4HaCPECU=
@@ -322,8 +312,6 @@ github.com/gogo/protobuf v1.3.1/go.mod h1:SlYgWuQ5SjCEi6WLHjHCa1yvBfUnHcTbrrZtXP
 github.com/gogo/protobuf v1.3.2 h1:Ov1cvc58UF3b5XjBnZv7+opcTcQFZebYjWzi34vdm4Q=
 github.com/gogo/protobuf v1.3.2/go.mod h1:P1XiOD3dCwIKUDQYPy72D8LYyHL2YPYrpS2s69NZV8Q=
 github.com/goji/httpauth v0.0.0-20160601135302-2da839ab0f4d/go.mod h1:nnjvkQ9ptGaCkuDUx6wNykzzlUixGxvkme+H/lnzb+A=
-github.com/golang-jwt/jwt/v5 v5.2.2 h1:Rl4B7itRWVtYIHFrSNd7vhTiz9UpLdi6gZhZ3wEeDy8=
-github.com/golang-jwt/jwt/v5 v5.2.2/go.mod h1:pqrtFR0X4osieyHYxtmOUWsAWrfe1Q5UVIyoH402zdk=
 github.com/golang-jwt/jwt/v5 v5.3.0 h1:pv4AsKCKKZuqlgs5sUmn4x8UlGa0kEVt/puTpKx9vvo=
 github.com/golang-jwt/jwt/v5 v5.3.0/go.mod h1:fxCRLWMO43lRc8nhHWY6LGqRcf+1gQWArsqaEUEa5bE=
 github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=

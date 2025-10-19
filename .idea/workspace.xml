@@ -4,13 +4,26 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="proto rpc get &amp; upload image product">
+    <list default="true" id="8ad73201-88e5-4827-af89-9dfc8e4b393d" name="Changes" comment="protoc product type">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/entity/category.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/entity/product_type.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/handler/category.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/handler/product_type.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/repository/category_repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/repository/product_type_repository.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/service/category_service.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/service/product_type_service.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/cmd/backend/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cmd/backend/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/handler/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/handler/product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/handler/product_upload_image.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/handler/product_upload_image.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/internal/handler/authentication.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/handler/authentication.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/.env" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/service/api.go" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/service/api.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,29 +64,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginOnboarding&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.GoLinterPluginStorageMigration&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/laragon/www/Go-react-ecommerce/go-grpc-ecommerce-be&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultGoTemplateProperty": "Go File",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.GoLinterPluginOnboarding": "true",
+    "RunOnceActivity.GoLinterPluginStorageMigration": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "main",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "last_opened_file_path": "C:/Users/MYPC",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "terminal"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\proto\proto\producttype" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\backend\internal\service" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\backend\internal\repository" />
+      <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\backend\internal\handler" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\common\utils" />
       <recent name="C:\laragon\www\Go-react-ecommerce\go-grpc-ecommerce-be\common" />
@@ -151,7 +170,11 @@
     <MESSAGE value="add proto rpc webhook xendit" />
     <MESSAGE value="fix webhook xendit with api req &amp; res" />
     <MESSAGE value="proto rpc get &amp; upload image product" />
-    <option name="LAST_COMMIT_MESSAGE" value="proto rpc get &amp; upload image product" />
+    <MESSAGE value="fix get file name &amp; upload image product" />
+    <MESSAGE value="protoc category" />
+    <MESSAGE value="protoc category update" />
+    <MESSAGE value="protoc product type" />
+    <option name="LAST_COMMIT_MESSAGE" value="protoc product type" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
