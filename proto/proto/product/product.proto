@@ -25,7 +25,7 @@ message CreateProductRequest {
     string name = 1 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
     string description = 2 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
     double price = 3 [(buf.validate.field).double.gte = 0];
-    string image_file_name = 4 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+    repeated string image_file_name = 4 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
 }
 
 message CreateProductResponse {
@@ -43,7 +43,7 @@ message DetailProductResponse {
     string name = 3;
     string description = 4;
     double price = 5;
-    string image_url = 6;
+    repeated string image_url = 6;
 }
 
 message EditProductRequest {
@@ -51,7 +51,7 @@ message EditProductRequest {
     string name = 2 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
     string description = 3 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
     double price = 4 [(buf.validate.field).double.gte = 0];
-    string image_file_name = 5 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+    repeated string image_file_name = 5 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
 }
 
 message EditProductResponse {
@@ -94,7 +94,7 @@ message ListProductAdminResponseItem {
     string name = 2;
     string description = 3;
     double price = 4;
-    string image_url = 5;
+    repeated string image_url = 5;
 }
 
 message ListProductAdminResponse {
@@ -110,7 +110,7 @@ message HighlightProductsResponseItem {
     string name = 2;
     string description = 3;
     double price = 4;
-    string image_url = 5;
+    repeated string image_url = 5;
 }
 
 message HighlightProductsResponse {
