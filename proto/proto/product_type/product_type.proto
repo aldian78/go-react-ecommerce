@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option go_package = "github.com/aldian78/go-react-ecommerce/proto/pb/ProductType";
+
+import "basecommon/base_response.proto";
+import "basecommon/pagination.proto";
+import "buf/validate/validate.proto";
+import "api/api.proto";
+
+package product_type;
+
+service ProductTypeService {
+  rpc CreateProductType(api.APIREQ) returns (api.APIRES);
+  rpc EditProductType(api.APIREQ) returns (api.APIRES);
+  rpc DeleteProductType(api.APIREQ) returns (api.APIRES);
+  rpc ListProductType(api.APIREQ) returns (api.APIRES);
+}
+
+message CreateProductTypeRequest {
+  string type = 1 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+}
+
+message CreateProductTypeResponse {
+  basecommon.BaseResponse base = 1;
+  string id = 2;
+}
+
+message EditProductTypeRequest {
+  string id = 1 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+  string type = 2 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+}
+
+message EditProductTypeResponse {
+  basecommon.BaseResponse base = 1;
+  string id = 2;
+}
+
+message DeleteProductTypeRequest {
+  string id = 1 [(buf.validate.field).string = { min_len: 1, max_len: 255 }];
+}
+
+message DeleteProductTypeResponse {
+  basecommon.BaseResponse base = 1;
+}
+
+message ListProductTypeRequest {
+  basecommon.PaginationRequest pagination = 1;
+}
+
+message ListProductTypeResponseItem {
+  string id = 1;
+  string type = 2;
+}
+
+message ListProductTypeResponse {
+  basecommon.BaseResponse base = 1;
+  basecommon.PaginationResponse pagination = 2;
+  repeated ListProductTypeResponseItem data = 3;
+}
