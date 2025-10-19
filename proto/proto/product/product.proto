@@ -76,7 +76,7 @@ message ListProductResponseItem {
     string name = 2;
     string description = 3;
     double price = 4;
-    string image_url = 5;
+    repeated string  image_url = 5;
 }
 
 message ListProductResponse {
