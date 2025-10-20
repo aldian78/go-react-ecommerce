@@ -69,12 +69,11 @@ message DeleteProductResponse {
 
 message ListProductRequest {
     basecommon.PaginationRequest pagination = 1;
-    string search = 2;
-    repeated string category_ids = 3;
-    repeated string material = 4;
+    string category_ids = 2;
+    string material = 3;
 
-    double min_price = 5;
-    double max_price = 6;
+    double min_price = 4;
+    double max_price = 5;
 }
 
 message ListProductResponseItem {
