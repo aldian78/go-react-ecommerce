@@ -80,8 +80,10 @@ message ListProductResponseItem {
     string id = 1;
     string name = 2;
     string description = 3;
-    double price = 4;
-    repeated string  image_url = 5;
+    string category_name = 4;
+    string material = 5;
+    double price = 6;
+    repeated string  image_url = 7;
 }
 
 message ListProductResponse {
