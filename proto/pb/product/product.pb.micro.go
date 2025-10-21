@@ -48,6 +48,7 @@ type ProductService interface {
 	HighlightProducts(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 	GetFileName(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 	UploadProductImage(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
+	GetListMaterials(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error)
 }
 
 type productService struct {
@@ -152,6 +153,16 @@ func (c *productService) UploadProductImage(ctx context.Context, in *api1.APIREQ
 	return out, nil
 }
 
+func (c *productService) GetListMaterials(ctx context.Context, in *api1.APIREQ, opts ...client.CallOption) (*api1.APIRES, error) {
+	req := c.c.NewRequest(c.name, "ProductService.GetListMaterials", in)
+	out := new(api1.APIRES)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ProductService service
 
 type ProductServiceHandler interface {
@@ -164,6 +175,7 @@ type ProductServiceHandler interface {
 	HighlightProducts(context.Context, *api1.APIREQ, *api1.APIRES) error
 	GetFileName(context.Context, *api1.APIREQ, *api1.APIRES) error
 	UploadProductImage(context.Context, *api1.APIREQ, *api1.APIRES) error
+	GetListMaterials(context.Context, *api1.APIREQ, *api1.APIRES) error
 }
 
 func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, opts ...server.HandlerOption) error {
@@ -177,6 +189,7 @@ func RegisterProductServiceHandler(s server.Server, hdlr ProductServiceHandler, 
 		HighlightProducts(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 		GetFileName(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 		UploadProductImage(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
+		GetListMaterials(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error
 	}
 	type ProductService struct {
 		productService
@@ -223,4 +236,8 @@ func (h *productServiceHandler) GetFileName(ctx context.Context, in *api1.APIREQ
 
 func (h *productServiceHandler) UploadProductImage(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
 	return h.ProductServiceHandler.UploadProductImage(ctx, in, out)
+}
+
+func (h *productServiceHandler) GetListMaterials(ctx context.Context, in *api1.APIREQ, out *api1.APIRES) error {
+	return h.ProductServiceHandler.GetListMaterials(ctx, in, out)
 }
